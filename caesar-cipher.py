@@ -7,6 +7,7 @@ import string
 2. Add an args and feature for ciphering text inside files
 3. Add an args and feature for deciphering text that is both inside files and command line args
 4. Add a feature to output cipher text to file
+5. Make a readme file for this program
 '''
 
 def main():
@@ -36,7 +37,11 @@ def main():
                 remainingNumberOfLetters = 26 - currentIndex
                 newChar = Uppercase_Letters[args.s - remainingNumberOfLetters - 1]
                 cipherText.append(newChar)
-    
+            else: 
+                currentIndex = Lowercase_Letters.index(i) + 1
+                remainingNumberOfLetters = 26 - currentIndex
+                newChar = Lowercase_Letters[args.s - remainingNumberOfLetters - 1]
+                cipherText.append(newChar)
     
     print(''.join(cipherText))
 
