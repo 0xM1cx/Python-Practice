@@ -1,6 +1,12 @@
 import argparse
-from ast import arg
 import string
+
+'''
+# TODO
+1. Find a solution for the index error =>
+    The error was caused due to the -s parameter having an shift value over the range of the list
+    E.g if -s is 3 and the letter is z it would case an indexError.
+'''
 
 def main():
     
@@ -14,15 +20,17 @@ def main():
 
     cipherText = []
     for i in args.t:
-        if i.isUpper():
-            index = Uppercase_Letters.index(i)
-            newChar = Uppercase_Letters[index + args.s]
-            cipherText.append(newChar)
-        else:
-            index = Lowercase_Letters.index(i)
-            newChar = Lowercase_Letters[index + arg.s]
-            cipherText.append(newChar)
-
+        try:
+            if i.isupper():
+                index = Uppercase_Letters.index(i)
+                newChar = Uppercase_Letters[index + args.s]
+                cipherText.append(newChar)
+            else:
+                index = Lowercase_Letters.index(i)
+                newChar = Lowercase_Letters[index + args.s]
+                cipherText.append(newChar)
+        except:
+            pass
     print(''.join(cipherText))
 
 main()
