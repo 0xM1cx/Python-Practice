@@ -14,9 +14,9 @@ def main():
     Lowercase_Letters = string.ascii_lowercase
     Uppercase_Letters = string.ascii_uppercase
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description="This converts your text to a caesar cipher text. You can specify the shift value from 1 - 25")
     parser.add_argument("-t", required=True, type=str, help="Indicate the text you want shift the values")
-    parser.add_argument("-s", required=True, type=int, help="Specify the shift value E.g. 3 to shift letter to 3 spaces.")
+    parser.add_argument("-s", required=True, type=int, help="Specify the shift value E.g. 3 to shift letter to 3 spaces. You can only have 1 - 25 as shift value")
     args = parser.parse_args()
 
     cipherText = []
