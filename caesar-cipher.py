@@ -3,9 +3,10 @@ import string
 
 '''
 # TODO
-1. Find a solution for the index error =>
-    The error was caused due to the -s parameter having an shift value over the range of the list
-    E.g if -s is 3 and the letter is z it would case an indexError.
+1. Start commenting on the different functions of each line
+2. Add an args and feature for ciphering text inside files
+3. Add an args and feature for deciphering text that is both inside files and command line args
+4. Add a feature to output cipher text to file
 '''
 
 def main():
