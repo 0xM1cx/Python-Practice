@@ -30,7 +30,13 @@ def main():
                 newChar = Lowercase_Letters[index + args.s]
                 cipherText.append(newChar)
         except:
-            pass
+            if i.isupper():
+                currentIndex = Uppercase_Letters.index(i) + 1
+                remainingNumberOfLetters = 26 - currentIndex
+                newChar = Uppercase_Letters[args.s - remainingNumberOfLetters - 1]
+                cipherText.append(newChar)
+    
+    
     print(''.join(cipherText))
 
 main()
