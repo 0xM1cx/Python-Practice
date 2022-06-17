@@ -11,21 +11,17 @@ romanNumeral_ToInt = {
         "M": 1000
     }
 
-user_input = input()
-def from_roman_numeral(user_input, dic):
-    n = 0
-    try:
-        UInput = user_input.split("")
-    except:
-        UInput = user_input
+n = str(input("RN: "))
 
-  
+def from_roman_numeral(roman_numeral):
+    sum = 0
+    if roman_numeral == "CD":
+        sum += 400
+    elif roman_numeral == "XL":
+        sum += 40
+    else:
+        for i in roman_numeral:
+            sum += int(romanNumeral_ToInt[i])
+    return sum
 
-    for i in UInput:
-        n += int(dic[i])
-        
-    print(n)
-
-
-
-from_roman_numeral(user_input, romanNumeral_ToInt)
+print(from_roman_numeral(n))
