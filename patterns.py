@@ -1,5 +1,3 @@
-import dis
-from unicodedata import numeric
 
 
 def displayNumberPyramid(): # Problem Complete
@@ -19,10 +17,17 @@ def displayNumberColumns(): # Problem Complete
         print(j, end="\t")
 
 
-def displayUpsideDownPyramid():
-    pass
+def displayUpsideDownPyramid(): # Problem Completed
+    for i in range(11, 0, -1):
+        for j in range(i):
+            print("*", end="")
+        print("")
+    for i in range(0, 11):
+        for j in range(i):
+            print("*", end="")
+        print("")
 
-def sumOfPrevAndCurrent():
+def sumOfPrevAndCurrent(): 
     '''Write a program to iterate the first 10 numbers and
     in each iteration, print the sum of the current and previous 
     number. '''
@@ -33,3 +38,16 @@ def sumOfPrevAndCurrent():
         previousNumber -= 1
     
     
+def numberPyramidReversed(): # Problem Completed
+    for i in range(6, 0, -1):
+        for j in range(i):
+            print(j, end=' ')
+        print("")
+
+def spacedPyramid():
+    for i in range(11):
+        for b in range(i):
+            print("*", end=" ")
+        print("")
+
+spacedPyramid()
