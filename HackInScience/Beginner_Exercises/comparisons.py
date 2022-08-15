@@ -11,11 +11,14 @@ the_list = [
     430158267,
 ]
 
+# The for loop below goes through every element 
+# in the list and compares that element to the biggestNumber variable
+# if the element is greater than the biggestNumber variable then it replaces its value
+# with the value of i which is the current element on the lsit that is passed.
 
 biggestNumber = 0
 for i in the_list:
-    for b in the_list:
-        if i > b:
-            biggestNumber = i
+    if i > biggestNumber:
+        biggestNumber = i
 
 print(biggestNumber)
