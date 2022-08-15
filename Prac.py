@@ -12,13 +12,15 @@ second
 third
 '''
 
-
 UserInput = str(input("Type Here: "))
 Inputs = []
 while UserInput:
     if UserInput not in Inputs:
         Inputs.append(UserInput)
     UserInput = str(input("Type Here: "))
+    
 
 for i in Inputs:
     print(i)
+
+

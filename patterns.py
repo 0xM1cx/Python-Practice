@@ -1,5 +1,3 @@
-
-
 def displayNumberPyramid(): # Problem Complete
     rowInput = str(input())
     for i in range(int(rowInput) + 1):
@@ -50,4 +48,4 @@ def spacedPyramid():
             print("*", end=" ")
         print("")
 
-spacedPyramid()
+displayNumberColumns()
