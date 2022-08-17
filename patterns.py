@@ -5,9 +5,10 @@ def displayNumberPyramid(): # Problem Complete
             print(i, end=" ")
         print("")
 
+
+
 def displayNumberColumns(): # Problem Complete
     numberRange = input("Number range: ")
-   
     for j in range(1, int(numberRange) + 1):
         if j % 5 == 0:
             print(j)
