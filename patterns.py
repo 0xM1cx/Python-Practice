@@ -48,4 +48,4 @@ def spacedPyramid():
             print("*", end=" ")
         print("")
 
-displayNumberColumns()
+displayUpsideDownPyramid()
