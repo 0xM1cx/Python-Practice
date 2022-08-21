@@ -12,6 +12,8 @@ second
 third
 '''
 
+
+
 UserInput = str(input("Type Here: "))
 Inputs = []
 while UserInput:
