@@ -21,5 +21,3 @@ def exerciseTwo():
             print("*", end="")
         print("")
 
-
-exerciseOne()
