@@ -1,6 +1,8 @@
 '''Create a program, that accepts three integers. Compare each and print the largest value among the three'''
 
 
+
+
 def assignmentTwo():
     '''Create a simple program, that accepts three integers. Compare each and print the largest value among the three.'''
     numArray = []
@@ -15,4 +17,6 @@ def assignmentTwo():
 
     print(f"The biggest number is {biggestNumber}")
 
+age = 14
+type(age)
 
