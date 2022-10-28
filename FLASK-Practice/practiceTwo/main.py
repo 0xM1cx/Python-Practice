@@ -4,19 +4,22 @@ import sqlite3
 app = Flask(__name__)
 
 
-
-connection = sqlite3.connect('instructors.db')
-cur = connection.cursor()
-arr = []
-for row in cur.execute("SELECT * FROM instructors"):
-    arr.append(row)
+def get_db_connection():
+    conn = sqlite3.connect("instructors.db")
+    conn.row_factory = sqlite3.Row
+    return conn
     
 
 @app.route('/')
-def main(arr=arr):
-    return render_template("index.html", arr=arr)
+def main():
+    conn = get_db_connection()
+    profiles = conn.execute("SELECT * FROM Instructors").fetchall()
+    conn.close()
+    return render_template("index.html", profiles=profiles)
 
 
 '''NOTES
-+ Make a sqlite database to store the location of images, as well as the content for each instructor card
++ Add new entries(instructor profiles) to the databse
++ Add database values to html flask web app
++ 
 '''
