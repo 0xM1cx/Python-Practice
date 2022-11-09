@@ -7,13 +7,13 @@ import string
 2. Add an args and feature for ciphering text inside files
 3. Add an args and feature for deciphering text that is both inside files and command line args
 4. Add a feature to output cipher text to file
-5. Make a readme file for this program
 '''
 
 def main():
     
     Lowercase_Letters = string.ascii_lowercase
     Uppercase_Letters = string.ascii_uppercase
+
 
     parser = argparse.ArgumentParser(description="This converts your text to a caesar cipher text. You can specify the shift value from 1 - 25")
     parser.add_argument("-t", required=True, type=str, help="Indicate the text you want shift the values")
