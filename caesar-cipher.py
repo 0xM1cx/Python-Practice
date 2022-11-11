@@ -1,5 +1,6 @@
 import argparse
 import string
+import subprocess
 
 '''
 # TODO
@@ -8,7 +9,6 @@ import string
 3. Add an args and feature for deciphering text that is both inside files and command line args
 4. Add a feature to output cipher text to file
 '''
-
 def main():
     
     Lowercase_Letters = string.ascii_lowercase
@@ -44,7 +44,5 @@ def main():
                 cipherText.append(newChar)
     
     print(''.join(cipherText))
-
-
 
 main()
