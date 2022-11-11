@@ -1,7 +1,5 @@
 import argparse
 import string
-import subprocess
-
 '''
 # TODO
 1. Start commenting on the different functions of each line
