@@ -1,11 +1,15 @@
-def authenticate(name):
-    print(f"Hello {name}")
+# himo kita bago na code
+print("Hello Earl")
+a=1
+b=7
+try:
+    int(input("Enter a number: "))
+except ValueError:
+    print("you're")
 
-def identify():
-    pass
 
 
-def main():
-    username = input("what is your name: ")
-    authenticate(username)
 
+name = "Shawn Michael A. Sudaria"
+
+print(f"My name is ", name)
