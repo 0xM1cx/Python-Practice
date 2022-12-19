@@ -12,4 +12,5 @@ except ValueError:
 
 name = "Shawn Michael A. Sudaria"
 
-print(f"My name is ", name)
+print(f"My name is {name}")
+print(8 + 8)
