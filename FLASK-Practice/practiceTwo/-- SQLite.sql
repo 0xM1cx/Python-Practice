@@ -1,0 +1,22 @@
+-- SQLite
+-- SELECT * from instructors;
+
+-- INSERT INTO Instructors (Name, Department, College, Score)
+-- VALUES ("Cheryl P. Abarientos", "CIVIL ENGINEERING", "COE", 0),
+-- ("Ma. Helen L. Abong", "CIVIL ENGINEERING", "COE", 0),
+-- ("Bartolome C. Anano", "CIVIL ENGINEERING", "COE", 0),
+-- ("Al Cris John C. Casio", "CIVIL ENGINEERING", "COE", 0),
+-- ("Mark Kevin T. Cidro", "CIVIL ENGINEERING", "COE", 0),
+-- ("Cynthia Grace C. Dumas", "CIVIL ENGINEERING", "COE", 0),
+-- ("Hannah Marie C. Entatano", "CIVIL ENGINEERING", "COE", 0),
+-- ("Marvin Jade G. Genoguin", "CIVIL ENGINEERING", "COE", 0),
+-- ("Arjane C. Lacambra", "CIVIL ENGINEERING", "COE", 0),
+-- ("Lilian A. Lerios", "CIVIL ENGINEERING", "COE", 0),
+-- ("Dioscoro Y. Mancao JR.", "CIVIL ENGINEERING", "COE", 0),
+-- ("Salamen P. Martin JR.", "CIVIL ENGINEERING", "COE", 0),
+-- ("Rina Marie V. Pedrosa", "CIVIL ENGINEERING", "COE", 0),
+-- ("Wenceslao C. Perante", "CIVIL ENGINEERING", "COE", 0),
+-- ("Annabelle B. Pilapil", "CIVIL ENGINEERING", "COE", 0),
+-- ("Danilo B. Pulma", "CIVIL ENGINEERING", "COE", 0),
+-- ("Krestie Nel B. Teposo", "CIVIL ENGINEERING", "COE", 0);
+SELECT * FROM Instructors;
