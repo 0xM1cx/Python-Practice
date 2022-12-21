@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>EVSU Teacher Evaluation</title>
+        <script src="/static/voting.js"></script>
+        <link rel="stylesheet" href="/static/voting.css">
+    </head>
+    <body>
+        <div class="main-card">
+            <h1>Instructor Evaluation</h1>
+            <div class="card-container">
+                <div class="sub-container">
+                    <div class="desc">
+                        <h4>Name: <b>{{ profiles[0][1] }}</b></h4>
+                        <h4>College: <b>{{ profiles[0][3] }}</b></h4>
+                        <h4>Department: <b>{{ profiles[0][2] }}</b></h4>
+                        <h4>Score: <b>{{ profiles[0][4] }}</b></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
