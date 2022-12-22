@@ -10,16 +10,13 @@ def get_db_connection():
     return conn
     
 
-@app.route('/')
-def main():
+@app.route('/voting')
+def voting():
     conn = get_db_connection()
     profiles = conn.execute("SELECT * FROM Instructors").fetchall()
     conn.close()
     return render_template("index.html", profiles=profiles)
 
 
-'''NOTES
-+ Add new entries(instructor profiles) to the databse
-+ Add database values to html flask web app
-+ 
-'''
+
+
