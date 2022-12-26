@@ -20,6 +20,7 @@ nodeC = Node(4)
 nodeD = Node(2)
 nodeE = Node(1)
 
+
 nodeA.next = nodeB
 nodeB.next = nodeC
 nodeC.next = nodeD
