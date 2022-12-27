@@ -3,7 +3,6 @@ class Node:
         self.data = data
         self.next = None  # make None as the default value for next.
 
-
 def count_nodes(head):
     # assuming that head != None
     count = 1
@@ -13,13 +12,11 @@ def count_nodes(head):
         count += 1
     return count
 
-
 nodeA = Node(6)
 nodeB = Node(3)
 nodeC = Node(4)
 nodeD = Node(2)
 nodeE = Node(1)
-
 
 nodeA.next = nodeB
 nodeB.next = nodeC
