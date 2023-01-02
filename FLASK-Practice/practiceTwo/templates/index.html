@@ -2,10 +2,39 @@
 <html>
     <head>
         <title>EVSU Teacher Evaluation</title>
-        <script src="/static/app.js"></script>
+        <script>
+            function displayTime() {
+                var now = new Date();
+                var hours = now.getHours();
+                var minutes = now.getMinutes();
+                var seconds = now.getSeconds();
+            
+                document.getElementById("time").innerHTML = 
+                (hours < 10 ? "0" : "") + hours + ":" + 
+                (minutes < 10 ? "0" : "") + minutes + ":" + 
+                (seconds < 10 ? "0" : "") + seconds;
+            }
+            
+            setInterval(displayTime, 1000);
+  
+        </script>
         <link rel="stylesheet" href="/static/styles.css">
     </head>
     <body>
-        
+        <main>
+            <div>
+                <h1>Rate Ur EVSU Prof(COE Edition)</h1>
+            </div>
+            <!-- Search Bar -->
+            <div>
+
+            </div>
+            <hr>
+            <p>DISCLAIMER: This is just for fun ;). This is not meant to </p>
+        </main>
+        <hr>
+        <footer>
+            <small id="time"></small>
+        </footer>
     </body>
 </html>
