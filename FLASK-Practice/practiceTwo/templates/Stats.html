@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>EVSU Teacher Evaluation</title>
+        <script>
+            function displayTime() {
+                var now = new Date();
+                var hours = now.getHours();
+                var minutes = now.getMinutes();
+                var seconds = now.getSeconds();
+            
+                document.getElementById("time").innerHTML = 
+                (hours < 10 ? "0" : "") + hours + ":" + 
+                (minutes < 10 ? "0" : "") + minutes + ":" + 
+                (seconds < 10 ? "0" : "") + seconds;
+            }
+            
+            setInterval(displayTime, 1000);
+  
+        </script>
+        <link rel="stylesheet" href="/static/styles.css">
+    </head>
+    <body>
+        <main>
+            <div>
+                <h1>Rate Ur EVSU Prof(COE Edition)</h1>
+            </div>
+            <!-- Search Bar -->
+            <div id="inputBox">
+                <label for="searchBar">Use the input box below to search for the professors name</label>
+                <br>
+                <input name="searchBar" type="text">
+            </div>
+            <hr>
+            <p>DISCLAIMER: This is just for fun ;). This is not meant to <b><span style="color: red;">UPDATE THIS SECTION</span></b></p>
+        </main>
+        <hr>
+        <footer>
+            <small id="time"></small>
+        </footer>
+    </body>
+</html>

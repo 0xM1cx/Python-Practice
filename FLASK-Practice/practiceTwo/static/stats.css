@@ -1,0 +1,34 @@
+main, footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+#inputBox{
+    width: 70%;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#inputBox > input {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.choose {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+}
