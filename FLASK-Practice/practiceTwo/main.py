@@ -14,22 +14,20 @@ def get_db_connection():
     return conn
     
 
-@app.route('/voting')
+@app.route('/rate')
 def voting():
 
     conn = get_db_connection()
     profiles = conn.execute("SELECT * FROM instructors").fetchall()
     conn.close()
     
-    return render_template("voting.html", profiles=profiles)
+    return render_template("rate.html", profiles=profiles)
 
 
 
 @app.route("/")
 def index():
-
-    current_time = datetime.now()
-    return render_template("index.html", current_time = current_time.strftime("%H:%M:%S"))
+    return render_template("index.html")
 
 if __name__ == "__main__":
     app.run(debug = True)
