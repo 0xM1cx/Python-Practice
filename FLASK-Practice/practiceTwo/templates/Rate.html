@@ -4,6 +4,12 @@
         <title>EVSU Teacher Evaluation</title>
         <script src="/static/Rate.js"></script>
         <link rel="stylesheet" href="/static/Rate.css">
+        <script>
+            function _next()
+            {
+                window.location.reload();
+            }
+        </script>
     </head>
     <body>
         <div class="main-card">
@@ -11,11 +17,11 @@
             <div class="card-container">
                 <div class="sub-container">
                     <div class="desc">
-                        <h4>Name: <b>{{ profiles[0][1] }}</b></h4>
-                        <h4>College: <b>{{ profiles[0][3] }}</b></h4>
-                        <h4>Department: <b>{{ profiles[0][2] }}</b></h4>
+                        <h4 class="teacher">Name: <b>{{ profiles[0][currentindex] }}</b></h4>
+                        <h4 class="_teacher">College: <b>{{ profiles[0][currentindex+2] }}</b></h4>
+                        <h4 class="teacher_">Department: <b>{{ profiles[0][currentindex+1] }}</b></h4>
                         <input type="">
-                        <span><button>Prev</button><button>Next</button></span>
+                        <span><button type="submit">Prev</button><button onclick="_next()" id="next" type="submit" name="next_item">Next</button></span>
                     </div>
                 </div>
             </div>
