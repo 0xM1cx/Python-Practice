@@ -17,18 +17,13 @@ def get_db_connection():
 currentindex = 0
 @app.route('/rate')
 def voting():
-
+    id_num = 1;
     conn = get_db_connection()
-    profiles = conn.execute("SELECT * FROM instructors").fetchall()
+    profiles = conn.execute(f"SELECT * FROM instructors WHERE id == '{id_num}'").fetchall()
     conn.close()
     
-    global currentindex
-    currentindex = currentindex + 1
-    # next_item = request.form.get('next_item')
-    # next_item_index = int(request.form.get('next_item_index', 0))
-    # data = conn.query(column='Nauka').offset(next_item_index).limit(1).all()[0]
-    # data = conn.execute("SELCT * FROM instructors WHERE College LIKE '%COE%'")
-    return render_template("rate.html", profiles=profiles, currentindex=currentindex)
+    
+    return render_template("rate.html", profiles=profiles)
 
 
 

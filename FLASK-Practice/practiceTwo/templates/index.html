@@ -21,45 +21,31 @@
             setInterval(displayTime, 1000);
   
         </script>
-        <link rel="stylesheet" type="text/css" href="/static/styles.css">
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/static/styles.css">
     </head>
-    <body class="bg-danger">
-        <div class="container bg-danger">
-            <!-- <main>
-                <div>
+    <body class="d-flex align-items-center justify-content-center">
+        <div class="container mx-auto">
+            <div class="row row-cols-1 text-center">
+                <div class="col">
                     <h1>Rate Ur EVSU Prof(COE Edition)</h1>
                 </div>
-                Choosing Section
-                <div class="choose">
-                    <button><span>Rate</span> A Professor</button>
-                    <button>See the <span>Reviews</span></button>
-                </div>
-                <hr>
-                <p>DISCLAIMER: This is just for fun ;). This is not meant to <b><span style="color: red;">UPDATE THIS SECTION</span></b></p>
-            </main> -->
-            <div class="row">
-                
-                <div class="title col d-flex justify-content-center align-items-center">
-                    <h1>Rate Ur EVSU Prof(COE Edition)</h1>
-                </div>
-                
             </div>
-
-            <div class="row row-cols-6 d-flex align-content-center justify-content-center g-0">
-                
-                <div class="col">
-                    <button><span>Rate</span> A Professor</button>
+            <br>
+            <div class="row row-cols-2 text-center">
+                <div class="btns col">
+                    <button type="button" class="btn btn-light"><span>Rate</span> A Professor</button>
                 </div>
-                <div class="col">
-                    <button>See the <span>Reviews</span></button>
+                <div class="btns col border-dark">
+                    <button type="button" class="btn btn-light">See the <span>Reviews</span></button>
                 </div>
-                
             </div>
 
             <hr>
-            <div class="row">
-                <div class="title col d-flex justify-content-center align-content-center">
+            <div class="row row-cols-1 text-center">
+                <div class="col">
+                    <small><p>This is not meant to tarnish the professors reputation, but only to give an anonymous voice to EVSU student and to give unbaised opinion on their respoective professors</p></small>
                     <small id="time"></small>
                 </div>
             </div>
@@ -67,8 +53,6 @@
         </div>
 
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+       
     </body>
 </html>

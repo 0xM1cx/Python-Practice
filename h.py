@@ -1,16 +1,23 @@
-# himo kita bago na code
-print("Hello Earl")
-a=1
-b=7
-try:
-    int(input("Enter a number: "))
-except ValueError:
-    print("you're")
+# import matplotlib.pyplot as akonPlotter
 
 
+# akonData = {
+#     "Math": 40,
+#     "Physics": 50,
+#     "Chemistry": 40,
+#     "Computer Science": 70,
+#     "Philosophy": 50
+# }
 
+# subjects = list(akonData.keys())
+# numberOfEnrollees = list(akonData.values())
 
-name = "Shawn Michael A. Sudaria"
+# figure = akonPlotter.figure(figsize=(10,5))
 
-print(f"My name is {name}")
-print(8 + 8)
+# akonPlotter.bar(subjects, numberOfEnrollees, color = "blue", width=0.5)
+
+# akonPlotter.xlabel("Mga subjects")
+# akonPlotter.ylabel("Mga Number of Enrollees")
+# akonPlotter.title("Number of students enrolled in sample courses")
+# akonPlotter.show()
+

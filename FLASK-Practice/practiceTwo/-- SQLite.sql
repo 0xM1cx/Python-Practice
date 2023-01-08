@@ -1,4 +1,4 @@
--- -- SQLite
+-- SQLite
 -- INSERT INTO instructors (Name, Department, College, Score)
 -- VALUES ("Douglas A. Anninon", "Mechanical Engineering", "COE", 0),
 -- ("Albert A. Azcarraga", "Mechanical Engineering", "COE", 0),
