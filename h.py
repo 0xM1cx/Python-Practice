@@ -28,4 +28,15 @@ def digit_sum(n):
         sum += int(i)
     return sum 
 
-print(f" The sum of the numbers is {digit_sum(1234)}")
+def longest_word(text):
+    text = text.replace("\n", " ")
+    words = text.split(" ")
+    longestword = " "
+    for i in words:
+        if len(i) >= len(longestword):
+            print(i)
+            
+            
+    print()
+
+longest_word("The king is the current\nking")
