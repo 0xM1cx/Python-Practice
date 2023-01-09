@@ -21,3 +21,11 @@
 # akonPlotter.title("Number of students enrolled in sample courses")
 # akonPlotter.show()
 
+def digit_sum(n):
+    n = str(n)
+    sum = 0
+    for i in n:
+        sum += int(i)
+    return sum 
+
+print(f" The sum of the numbers is {digit_sum(1234)}")
