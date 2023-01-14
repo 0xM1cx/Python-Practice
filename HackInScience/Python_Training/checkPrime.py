@@ -1,19 +1,21 @@
+from math import sqrt
+
 def is_prime(n):
-    flag = 0;
-    if n == 1 or n == 0 or n == 2:
-        return 1
+    flag = False
+    if n == 1 or n == 0:
+        flag = True
     elif n > 2:
-        for i in range(2, n):
-            if n % i == 0:
-                flag = 1
-            else: 
-                flag = 0
+        for i in range(2, round(sqrt(n))):
+            if (n % i) == 0:
+                flag = True
+                break
+            
 
 
-    if flag == 0:
-        return True
-    else:
+    if flag:
         return False
+    else:
+        return True
 
-        
-print(is_prime(9))
+
+print(is_prime(20021527))
