@@ -23,3 +23,5 @@ push(s, 5)
 push(s, 6)
 
 print(s)
+print(pop(s))
+print(s)
