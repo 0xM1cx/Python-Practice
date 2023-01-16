@@ -1,17 +1,27 @@
 import string
 
 def filterList(s):
-    new_string = [] # the books/letters will be contained here
+    current_string = [] # the books/letters will be contained here
 
     letters = string.ascii_letters 
+    encountered_backslash = 0
 
-    for i in s: # This loops through every element in the array/list
-        if i in letters: # if the current element searched is a letter/book and not a wall then it will be pushed to the new_string stack
-            new_string.append(i)
+
+    for i in s:
+        if i == "\\":
+            encountered_backslash += 1
         else:
-            continue
+            if i in letters:
+                current_string.append(i)
+        if encountered_backslash == 2:
+            break
+    # for i in s: # This loops through every element in the array/list
+    #     if i in letters: # if the current element searched is a letter/book and not a wall then it will be pushed to the new_string stack
+    #         new_string.append(i)
+    #     else:
+    #         continue
     
-    return new_string
+    return current_string
 
 
 
