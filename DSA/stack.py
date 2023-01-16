@@ -6,15 +6,15 @@ def filterList(s):
     letters = string.ascii_letters 
     encountered_backslash = 0
 
-
-    for i in s:
-        if i == "\\":
-            encountered_backslash += 1
-        else:
-            if i in letters:
-                current_string.append(i)
-        if encountered_backslash == 2:
-            break
+    while len(s) != 0:
+        for i in s:
+            if i == "\\":
+                encountered_backslash += 1
+            else:
+                if i in letters:
+                    buffer = s.pop(s.index(i))
+                    current_string.append(buffer)
+        
     # for i in s: # This loops through every element in the array/list
     #     if i in letters: # if the current element searched is a letter/book and not a wall then it will be pushed to the new_string stack
     #         new_string.append(i)
@@ -56,8 +56,8 @@ def main():
     iloveu
 
     '''
-    s = list(input("INPUT: "))
-
+    s = input("INPUT: ").split("/")
+    print(s)
     stack = filterList(s)    
 
     final = []
