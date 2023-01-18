@@ -21,3 +21,10 @@ def exerciseTwo():
             print("*", end="")
         print("")
 
+def lambdaPractice():
+    greetUser = lambda name : print(f"Welcome {name}")
+
+    greetUser("Shawn")
+
+
+lambdaPractice()

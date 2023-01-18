@@ -1,7 +1,7 @@
 import argparse
 import string
 '''
-# TODO
+!! TODO !!
 1. Start commenting on the different functions of each line
 2. Add an args and feature for ciphering text inside files
 3. Add an args and feature for deciphering text that is both inside files and command line args
@@ -9,8 +9,8 @@ import string
 '''
 def main():
     
-    Lowercase_Letters = string.ascii_lowercase
-    Uppercase_Letters = string.ascii_uppercase
+    Lowercase_Letters = string.ascii_lowercase # string of lowercase letters
+    Uppercase_Letters = string.ascii_uppercase # string of uppercase letters
 
 
     parser = argparse.ArgumentParser(description="This converts your text to a caesar cipher text. You can specify the shift value from 1 - 25")
@@ -18,11 +18,11 @@ def main():
     parser.add_argument("-s", required=True, type=int, help="Specify the shift value E.g. 3 to shift letter to 3 spaces. You can only have 1 - 25 as shift value")
     args = parser.parse_args()
 
-    cipherText = []
+    cipherText = [] # This stores the ciphered text
     for i in args.t:
         try:
-            if i.isupper():
-                index = Uppercase_Letters.index(i)
+            if i.isupper(): # check if its an uppercase letter
+                index = Uppercase_Letters.index(i) # 
                 newChar = Uppercase_Letters[index + args.s]
                 cipherText.append(newChar)
             else:
