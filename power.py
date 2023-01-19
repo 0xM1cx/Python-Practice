@@ -25,10 +25,15 @@ def lambdaPractice():
     greetUser = lambda name : print(f"Welcome {name}")
     greetUser("Shawn")
 
-    # sort an array of tuples by their second element using
+    # sort an list of tuples by their second element using
     # lamda function    
     tuple_list = [('English', 88), ('Science', 90), ('Maths', 97), ('Social sciences', 82)]
     tuple_list.sort(key=lambda i : i[1]) # instructs Python to sort list of tuples by the second element
     print(tuple_list)
+
+    # sort a list of dictionanries using a lambda function
+    dict_list = [{'make': 'Nokia', 'model': 216, 'color': 'Black'}, {'make': 'Mi Max', 'model': '2', 'color': 'Gold'}, {'make': 'Samsung', 'model': 7, 'color': 'Blue'}]
+    dict_list.sort(key=lambda a: a.model)
+    print(dict_list)
     
 lambdaPractice()
