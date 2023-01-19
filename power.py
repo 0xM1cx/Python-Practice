@@ -23,8 +23,12 @@ def exerciseTwo():
 
 def lambdaPractice():
     greetUser = lambda name : print(f"Welcome {name}")
-
     greetUser("Shawn")
 
-
+    # sort an array of tuples by their second element using
+    # lamda function    
+    tuple_list = [('English', 88), ('Science', 90), ('Maths', 97), ('Social sciences', 82)]
+    tuple_list.sort(key=lambda i : i[1]) # instructs Python to sort list of tuples by the second element
+    print(tuple_list)
+    
 lambdaPractice()
