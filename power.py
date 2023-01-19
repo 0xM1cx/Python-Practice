@@ -33,7 +33,7 @@ def lambdaPractice():
 
     # sort a list of dictionanries using a lambda function
     dict_list = [{'make': 'Nokia', 'model': 216, 'color': 'Black'}, {'make': 'Mi Max', 'model': '2', 'color': 'Gold'}, {'make': 'Samsung', 'model': 7, 'color': 'Blue'}]
-    dict_list.sort(key=lambda a: a.model)
+    sorted_dictList = sorted(dict_list, key=lambda a: int(a['model']))
     print(dict_list)
     
 lambdaPractice()
