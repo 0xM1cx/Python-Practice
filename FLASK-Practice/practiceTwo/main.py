@@ -16,16 +16,18 @@ def get_db_connection():
     
 currentindex = 0
 @app.route('/rate')
-def voting():
+def rate():
     id_num = 1;
     conn = get_db_connection()
     profiles = conn.execute(f"SELECT * FROM instructors WHERE id == '{id_num}'").fetchall()
     conn.close()
     
     
-    return render_template("rate.html", profiles=profiles)
+    return render_template("Rate.html", profiles=profiles)
 
-
+@app.route('/review')
+def review():
+    return render_template("Reviews.html")
 
 @app.route("/")
 def index():
