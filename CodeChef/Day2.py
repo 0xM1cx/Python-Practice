@@ -116,3 +116,72 @@ def TourOfKing():
         uInput = input().split(' ')
         uInput = [int(x) for x in uInput]
         print((uInput[0] * 5)+(uInput[1] * 7))
+
+def My1stContest():
+    '''In a contest where N new users visited the contest,
+    - A users just saw the problem and didn't make any submissions and hence
+    won't get any rating.
+    - B users who made a submission but could not solve any problem correctly.
+    Thus, after the contest, they will get a rating in the range 800-1000.
+    - Everyone else could correctly solve atleast 1 problem. Thus, they will
+    get a rating strictly greater than 1000 after the contest.
+    
+    You need to output the number of new users in the contest who, after 
+    the contest, will get a rating and also the number of new users who
+    will get a rating strictly greater thatn 1000'''
+
+    uInput = input().split(' ')
+    uInput = [int(x) for x in uInput]
+    Ausers = uInput[1]
+    TotalNewUsers = uInput[0]
+    Busers = uInput[2]
+
+    willGetRating = TotalNewUsers - Ausers
+    willGetHigherRating = willGetRating - Busers
+
+    print(f"{willGetRating} {willGetHigherRating}")
+
+
+
+def BestOfTwo():
+    '''Chef took an examination two times. In the first attempt, he scored
+    X marks while in the second attempt he scored Y marks. According to the
+    rules of the examination, the best score out of the two attempts will
+    be considered as the final score. Determine the final score of the 
+    chef.'''
+
+
+
+    import math
+    t = int(input())
+    for i in range(t):
+        x,y = map(int, input().split())
+        print(max(x,y))
+
+
+def RollerCoaster():
+    '''Chef's son wants to go on a roller coaster ride. The height of 
+    Chef's son is X inches while the minimum height required to go on the
+    ride is H inches. Determine whether he can go on the ride or not'''
+
+    t = int(input())
+    for i in range(t):
+        x,h = map(int, input().split(' '))
+        if x >= h:
+            print("YES")
+        else:
+            print("NO")
+
+def ChefAndBrainSpeed():
+    '''Chef has a threshhold limit of X bits per second above which his
+    calculation are prone to errors. If Chef is currently working at Y
+    bits per second, is he prone to errors?'''
+
+    X, Y = map(int, input().split(' '))
+
+    if Y > X:
+        print("YES")
+    else:
+        print("NO")
+
+
