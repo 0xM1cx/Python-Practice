@@ -1,3 +1,8 @@
+'''
+Advent of Code Day 4
+Author: Shawn Michael A. Sudaria
+Status: Completed
+'''
 fullyContain = 0
 
 def getNumOfFullyContained(firstPair, secondPair):
