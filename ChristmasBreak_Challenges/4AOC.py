@@ -7,8 +7,8 @@ def getNumOfFullyContained(firstPair, secondPair):
             noOfContained += 1
 
     if noOfContained == len(firstPair) or noOfContained == len(secondPair):
+        global fullyContain
         fullyContain += 1
-
 
 def separateSections(sectionOne, sectionTwo):
     firstPair = []
