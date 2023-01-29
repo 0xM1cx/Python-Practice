@@ -3,6 +3,6 @@ CREATE TABLE instructors (
     Instructor_Name TEXT NOT NULL,
     Department TEXT NOT NULL,
     College TEXT NOT NULL,
-    SCORE 
+    SCORE INTEGER
 
 )
