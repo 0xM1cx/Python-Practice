@@ -54,22 +54,22 @@ def main():
             for i in file:
                 for char in i:
                     try:
-                        if i.isupper(): # check if its an uppercase letter
-                            index = Uppercase_Letters.index(i) # 
+                        if char.isupper(): # check if its an uppercase letter
+                            index = Uppercase_Letters.index(char) # 
                             newChar = Uppercase_Letters[index + args.s]
                             cipherText.append(newChar)
                         else:
-                            index = Lowercase_Letters.index(i)
+                            index = Lowercase_Letters.index(char)
                             newChar = Lowercase_Letters[index + args.s]
                             cipherText.append(newChar)
                     except:
                         if i.isupper(): # Check if its in lowercase
-                            currentIndex = Uppercase_Letters.index(i) + 1
+                            currentIndex = Uppercase_Letters.index(char) + 1
                             remainingNumberOfLetters = 26 - currentIndex
                             newChar = Uppercase_Letters[args.s - remainingNumberOfLetters - 1]
                             cipherText.append(newChar)
                         else: 
-                            currentIndex = Lowercase_Letters.index(i) + 1
+                            currentIndex = Lowercase_Letters.index(char) + 1
                             remainingNumberOfLetters = 26 - currentIndex
                             newChar = Lowercase_Letters[args.s - remainingNumberOfLetters - 1]
                             cipherText.append(newChar)
