@@ -22,5 +22,7 @@ stack9 = createStack()
 with open("5AOC.txt", "r") as file:
     for i in file:
         line = i.replace("\n", "")
+        words = line.split(" ")
+        print(words)
 
-        
+
