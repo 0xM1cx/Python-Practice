@@ -58,6 +58,17 @@ with open("5AOC.txt", "r") as file:
             crate = pop(stacksDic[source])
             push(stacksDic[destination], crate)
 
-        
+
+def displayStacks(stackDic):
+    message = []
+    for key in stackDic.keys():
+        withBrackets = stackDic[key][-1]
+        letter = withBrackets[1]
+        message.append(letter)
+
+    print(''.join(message))
+
+
+displayStacks(stacksDic)        
 
 
