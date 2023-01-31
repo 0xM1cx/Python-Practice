@@ -55,22 +55,25 @@ with open("5AOC.txt", "r") as file:
         source = words[3]
         destination = words[5]
         temp_source = stacksDic[source]
-        # toMove = [temp_source.pop() for li_item in range(moves)]
-        # push(stacksDic[destination], toMove.reverse())  
-        print(temp_source)
+        try:
+            toMove = [temp_source.pop() for li_item in range(moves)]
+            push(stacksDic[destination], toMove.reverse())  
+        except:
+            continue
+        
 
 
 
 
 
-# def displayStacks(stackDic):
-#     message = []
-#     for key in stackDic.keys():
-#         withBrackets = stackDic[key][-1]
-#         letter = withBrackets[1]
-#         message.append(letter)
+def displayStacks(stackDic):
+    message = []
+    for key in stackDic.keys():
+        withBrackets = stackDic[key][-1]
+        letter = withBrackets[1]
+        message.append(letter)
 
-#     print(''.join(message))
+    print(''.join(message))
 
 
-# displayStacks(stacksDic)  
+displayStacks(stacksDic)  
