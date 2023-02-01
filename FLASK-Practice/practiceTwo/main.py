@@ -9,17 +9,14 @@ app = Flask(__name__)
 
 
 
-def get_db_connection():
-    conn = sqlite3.connect("instructors.db")
-    conn.row_factory = sqlite3.Row
-    return conn
-    
 currentindex = 0
 @app.route('/rate')
 def rate():
     id_num = 1;
-    conn = get_db_connection()
-    profiles = conn.execute(f"SELECT * FROM instructors WHERE id == '{id_num}'").fetchall()
+    conn = sqlite3.connect('instructors.db')
+    cur = conn.cursor()
+    profiles = cur.execute(f"SELECT * FROM instructors WHERE id == '{id_num}'").fetchall()
+    print
     conn.close()
     
     
