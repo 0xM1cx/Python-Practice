@@ -12,17 +12,21 @@ app = Flask(__name__)
 currentindex = 0
 @app.route('/rate')
 def rate():
-    id_num = 1;
     conn = sqlite3.connect('instructors.db')
     cur = conn.cursor()
     profiles = cur.execute(f"SELECT * FROM instructors WHERE id == '{id_num}'").fetchall()
-    # test
+    data = []
     for x in profiles:
-        print(type(x))
+        data.append(x)
     conn.close()
+    current = 0
+
+    name = data[current][1]
+    dept = data[current][2]
+    college = data[current][3]
 
     
-    return render_template("Rate.html", profiles=profiles)
+    return render_template("Rate.html", name=name, dept=dept, college=college)
 
 @app.route('/review')
 def review():
