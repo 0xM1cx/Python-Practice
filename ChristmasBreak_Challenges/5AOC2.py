@@ -54,15 +54,14 @@ with open("5AOC.txt", "r") as file:
         moves = int(words[1])
         source = words[3]
         destination = words[5]
-        temp_source = stacksDic[source]
-        if moves > 1:
-            toMove = [temp_source.pop() for li_item in range(moves)]
-            push(stacksDic[destination], toMove.reverse())  
-        else:
-            for b in range(moves):
-                crate = pop(stacksDic[source])
-                push(stacksDic[destination], crate)
+        temp = []
 
+        crate = pop(stacksDic[source])
+
+        # for b in range(moves):
+        #     crate = pop(stacksDic[source])
+        #     push(temp, createStack)
+        # push(stacksDic[destination], temp.reverse)
 
 
 
