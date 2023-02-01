@@ -16,9 +16,11 @@ def rate():
     conn = sqlite3.connect('instructors.db')
     cur = conn.cursor()
     profiles = cur.execute(f"SELECT * FROM instructors WHERE id == '{id_num}'").fetchall()
-    print
+    # test
+    for x in profiles:
+        print(type(x))
     conn.close()
-    
+
     
     return render_template("Rate.html", profiles=profiles)
 
