@@ -10,14 +10,14 @@ app = Flask(__name__)
 
 
 currentindex = 0
-@app.route('/rate')
+@app.route('/rate' )
 def rate():
     conn = sqlite3.connect('instructors.db')
     cur = conn.cursor()
-    profiles = cur.execute(f"SELECT * FROM instructors WHERE id == '{id_num}'").fetchall()
+    id = 0
+    profiles = cur.execute(f"SELECT * FROM instructors WHERE id == '{id}'").fetchone()
     data = []
-    for x in profiles:
-        data.append(x)
+    
     conn.close()
     current = 0
 
@@ -25,8 +25,8 @@ def rate():
     dept = data[current][2]
     college = data[current][3]
 
-    
-    return render_template("Rate.html", name=name, dept=dept, college=college)
+    # name=name, dept=dept, college=college
+    return render_template("Rate.html")
 
 @app.route('/review')
 def review():
