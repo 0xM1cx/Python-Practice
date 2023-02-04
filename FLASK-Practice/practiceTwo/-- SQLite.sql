@@ -42,5 +42,8 @@
 -- ("Roxcella T. Reas", "Electrical Engineering", "COE", 0);
 
 
-SELECT * FROM instructors;
+-- SELECT * FROM instructors;
+
+ALTER TABLE Instructors
+DROP ID;
 
