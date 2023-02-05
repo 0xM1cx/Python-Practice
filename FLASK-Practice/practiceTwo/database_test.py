@@ -6,6 +6,7 @@ cur = conn.cursor()
 data = []
 
 result = cur.execute("SELECT * FROM instructors")
+res = cur.fetchone()
 # for i in result:
 #     data.append(i)
 
