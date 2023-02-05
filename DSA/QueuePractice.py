@@ -29,3 +29,7 @@ print(q.dequeue())
 q.display()
 q.enqueue(15)
 q.display()
+
+
+second = Queue()
+second.enqueue(1)

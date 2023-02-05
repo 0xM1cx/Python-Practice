@@ -1,4 +1,3 @@
-from bisect import bisect
 import random
 
 def getRandomNumbers():
@@ -9,16 +8,6 @@ def getRandomNumbers():
             phoneNumbers.append(n)
         else:
             continue
-
-
-    # biggestNumber = 0
-
-    # for i in phoneNumbers:
-    #     for b in phoneNumbers:
-    #         if i > b:
-    #             biggestNumber = i
-    #         else:
-    #             biggestNumber = b
             
 
 
