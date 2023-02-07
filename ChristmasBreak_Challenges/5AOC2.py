@@ -56,13 +56,7 @@ with open("5AOC.txt", "r") as file:
         destination = words[5]
         temp = []
 
-        crate = pop(stacksDic[source])
-
-        # for b in range(moves):
-        #     crate = pop(stacksDic[source])
-        #     push(temp, createStack)
-        # push(stacksDic[destination], temp.reverse)
-
+        crate = pop(stacksDic[source])  
 
 
 
