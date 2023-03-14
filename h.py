@@ -1,5 +1,5 @@
 import matplotlib.pyplot as akonPlotter
-
+#Loops 5 times
 for i in range(1,5):
     akonData = {
         "Kagwapohan pag nasa EVSU": i,
