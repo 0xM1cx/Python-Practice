@@ -6,8 +6,6 @@ letters = string.ascii_letters
 rucksacks = []
 duplicates = []
 
-
-
 with open("./input.txt", "r") as f:
     for i in f:
         removedNewline = i.replace("\n", "")
