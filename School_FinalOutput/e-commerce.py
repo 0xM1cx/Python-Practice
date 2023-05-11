@@ -28,7 +28,7 @@ class Sales:
         print("DG Store")
         for each_p in self.dgProduct.keys():
             pro_Details = self.dgProduct[each_p]
-            print(str(eac_p) + ' - ' + str(pro_Details[0]) + ' @ Php' + str(pro_Details[1]))
+            print(str(each_p) + ' - ' + str(pro_Details[0]) + ' @ Php' + str(pro_Details[1]))
         return ''
 
     def selling(self):
@@ -91,6 +91,18 @@ class Customer:
         self.customer_name = cname
         self.customer_address = caddress
 
+class DG_inventory():
+    def __init__(self):
+        self.display_inventory()
+    
+    def display_inventory(self):
+        file_dg_inventory = open("dg_inventory.txt", "t")
+        sales_rec = file_dg_inventory.readline()
+        sales_amt = 0
+        dg_item = []
+
+        while sales_rec != '':
+            print(sales_rec, end='')
 
 dg_tshirt = DG_Product('Mark', 150, 20)
 dg_pants = DG_Product('Martin', 200, 25)
