@@ -74,7 +74,7 @@ class Sales:
 
 
 # ========== K Inventory ==========
-class K_inventory():
+class Sudars_inventory():
     '''This stores the sales details in a text file'''
     def __init__(self):
         self.display_inventory()
@@ -102,8 +102,8 @@ def menu():
 
     rpt = "Y"
     while rpt == "Y":
-        print("\nK's Online Store")
-        print("""\nSystem Menu
+        print(Fore.BLUE, "\nSudaria's Online Store")
+        print(Fore.GREEN, """\nSystem Menu
         [1] Buy a product
         [2] View Products
         [3] View Customers
@@ -121,7 +121,7 @@ def menu():
             print(first_customer.customer_record())
 
         elif c == 4:
-            k_os = K_inventory()
+            k_os = Sudars_inventory()
 
         elif c == 5:
             print("Thank You! Come Again.")
