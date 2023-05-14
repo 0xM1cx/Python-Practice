@@ -1,3 +1,7 @@
+from colorama import Fore
+
+
+
 class K_Store:
     k_store = {}
     pcode = 1
@@ -17,7 +21,10 @@ class K_Store:
             print(f"{str(each_p)} - {str(pro_details[0])} @ Php {str(pro_details[1])}")
         return ''
 
+
+# ========== Customer =========
 class Customer:
+    '''This handles customer data'''
     c_customer = {}
 
     def __init__(self, cid, cname, caddress):
@@ -31,7 +38,10 @@ class Customer:
         self.c_customer[self.customer_id] = (self.customer_name, self.customer_address)
         return self.c_customer[self.customer_id]
 
+
+# ========== Sales =========
 class Sales:
+    '''This handles customer transactions with the store'''
     def __init__(self):
         self.display_K_product()
         self.buy()
@@ -61,7 +71,11 @@ class Sales:
         file_k_inventory.write(sales_rec)
         file_k_inventory.close()                                                
 
+
+
+# ========== K Inventory ==========
 class K_inventory():
+    '''This stores the sales details in a text file'''
     def __init__(self):
         self.display_inventory()
 
