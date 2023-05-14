@@ -48,8 +48,8 @@ class Sales:
 
     def display_K_product(self):
         print("My store")
-        for each_p in k_shirt.k_store.keys():
-            pro_details = k_shirt.k_store[each_p]
+        for each_p in S_shirt.k_store.keys():
+            pro_details = S_shirt.k_store[each_p]
             print(f"[{str(each_p)}] - {str(pro_details[0])} @ Php {str(pro_details[1])}")
 
     def buy(self):
@@ -57,7 +57,7 @@ class Sales:
         self.customer_quantity = int(input("Enter number quantity: "))
         self.customer_id = int(input("Enter customer ID: "))
 
-        item_detail = k_shirt.k_store[self.customer_choice]
+        item_detail = S_shirt.k_store[self.customer_choice]
         c_detail = first_customer.c_customer[self.customer_id]
 
         print(c_detail[0] + ", Please pay an amount of", self.customer_quantity * item_detail[1], "pesos only")
@@ -80,8 +80,8 @@ class Sudars_inventory():
         self.display_inventory()
 
     def display_inventory(self):
-        file_k_inventory = open("k_inventory.txt", "r")
-        sales_rec = file_k_inventory.readline()
+        file_S_inventory = open("k_inventory.txt", "r")
+        sales_rec = file_S_inventory.readline()
         sales_amt = 0
         k_item = {}
 
@@ -96,7 +96,7 @@ class Sudars_inventory():
             else:
                 k_item[int(sales_details[2])] = (sales_details[4],)
                 
-            sales_rec = file_k_inventory.readline()
+            sales_rec = file_S_inventory.readline()
 
 def menu():
 
@@ -115,7 +115,7 @@ def menu():
             s_rec = Sales()
 
         elif c == 2:
-            k_shirt.display_K_product()
+            S_shirt.display_K_product()
 
         elif c == 3:
             print(first_customer.customer_record())
@@ -129,8 +129,8 @@ def menu():
         else:
             print("Enter the right number of choices!")
 
-k_shirt = K_Store("shirt", 100, 20)
-k_pants = K_Store("Pants", 150, 15)
+S_shirt = K_Store("shirt", 100, 20)
+S_pants = K_Store("Pants", 150, 15)
 
 first_customer = Customer(12, "Shawn", "Tacloban City, Leyte")
 
