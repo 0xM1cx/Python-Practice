@@ -1,7 +1,7 @@
 from colorama import Fore
 
 
-
+# ========== Main Store ==========
 class K_Store:
     k_store = {}
     pcode = 1
@@ -20,6 +20,7 @@ class K_Store:
             pro_details = self.k_store[each_p]
             print(f"{str(each_p)} - {str(pro_details[0])} @ Php {str(pro_details[1])}")
         return ''
+
 
 
 # ========== Customer =========
