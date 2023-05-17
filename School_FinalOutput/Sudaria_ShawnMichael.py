@@ -3,7 +3,7 @@ from colorama import Fore
 
 
 
-# ========== Main Store ==========
+# ========== Main Store | Where All the products are placed ==========
 class K_Store:
     k_store = {}
     pcode = 1
@@ -55,9 +55,9 @@ class Sales:
 
     def display_K_product(self):
         print("My store")
-        for each_p in S_shirt.k_store.keys():
-            pro_details = S_shirt.k_store[each_p]
-            print(f"[{str(each_p)}] - {str(pro_details[0])} @ Php {str(pro_details[1])}")
+        for each_prod in S_shirt.k_store.keys():
+            pro_details = S_shirt.k_store[each_prod]
+            print(f"[{str(each_prod)}] - {str(pro_details[0])} @ Php {str(pro_details[1])}")
 
     def buy(self):
         self.customer_choice = int(input("Enter the number of your choice: "))
@@ -106,6 +106,12 @@ class Sudars_inventory():
                 
             sales_rec = file_S_inventory.readline()
 
+
+S_shirt = K_Store("shirt", 100, 20) 
+S_pants = K_Store("Pants", 150, 15)
+
+first_customer = Customer(12, "Shawn", "Tacloban City, Leyte")
+
 def menu():
 
     rpt = "Y"
@@ -119,10 +125,10 @@ def menu():
         [5] Exit""")
         c = int(input("Enter your Choice: "))
 
-        if c == 1:
+        if c == 1: #For buying items
             s_rec = Sales()
 
-        elif c == 2:
+        elif c == 2: # for displaying all the products
             S_shirt.display_K_product()
 
         elif c == 3:
@@ -138,10 +144,8 @@ def menu():
             print("Enter the right number of choices!")
 
 
-S_shirt = K_Store("shirt", 100, 20)
-S_pants = K_Store("Pants", 150, 15)
 
-first_customer = Customer(12, "Shawn", "Tacloban City, Leyte")
+
 
 
 menu()
