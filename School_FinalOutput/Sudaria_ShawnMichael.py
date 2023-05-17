@@ -107,8 +107,9 @@ class Sudars_inventory():
             sales_rec = file_S_inventory.readline()
 
 
-S_shirt = K_Store("shirt", 100, 20) 
-S_pants = K_Store("Pants", 150, 15)
+S_shirt = K_Store("shirt_one", 100, 20) 
+S_pants = K_Store("Pants_one", 150, 15)
+
 
 first_customer = Customer(12, "Shawn", "Tacloban City, Leyte")
 
