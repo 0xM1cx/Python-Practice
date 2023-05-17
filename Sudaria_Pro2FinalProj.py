@@ -1,7 +1,7 @@
 #Sudaria, Shawn Michael A.
 
 record = []
-
+#tanginang add records function
 def Add_Records(record):
     print("\nAddding a Record\n")
     uInput = input("E.g Name Year Section:  ")
@@ -35,8 +35,6 @@ def Delete_Records(record):
 
     index = int(input("Choose what to delete: ")) - 1
     del record[index]
-
-    
 
     
     

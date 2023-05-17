@@ -1,6 +1,8 @@
 from colorama import Fore
 
 
+
+
 # ========== Main Store ==========
 class K_Store:
     k_store = {}
@@ -23,6 +25,7 @@ class K_Store:
 
 
 
+
 # ========== Customer =========
 class Customer:
     '''This handles customer data'''
@@ -38,6 +41,9 @@ class Customer:
         print("View Customers")
         self.c_customer[self.customer_id] = (self.customer_name, self.customer_address)
         return self.c_customer[self.customer_id]
+
+
+
 
 
 # ========== Sales =========
@@ -71,6 +77,7 @@ class Sales:
 
         file_k_inventory.write(sales_rec)
         file_k_inventory.close()                                                
+
 
 
 
@@ -129,6 +136,7 @@ def menu():
             rpt = "N"
         else:
             print("Enter the right number of choices!")
+
 
 S_shirt = K_Store("shirt", 100, 20)
 S_pants = K_Store("Pants", 150, 15)
