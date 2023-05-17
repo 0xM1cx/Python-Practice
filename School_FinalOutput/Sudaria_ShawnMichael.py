@@ -135,4 +135,5 @@ S_pants = K_Store("Pants", 150, 15)
 
 first_customer = Customer(12, "Shawn", "Tacloban City, Leyte")
 
+
 menu()
