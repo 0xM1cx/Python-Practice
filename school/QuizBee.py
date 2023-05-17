@@ -9,7 +9,13 @@ def questionOne():
         if i % 2 == 0:
             print(i)
 
-def questionTwo():
-    
 
-questionTwo()
+def getThis():
+	return "INTEL"
+
+
+def main():
+	uInput = getThis()
+	return uInput + "!!!"
+
+print(main())
