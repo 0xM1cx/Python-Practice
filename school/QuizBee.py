@@ -18,4 +18,12 @@ def main():
 	uInput = getThis()
 	return uInput + "!!!"
 
-print(main())
+
+def start():
+	print("b", end='')
+	def end():
+		return "a"
+	print(end(), end='')
+	print("g")
+
+start()
