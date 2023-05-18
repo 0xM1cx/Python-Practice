@@ -87,6 +87,7 @@ class Sudars_inventory():
     def __init__(self):
         self.display_inventory()
 
+
     def display_inventory(self):
         file_S_inventory = open("k_inventory.txt", "r")
         sales_rec = file_S_inventory.readline()
