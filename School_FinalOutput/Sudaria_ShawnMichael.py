@@ -48,7 +48,7 @@ class Customer:
 
 # ========== Sales =========
 class Sales:
-    '''This handles customer transactions with the store'''
+    '''This handles customer transactions with the store | 09817822116  '''
     def __init__(self):
         self.display_K_product()
         self.buy()
