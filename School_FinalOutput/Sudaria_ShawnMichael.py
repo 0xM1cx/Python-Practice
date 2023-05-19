@@ -1,7 +1,8 @@
 from colorama import Fore
 
 
-
+def _test():
+    pass
 
 # ========== Main Store | Where All the products are placed ==========
 class K_Store:
