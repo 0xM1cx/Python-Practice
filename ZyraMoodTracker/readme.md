@@ -18,3 +18,11 @@
 5 - Angry/Nauuyam/Napipikon 😡
 
 
+
+# main.py functions
+1. 
+
+# moodTracker.py functions
+1. 
+
+
