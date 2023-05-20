@@ -1,5 +1,7 @@
-from colorama import Fore
+from rich import print
+from rich.console import Console
 
+console = Console(width=50)
 
 def _test():
     pass 
@@ -42,9 +44,6 @@ class Customer:
         print("View Customers")
         self.c_customer[self.customer_id] = (self.customer_name, self.customer_address)
         return self.c_customer[self.customer_id]
-
-
-
 
 
 # ========== Sales =========
@@ -119,8 +118,8 @@ def menu():
 
     rpt = "Y"
     while rpt == "Y":
-        print(Fore.BLUE, "\nSudaria's Online Store")
-        print(Fore.GREEN, """\nSystem Menu
+        console.print("\nSudaria's Online Store", style="bold white on blue", justify="center")
+        print("""\nSystem Menu
         [1] Buy a product
         [2] View Products
         [3] View Customers
