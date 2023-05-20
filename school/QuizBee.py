@@ -26,4 +26,5 @@ def start():
 	print(end(), end='')
 	print("g")
 
-start()
+def example():
+	print("\\")
