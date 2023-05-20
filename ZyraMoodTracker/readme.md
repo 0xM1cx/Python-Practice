@@ -20,9 +20,9 @@
 
 
 # main.py functions
-1. 
+1. Serves as the main functions for where the program starts
 
 # moodTracker.py functions
-1. 
+1. Keeps track of moods per specific date and time
 
 
