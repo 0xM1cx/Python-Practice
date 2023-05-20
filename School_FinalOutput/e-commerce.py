@@ -17,7 +17,7 @@ class DG_Product:
             print(str(eac_p) + ' - ' + str(pro_Details[0]) + ' @ Php' + str(pro_Details[1]))
         return ''
 
-    
+# handles sales
 class Sales:
     def __init__(self):
         self.display_DG_Product()
