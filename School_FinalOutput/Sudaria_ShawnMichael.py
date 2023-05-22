@@ -3,9 +3,6 @@ from rich.console import Console
 
 console = Console(width=50)
 
-def _test():
-    pass 
-
 # ========== Main Store | Where All the products are placed ==========
 class K_Store:
     k_store = {}
