@@ -34,3 +34,7 @@ class Circle(Shape):
         self.color = super().__init__(s_color)        
         self.radius = radius
 
+    def calculate_area(self):
+        area = 3.14 * self.radius * self.radius
+        return area
+
