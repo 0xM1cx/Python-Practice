@@ -24,8 +24,6 @@ class K_Store:
         return ''
 
 
-
-
 # ========== Customer =========
 class Customer:
     '''This handles customer data'''
