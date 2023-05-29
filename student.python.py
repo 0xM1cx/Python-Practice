@@ -43,65 +43,74 @@ class StudentEnrollmentGUI:
         # self.student_listbox = tk.Listbox(root,width=60,height=8)
         # self.student_listbox.grid(row=10, columnspan=2, padx=10, pady=3)
         # self.student_listbox.insert(1, "FirstName   LastName   Age   School ID")
-        s = ttk.Style()
-        s.theme_use('calm')
+        self.s = ttk.Style()
+        self.s.theme_use('clam')
 
-        tree = ttk.Treeview(root, columns=("c1", "c2", "c3", "c4"), show='headings', height=5)
+
+        self.column_headings = ("LASTNAME", "FIRSTNAME", "AGE", "SCHOOL ID")
+        self.tree = ttk.Treeview(root, columns=self.column_headings, show='headings', height=5)
         
-        tree.column("# 1", anchor="center")
-        tree.heading("# 1", text="LASTNAME")
-        tree.column("# 2", anchor="center")
-        tree.heading("# 2", text="FIRSTNAME")
-        tree.column("# 3", anchor="center")
-        tree.heading("# 3", text="AGE")
-        tree.column("# 4", anchor="center")
-        tree.heading("# 4", text="SCHOOL ID")
+        
+
+        self.tree.column("# 1", anchor="center")
+        self.tree.heading("# 1", text="LASTNAME")
+        self.tree.column("# 2", anchor="center")
+        self.tree.heading("# 2", text="FIRSTNAME")
+        self.tree.column("# 3", anchor="center")
+        self.tree.heading("# 3", text="AGE")
+        self.tree.column("# 4", anchor="center")
+        self.tree.heading("# 4", text="SCHOOL ID")
 
         self.delete_button = tk.Button(root, text="Delete", command=self.delete_student,bg="pink",width=5,height=2)
         self.delete_button.grid(row=6, columnspan=9, padx=20, pady=20,column=0)
         
-        
-        self.student_listbox.bind("<Double-Button>", self.load_student)
-    
+        self.tree.pack()
+        # self.student_listbox.bind("<Double-Button>", self.load_student)
         
         
     def add_student(self):
-        firstname = self.firstname_entry.get()
-        lastname = self.lastname_entry.get()
-        age = self.age_entry.get()
-        gender = self.gender_entry.get()
+        pass
+        # firstname = self.firstname_entry.get()
+        # lastname = self.lastname_entry.get()
+        # age = self.age_entry.get()
+        # gender = self.gender_entry.get()
 
-        if firstname and lastname and age and gender:
-            student_info =  firstname,lastname,age,gender
-            self.student_listbox.insert(tk.END, student_info)
-            self.clear_entries()
-        else:
-            messagebox.showwarning("Incomplete Information", "Please enter all the fields.")
+        # if firstname and lastname and age and gender:
+        #     student_info =  firstname,lastname,age,gender
+        #     self.student_listbox.insert(tk.END, student_info)
+        #     self.clear_entries()
+        # else:
+        #     messagebox.showwarning("Incomplete Information", "Please enter all the fields.")
 
     def delete_student(self):
-        selected_index = self.student_listbox.curselection()
+        pass
+        # selected_index = self.student_listbox.curselection()
 
-        if selected_index:
-                self.student_listbox.delete(selected_index)
-        else:
-            messagebox.showwarning("No Student Selected", "Please select a student to delete.")
+        # if selected_index:
+        #         self.student_listbox.delete(selected_index)
+        # else:
+        #     messagebox.showwarning("No Student Selected", "Please select a student to delete.")
 
     def load_student(self, event):
-        selected_index = self.student_listbox.curselection()
+        pass
+        # selected_index = self.student_listbox.curselection()
 
-        if selected_index:
-            selected_student = self.student_listbox.get(selected_index)
-            messagebox.showinfo("Selected Student", selected_student)
+        # if selected_index:
+        #     selected_student = self.student_listbox.get(selected_index)
+        #     messagebox.showinfo("Selected Student", selected_student)
 
     def clear_entries(self):
-        self.firstname_entry.delete(0, tk.END)
-        self.lastname_entry.delete(0, tk.END)
-        self.age_entry.delete(0, tk.END)
-        self.gender_entry.delete(0, tk.END)
+        pass
+        # self.firstname_entry.delete(0, tk.END)
+        # self.lastname_entry.delete(0, tk.END)
+        # self.age_entry.delete(0, tk.END)
+        # self.gender_entry.delete(0, tk.END)
 
 if __name__ == "__main__":
     root = tk.Tk()
     app = StudentEnrollmentGUI(root)
+    app.tree.pack()
+
     root.mainloop()
 
  
