@@ -40,10 +40,22 @@ class StudentEnrollmentGUI:
         self.enroll_button = tk.Button(root, text="Add", command=self.add_student,bg="lightgreen",width=5,height=2)
         self.enroll_button.grid(row=6, columnspan=10, padx=5, pady=8,column=1)
     
-        self.student_listbox = tk.Listbox(root,width=60,height=8)
-        self.student_listbox.grid(row=10, columnspan=2, padx=10, pady=3)
-        self.student_listbox.insert(1, "FirstName   LastName   Age   School ID")
+        # self.student_listbox = tk.Listbox(root,width=60,height=8)
+        # self.student_listbox.grid(row=10, columnspan=2, padx=10, pady=3)
+        # self.student_listbox.insert(1, "FirstName   LastName   Age   School ID")
+        s = ttk.Style()
+        s.theme_use('calm')
+
+        tree = ttk.Treeview(root, columns=("c1", "c2", "c3", "c4"), show='headings', height=5)
         
+        tree.column("# 1", anchor="center")
+        tree.heading("# 1", text="LASTNAME")
+        tree.column("# 2", anchor="center")
+        tree.heading("# 2", text="FIRSTNAME")
+        tree.column("# 3", anchor="center")
+        tree.heading("# 3", text="AGE")
+        tree.column("# 4", anchor="center")
+        tree.heading("# 4", text="SCHOOL ID")
 
         self.delete_button = tk.Button(root, text="Delete", command=self.delete_student,bg="pink",width=5,height=2)
         self.delete_button.grid(row=6, columnspan=9, padx=20, pady=20,column=0)
