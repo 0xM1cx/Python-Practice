@@ -52,19 +52,19 @@ class StudentEnrollmentGUI:
         
         
 
-        self.tree.column("# 1", anchor="center")
-        self.tree.heading("# 1", text="LASTNAME")
-        self.tree.column("# 2", anchor="center")
-        self.tree.heading("# 2", text="FIRSTNAME")
-        self.tree.column("# 3", anchor="center")
-        self.tree.heading("# 3", text="AGE")
-        self.tree.column("# 4", anchor="center")
-        self.tree.heading("# 4", text="SCHOOL ID")
+        self.tree.column("LASTNAME", anchor="center")
+        self.tree.heading("LASTNAME", text="LASTNAME")
+        self.tree.column("FIRSTNAME", anchor="center")
+        self.tree.heading("FIRSTNAME", text="FIRSTNAME")
+        self.tree.column("AGE", anchor="center")
+        self.tree.heading("AGE", text="AGE")
+        self.tree.column("SCHOOL ID", anchor="center")
+        self.tree.heading("SCHOOL ID", text="SCHOOL ID")
 
         self.delete_button = tk.Button(root, text="Delete", command=self.delete_student,bg="pink",width=5,height=2)
         self.delete_button.grid(row=6, columnspan=9, padx=20, pady=20,column=0)
         
-        self.tree.pack()
+        
         # self.student_listbox.bind("<Double-Button>", self.load_student)
         
         
@@ -109,7 +109,7 @@ class StudentEnrollmentGUI:
 if __name__ == "__main__":
     root = tk.Tk()
     app = StudentEnrollmentGUI(root)
-    app.tree.pack()
+    
 
     root.mainloop()
 
