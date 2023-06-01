@@ -23,7 +23,7 @@ class K_Store:
             print(f"{str(each_p)} - {str(pro_details[0])} @ Php {str(pro_details[1])}")
         return ''
 
-
+    
 # ========== Customer =========
 class Customer:
     '''This handles customer data'''
@@ -109,6 +109,8 @@ S_pants = K_Store("Pants_one", 150, 15)
 
 first_customer = Customer(12, "Shawn", "Tacloban City, Leyte")
 
+
+# ========== First funtion to be called ==========
 def menu():
 
     rpt = "Y"
@@ -128,10 +130,10 @@ def menu():
         elif c == 2: # for displaying all the products
             S_shirt.display_K_product()
 
-        elif c == 3:
+        elif c == 3: # Get specified customer record
             print(first_customer.customer_record())
 
-        elif c == 4:
+        elif c == 4: #
             k_os = Sudars_inventory()
 
         elif c == 5:
@@ -139,10 +141,5 @@ def menu():
             rpt = "N"
         else:
             print("Enter the right number of choices!")
-
-
-
-
-
 
 menu()
