@@ -4,20 +4,20 @@ from rich.console import Console
 console = Console(width=50)
 
 # ========== Main Store | Where All the products are placed ==========
-class K_Store:
+class Sudaria_Store:
     k_store = {}
     pcode = 1
 
     def __init__(self, pname, pprice, pstock):
         self.product_name = pname
         self.product_price = pprice
-        K_Store.product_stock = pstock
+        Sudaria_Store.product_stock = pstock
 
         self.k_store[self.pcode] = (self.product_name, self.product_price, self.product_stock)
-        K_Store.pcode += 1
+        Sudaria_Store.pcode += 1
 
     def display_K_product(self):
-        print("K's Store")
+        print("Sudaria's Store")
         for each_p in self.k_store.keys():
             pro_details = self.k_store[each_p]
             print(f"{str(each_p)} - {str(pro_details[0])} @ Php {str(pro_details[1])}")
@@ -103,8 +103,8 @@ class Sudars_inventory():
             sales_rec = file_S_inventory.readline()
 
 
-S_shirt = K_Store("shirt_one", 100, 20) 
-S_pants = K_Store("Pants_one", 150, 15)
+S_shirt = Sudaria_Store("shirt_one", 100, 20) 
+S_pants = Sudaria_Store("Pants_one", 150, 15)
 
 
 first_customer = Customer(12, "Shawn", "Tacloban City, Leyte")
@@ -116,7 +116,7 @@ def menu():
     rpt = "Y"
     while rpt == "Y":
         console.print("\nSudaria's Online Store", style="bold white on blue", justify="center")
-        print("""\nSystem Menu
+        console.print("""\nSystem Menu
         [1] Buy a product
         [2] View Products
         [3] View Customers
