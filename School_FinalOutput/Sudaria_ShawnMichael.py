@@ -1,23 +1,24 @@
 from rich import print
 from rich.console import Console
+from time import sleep
 
 console = Console(width=50)
 
 # ========== Main Store | Where All the products are placed ==========
-class Sudaria_Store:
+class Shun_Store:
     k_store = {}
     pcode = 1
 
     def __init__(self, pname, pprice, pstock):
         self.product_name = pname
         self.product_price = pprice
-        Sudaria_Store.product_stock = pstock
+        Shun_Store.product_stock = pstock
 
         self.k_store[self.pcode] = (self.product_name, self.product_price, self.product_stock)
-        Sudaria_Store.pcode += 1
+        Shun_Store.pcode += 1
 
     def display_K_product(self):
-        print("Sudaria's Store")
+        print("Shun's Store")
         for each_p in self.k_store.keys():
             pro_details = self.k_store[each_p]
             print(f"{str(each_p)} - {str(pro_details[0])} @ Php {str(pro_details[1])}")
@@ -43,12 +44,14 @@ class Customer:
 
 # ========== Sales =========
 class Sales:
-    '''This handles customer transactions with the store | 09817822116  '''
+    '''This handles customer transactions with the store'''
     def __init__(self):
         self.display_K_product()
         self.buy()
 
-    def display_K_product(self):
+
+    # ========= Display the products in the store
+    def display_Shuns_product(self):
         print("My store")
         for each_prod in S_shirt.k_store.keys():
             pro_details = S_shirt.k_store[each_prod]
@@ -103,8 +106,8 @@ class Sudars_inventory():
             sales_rec = file_S_inventory.readline()
 
 
-S_shirt = Sudaria_Store("shirt_one", 100, 20) 
-S_pants = Sudaria_Store("Pants_one", 150, 15)
+S_shirt = Shun_Store("shirt_one", 100, 20) 
+S_pants = Shun_Store("Pants_one", 150, 15)
 
 
 first_customer = Customer(12, "Shawn", "Tacloban City, Leyte")
@@ -114,32 +117,35 @@ first_customer = Customer(12, "Shawn", "Tacloban City, Leyte")
 def menu():
 
     rpt = "Y"
-    while rpt == "Y":
-        console.print("\nSudaria's Online Store", style="bold white on blue", justify="center")
-        console.print("""\nSystem Menu
-        [1] Buy a product
-        [2] View Products
-        [3] View Customers
-        [4] Generate Inventory Report
-        [5] Exit""")
-        c = int(input("Enter your Choice: "))
+    try:
+        while rpt == "Y":
+            console.print("Shun's Online Store", style="bold white on blue", justify="center")
+            console.print("""\nSystem Menu
+            [1] Buy a product
+            [2] View Products
+            [3] View Customers
+            [4] Generate Inventory Report
+            [5] Exit""")
+            c = int(input("Enter your Choice: "))
 
-        if c == 1: #For buying items
-            s_rec = Sales()
+            if c == 1: #For buying items
+                s_rec = Sales()
 
-        elif c == 2: # for displaying all the products
-            S_shirt.display_K_product()
+            elif c == 2: # for displaying all the products
+                S_shirt.display_K_product()
 
-        elif c == 3: # Get specified customer record
-            print(first_customer.customer_record())
+            elif c == 3: # Get specified customer record
+                print(first_customer.customer_record())
 
-        elif c == 4: #
-            k_os = Sudars_inventory()
+            elif c == 4: #
+                k_os = Sudars_inventory()
 
-        elif c == 5:
-            print("Thank You! Come Again.")
-            rpt = "N"
-        else:
-            print("Enter the right number of choices!")
-
+            elif c == 5:
+                print("Thank You! Come Again.")
+                rpt = "N"
+            else:
+                print("Enter the right number of choices!")
+    except:
+        console.print("WRONG INPUT!!!!")
+        slee
 menu()
