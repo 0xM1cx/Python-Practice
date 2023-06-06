@@ -23,11 +23,11 @@ class Shun_Store:
         self.Shun_items[self.pcode] = (self.product_name, self.product_price, self.product_stock)
         self.pcode += 1
 
-    def display_Shun_product(self):
+    def display_Shun_product():
         print("Shun's Store")
-        for each_p in self.Shun_items.keys():
-            pro_details = self.Shun_items[each_p]
-            print(f"{str(each_p)} - {str(pro_details[0])} @ Php {str(pro_details[1])}")
+        for each_p in Shun_Store.Shun_items.keys():
+            pro_details = Shun_Store.Shun_items[each_p]
+            print(f"{str(each_p)} - {str(pro_details[0])} @ Php {str(pro_details[1])}\n")
         
 
     
@@ -63,8 +63,8 @@ class Sales:
     # ========= Display the products in the store
     def display_Shuns_product(self):
         print("My store")
-        for each_prod in S_Summer_shirt.Shun_Store.keys():
-            pro_details = S_Summer_shirt.Shun_Store[each_prod]
+        for each_prod in S_Summer_shirt.Shun_items.keys():
+            pro_details = S_Summer_shirt.Shun_items[each_prod]
             print(f"[{str(each_prod)}] - {str(pro_details[0])} @ Php {str(pro_details[1])}")
 
     def buy(self):
@@ -72,19 +72,18 @@ class Sales:
         self.customer_quantity = int(input("Enter number quantity: "))
         self.customer_id = int(input("Enter customer ID: "))
 
-        item_detail = S_Summer_shirt.Shun_Store[self.customer_choice]
+        item_detail = S_Summer_shirt.Shun_items[self.customer_choice]
         c_detail = first_customer.c_customer[self.customer_id]
 
         print(c_detail[0] + ", Please pay an amount of", self.customer_quantity * item_detail[1], "pesos only")
         
-        file_Shun_inventory = open("Shun_inventory.txt", "a")
+        with open("Shun_inventory.txt", "a") as file_Shun_inventory:
                                
-        sales_record = str(self.customer_id) + " " + str(item_detail[0]) + " "
-        sales_record += str(self.customer_choice) + " " + str(item_detail[0]) + " " + str(self.customer_quantity) + " "
-        sales_record += str(self.customer_quantity * item_detail[1]) + "\n"
+            sales_record = str(self.customer_id) + " " + str(item_detail[0]) + " "
+            sales_record += str(self.customer_choice) + " " + str(item_detail[0]) + " " + str(self.customer_quantity) + " "
+            sales_record += str(self.customer_quantity * item_detail[1]) + "\n"
 
-        file_Shun_inventory.write(sales_record)
-        file_Shun_inventory.close()                                                
+            file_Shun_inventory.write(sales_record)                                         
 
 
 
@@ -99,24 +98,23 @@ class Sudars_inventory():
 
 
     def display_inventory(self):
-        file_S_inventory = open("Shun_inventory.txt", "r")
-        sales_record = file_S_inventory.readline()
-        sales_amount = 0
-        Shuns_item = {}
+        with open("Shun_inventory.txt", "r") as file_S_inventory:
+            sales_record = file_S_inventory.readline()
+            sales_amount = 0
+            Shuns_item = {}
 
-        while sales_record != '':
-            print(sales_record, end='')
+            while sales_record != '':
+                print(sales_record, end='')
 
-            sales_details = sales_rec.split()
-            sales_amount += int(sales_details[5])
+                sales_details = sales_rec.split()
+                sales_amount += int(sales_details[5])
 
-            if int(sales_details[2]) in Shuns_item:
-                Shuns_item[int(sales_details[2])] += (sales_details[4],)
-            else:
-                Shuns_item[int(sales_details[2])] = (sales_details[4],)
-                
-            sales_rec = file_S_inventory.readline()
-
+                if int(sales_details[2]) in Shuns_item:
+                    Shuns_item[int(sales_details[2])] += (sales_details[4],)
+                else:
+                    Shuns_item[int(sales_details[2])] = (sales_details[4],)
+                    
+                sales_rec = file_S_inventory.readline()
 
 S_Summer_shirt = Shun_Store("shirt_one", 100, 20) 
 S_Summer_short = Shun_Store("Pants_one", 150, 15)
