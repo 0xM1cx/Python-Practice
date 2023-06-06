@@ -2,7 +2,10 @@ from rich import print
 from rich.console import Console
 from time import sleep
 
+
+
 console = Console(width=50)
+
 
 
 
@@ -15,17 +18,17 @@ class Shun_Store:
     def __init__(self, pname, pprice, pstock):
         self.product_name = pname
         self.product_price = pprice
-        Shun_Store.product_stock = pstock
+        self.product_stock = pstock
 
         self.Shun_Store[self.pcode] = (self.product_name, self.product_price, self.product_stock)
-        Shun_Store.pcode += 1
+        self.pcode += 1
 
     def display_Shun_product(self):
         print("Shun's Store")
         for each_p in self.Shun_Store.keys():
             pro_details = self.Shun_Store[each_p]
             print(f"{str(each_p)} - {str(pro_details[0])} @ Php {str(pro_details[1])}")
-        return ''
+        
 
     
     
@@ -60,8 +63,8 @@ class Sales:
     # ========= Display the products in the store
     def display_Shuns_product(self):
         print("My store")
-        for each_prod in S_shirt.Shun_Store.keys():
-            pro_details = S_shirt.Shun_Store[each_prod]
+        for each_prod in S_Summer_shirt.Shun_Store.keys():
+            pro_details = S_Summer_shirt.Shun_Store[each_prod]
             print(f"[{str(each_prod)}] - {str(pro_details[0])} @ Php {str(pro_details[1])}")
 
     def buy(self):
@@ -69,7 +72,7 @@ class Sales:
         self.customer_quantity = int(input("Enter number quantity: "))
         self.customer_id = int(input("Enter customer ID: "))
 
-        item_detail = S_shirt.Shun_Store[self.customer_choice]
+        item_detail = S_Summer_shirt.Shun_Store[self.customer_choice]
         c_detail = first_customer.c_customer[self.customer_id]
 
         print(c_detail[0] + ", Please pay an amount of", self.customer_quantity * item_detail[1], "pesos only")
@@ -82,6 +85,8 @@ class Sales:
 
         file_Shun_inventory.write(sales_record)
         file_Shun_inventory.close()                                                
+
+
 
 
 
@@ -113,8 +118,14 @@ class Sudars_inventory():
             sales_rec = file_S_inventory.readline()
 
 
-S_shirt = Shun_Store("shirt_one", 100, 20) 
-S_pants = Shun_Store("Pants_one", 150, 15)
+S_Summer_shirt = Shun_Store("shirt_one", 100, 20) 
+S_Summer_short = Shun_Store("Pants_one", 150, 15)
+S_Winter_shirt = Shun_Store("shirt_one", 100, 20) 
+S_Winter_short = Shun_Store("Pants_one", 150, 15)
+S_Spring_shirt = Shun_Store("shirt_one", 100, 20) 
+S_Sprint_short = Shun_Store("Pants_one", 150, 15)
+S_Fall_shirt = Shun_Store("shirt_one", 100, 20) 
+S_Fall_short = Shun_Store("Pants_one", 150, 15)
 
 
 first_customer = Customer(12, "Shawn", "Tacloban City, Leyte")
@@ -141,7 +152,7 @@ def menu():
             s_rec = Sales()
 
         elif c == 2: # for displaying all the products
-            S_shirt.display_Shun_product()
+            Shun_Store.display_Shun_product()
 
         elif c == 3: # Get specified customer record
             print(first_customer.customer_record())
