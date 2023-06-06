@@ -6,7 +6,7 @@ console = Console(width=50)
 
 # ========== Main Store | Where All the products are placed ==========
 class Shun_Store:
-    k_store = {}
+    Shun_Store = {}
     pcode = 1
 
     def __init__(self, pname, pprice, pstock):
@@ -14,13 +14,13 @@ class Shun_Store:
         self.product_price = pprice
         Shun_Store.product_stock = pstock
 
-        self.k_store[self.pcode] = (self.product_name, self.product_price, self.product_stock)
+        self.Shun_store[self.pcode] = (self.product_name, self.product_price, self.product_stock)
         Shun_Store.pcode += 1
 
-    def display_K_product(self):
+    def display_Shun_product(self):
         print("Shun's Store")
-        for each_p in self.k_store.keys():
-            pro_details = self.k_store[each_p]
+        for each_p in self.shun_store.keys():
+            pro_details = self.shun_store[each_p]
             print(f"{str(each_p)} - {str(pro_details[0])} @ Php {str(pro_details[1])}")
         return ''
 
@@ -53,8 +53,8 @@ class Sales:
     # ========= Display the products in the store
     def display_Shuns_product(self):
         print("My store")
-        for each_prod in S_shirt.k_store.keys():
-            pro_details = S_shirt.k_store[each_prod]
+        for each_prod in S_shirt.Shun_store.keys():
+            pro_details = S_shirt.Shun_store[each_prod]
             print(f"[{str(each_prod)}] - {str(pro_details[0])} @ Php {str(pro_details[1])}")
 
     def buy(self):
@@ -62,19 +62,19 @@ class Sales:
         self.customer_quantity = int(input("Enter number quantity: "))
         self.customer_id = int(input("Enter customer ID: "))
 
-        item_detail = S_shirt.k_store[self.customer_choice]
+        item_detail = S_shirt.Shun_store[self.customer_choice]
         c_detail = first_customer.c_customer[self.customer_id]
 
         print(c_detail[0] + ", Please pay an amount of", self.customer_quantity * item_detail[1], "pesos only")
         
-        file_k_inventory = open("k_inventory.txt", "a")
+        file_Shun_inventory = open("Shun_inventory.txt", "a")
                                
         sales_rec = str(self.customer_id) + " " + str(item_detail[0]) + " "
         sales_rec += str(self.customer_choice) + " " + str(item_detail[0]) + " " + str(self.customer_quantity) + " "
         sales_rec += str(self.customer_quantity * item_detail[1]) + "\n"
 
-        file_k_inventory.write(sales_rec)
-        file_k_inventory.close()                                                
+        file_Shun_inventory.write(sales_rec)
+        file_Shun_inventory.close()                                                
 
 
 
@@ -147,5 +147,6 @@ def menu():
                 print("Enter the right number of choices!")
     except:
         console.print("WRONG INPUT!!!!")
-        slee
+        sleep(2)
+        menu()
 menu()
