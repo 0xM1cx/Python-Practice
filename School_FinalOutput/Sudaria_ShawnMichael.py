@@ -4,6 +4,9 @@ from time import sleep
 
 console = Console(width=50)
 
+
+
+
 # ========== Main Store | Where All the products are placed ==========
 class Shun_Store:
     Shun_Store = {}
@@ -14,16 +17,17 @@ class Shun_Store:
         self.product_price = pprice
         Shun_Store.product_stock = pstock
 
-        self.Shun_store[self.pcode] = (self.product_name, self.product_price, self.product_stock)
+        self.Shun_Store[self.pcode] = (self.product_name, self.product_price, self.product_stock)
         Shun_Store.pcode += 1
 
     def display_Shun_product(self):
         print("Shun's Store")
-        for each_p in self.shun_store.keys():
-            pro_details = self.shun_store[each_p]
+        for each_p in self.Shun_Store.keys():
+            pro_details = self.Shun_Store[each_p]
             print(f"{str(each_p)} - {str(pro_details[0])} @ Php {str(pro_details[1])}")
         return ''
 
+    
     
 # ========== Customer =========
 class Customer:
@@ -42,19 +46,22 @@ class Customer:
         return self.c_customer[self.customer_id]
 
 
+
+
+
 # ========== Sales =========
 class Sales:
     '''This handles customer transactions with the store'''
     def __init__(self):
-        self.display_K_product()
+        self.display_Shuns_product()
         self.buy()
 
 
     # ========= Display the products in the store
     def display_Shuns_product(self):
         print("My store")
-        for each_prod in S_shirt.Shun_store.keys():
-            pro_details = S_shirt.Shun_store[each_prod]
+        for each_prod in S_shirt.Shun_Store.keys():
+            pro_details = S_shirt.Shun_Store[each_prod]
             print(f"[{str(each_prod)}] - {str(pro_details[0])} @ Php {str(pro_details[1])}")
 
     def buy(self):
@@ -62,18 +69,18 @@ class Sales:
         self.customer_quantity = int(input("Enter number quantity: "))
         self.customer_id = int(input("Enter customer ID: "))
 
-        item_detail = S_shirt.Shun_store[self.customer_choice]
+        item_detail = S_shirt.Shun_Store[self.customer_choice]
         c_detail = first_customer.c_customer[self.customer_id]
 
         print(c_detail[0] + ", Please pay an amount of", self.customer_quantity * item_detail[1], "pesos only")
         
         file_Shun_inventory = open("Shun_inventory.txt", "a")
                                
-        sales_rec = str(self.customer_id) + " " + str(item_detail[0]) + " "
-        sales_rec += str(self.customer_choice) + " " + str(item_detail[0]) + " " + str(self.customer_quantity) + " "
-        sales_rec += str(self.customer_quantity * item_detail[1]) + "\n"
+        sales_record = str(self.customer_id) + " " + str(item_detail[0]) + " "
+        sales_record += str(self.customer_choice) + " " + str(item_detail[0]) + " " + str(self.customer_quantity) + " "
+        sales_record += str(self.customer_quantity * item_detail[1]) + "\n"
 
-        file_Shun_inventory.write(sales_rec)
+        file_Shun_inventory.write(sales_record)
         file_Shun_inventory.close()                                                
 
 
@@ -87,21 +94,21 @@ class Sudars_inventory():
 
 
     def display_inventory(self):
-        file_S_inventory = open("k_inventory.txt", "r")
-        sales_rec = file_S_inventory.readline()
-        sales_amt = 0
-        k_item = {}
+        file_S_inventory = open("Shun_inventory.txt", "r")
+        sales_record = file_S_inventory.readline()
+        sales_amount = 0
+        Shuns_item = {}
 
-        while sales_rec != '':
-            print(sales_rec, end='')
+        while sales_record != '':
+            print(sales_record, end='')
 
             sales_details = sales_rec.split()
-            sales_amt += int(sales_details[5])
+            sales_amount += int(sales_details[5])
 
-            if int(sales_details[2]) in k_item:
-                k_item[int(sales_details[2])] += (sales_details[4],)
+            if int(sales_details[2]) in Shuns_item:
+                Shuns_item[int(sales_details[2])] += (sales_details[4],)
             else:
-                k_item[int(sales_details[2])] = (sales_details[4],)
+                Shuns_item[int(sales_details[2])] = (sales_details[4],)
                 
             sales_rec = file_S_inventory.readline()
 
@@ -113,40 +120,38 @@ S_pants = Shun_Store("Pants_one", 150, 15)
 first_customer = Customer(12, "Shawn", "Tacloban City, Leyte")
 
 
+
+
 # ========== First funtion to be called ==========
 def menu():
 
     rpt = "Y"
-    try:
-        while rpt == "Y":
-            console.print("Shun's Online Store", style="bold white on blue", justify="center")
-            console.print("""\nSystem Menu
-            [1] Buy a product
-            [2] View Products
-            [3] View Customers
-            [4] Generate Inventory Report
-            [5] Exit""")
-            c = int(input("Enter your Choice: "))
 
-            if c == 1: #For buying items
-                s_rec = Sales()
+    while rpt == "Y":
+        console.print("Shun's Online Store", style="bold white on blue", justify="center")
+        console.print("""\nSystem Menu
+        [1] Buy a product
+        [2] View Products
+        [3] View Customers
+        [4] Generate Inventory Report
+        [5] Exit""")
+        c = int(input("Enter your Choice: "))
 
-            elif c == 2: # for displaying all the products
-                S_shirt.display_K_product()
+        if c == 1: #For buying items
+            s_rec = Sales()
 
-            elif c == 3: # Get specified customer record
-                print(first_customer.customer_record())
+        elif c == 2: # for displaying all the products
+            S_shirt.display_Shun_product()
 
-            elif c == 4: #
-                k_os = Sudars_inventory()
+        elif c == 3: # Get specified customer record
+            print(first_customer.customer_record())
 
-            elif c == 5:
-                print("Thank You! Come Again.")
-                rpt = "N"
-            else:
-                print("Enter the right number of choices!")
-    except:
-        console.print("WRONG INPUT!!!!")
-        sleep(2)
-        menu()
+        elif c == 4: #
+            Sudars_inven = Sudars_inventory()
+
+        elif c == 5:
+            print("Thank You! Come Again.")
+            rpt = "N"
+        else:
+            print("Enter the right number of choices!")
 menu()
