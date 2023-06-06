@@ -12,7 +12,7 @@ console = Console(width=50)
 
 # ========== Main Store | Where All the products are placed ==========
 class Shun_Store:
-    Shun_Store = {}
+    Shun_items = {}
     pcode = 1
 
     def __init__(self, pname, pprice, pstock):
@@ -20,13 +20,13 @@ class Shun_Store:
         self.product_price = pprice
         self.product_stock = pstock
 
-        self.Shun_Store[self.pcode] = (self.product_name, self.product_price, self.product_stock)
+        self.Shun_items[self.pcode] = (self.product_name, self.product_price, self.product_stock)
         self.pcode += 1
 
     def display_Shun_product(self):
         print("Shun's Store")
-        for each_p in self.Shun_Store.keys():
-            pro_details = self.Shun_Store[each_p]
+        for each_p in self.Shun_items.keys():
+            pro_details = self.Shun_items[each_p]
             print(f"{str(each_p)} - {str(pro_details[0])} @ Php {str(pro_details[1])}")
         
 
