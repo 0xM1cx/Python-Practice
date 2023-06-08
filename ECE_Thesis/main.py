@@ -12,10 +12,9 @@ def main(eng):
     eng.setProperty('volume', 2.0)
 
     voices = engine.getProperty('voices')
-    for voice in voices:
-        engine.setProperty('voice', voice.id)
-        engine.say('I see a Nigger')
-        engine.save_to_file('I see a Nigger' , 'test.mp3')
+    engine.setProperty('voice', voices)
+    engine.say('I Love you Zyra')
+        # engine.save_to_file('I see a Nigger' , 'test.mp3')
     engine.runAndWait()
 
 
