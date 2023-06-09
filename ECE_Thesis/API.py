@@ -31,7 +31,7 @@ api_key = 'etBCpNG9NNkJJAeFkI6zGEMUX3tbJi3D'
 # Replace 'LOCATION_KEY' with the location key of the desired location
 location_key = '759549'
 
-weather_info = fetch_weather(api_key, location_key)
+weather_info = fetch_weather(api_key, location_key) 
 if weather_info:
     print("Weather Information:")
     print("Temperature:", weather_info['Temperature'])
