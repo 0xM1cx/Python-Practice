@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 URL = "http://dataservice.accuweather.com/forecasts/v1/minute"
 resp = requests.get(URL)
 param = ""
+key = "KmUdYvB1ux8HrJHotWMYctgbAiEokWde"
 # try:
 #     page = requests.get(URL)
 #     soup = BeautifulSoup(page.content, "html.parser")
