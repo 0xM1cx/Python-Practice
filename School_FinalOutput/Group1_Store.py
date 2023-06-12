@@ -1,10 +1,11 @@
 from rich import print
 from rich.console import Console
+from rich.table import Table
 from time import sleep
 
 
 
-console = Console(width=50)
+console = Console(width=100)
 
 
 
@@ -29,24 +30,37 @@ class Shun_Store:
         
 
     
-    
+c_customer = {}
+
 # ========== Customer =========
 class Customer:
     '''This handles customer data'''
-    c_customer = {}
 
-    def __init__(self, cid, cname, caddress):
+    def __init__(self, cid, cname, caddress, cust_dic):
         self.customer_id = cid
         self.customer_name = cname
         self.customer_address = caddress
+        self.cust_dic = cust_dic
+        self.add_to_record(self.cust_dic)
+
+    # this function adds the customers to the record
+    def add_to_record(self, c_customer):
+        c_customer[self.customer_id] = (self.customer_name, self.customer_address)
 
 
     def customer_record(self):
-        # console.print("\nView Customers", style="bold white on blue", justify="center")
-        self.c_customer[self.customer_id] = (self.customer_name, self.customer_address)
+        table = Table()
+        console.print("\n🔎 View Customer \n", style="bold white on cyan", justify="center")
         
-        for key, value in self.c_customer.items():
-            console.print(f"#{key} Name: {value[0]}; Address: {value[1]}")
+        # Table
+        table.add_column("Customer ID", style="cyan", no_wrap=True)
+        table.add_column("Customer Name", style="green")
+        table.add_column("Customer Adress", justify="right", style="red")
+
+        for key, value in self.cust_dic.items():
+            table.add_row(str(key), value[0], value[1])
+        
+        print(table)
 
 
 
@@ -120,7 +134,9 @@ S_Summer_shirt = Shun_Store("shirt_one", 100, 20)
 S_Summer_short = Shun_Store("Pants_one", 150, 15)
 
 
-first_customer = Customer(12, "Shawn", "Tacloban City, Leyte")
+first_customer = Customer(14, "Shawn", "Cebu City, Cebu", c_customer)
+second_customer = Customer(16, "Eloisa", "Pinabacdao, Samar", c_customer)
+third_customer = Customer(67, "Krizzel", "Albuera, Leyte", c_customer)
 
 
 
@@ -131,7 +147,7 @@ def menu():
     rpt = "Y"
 
     while rpt == "Y":
-        console.print("Shun's Online Store", style="bold white on blue", justify="center")
+        console.print("\n🩳 たかい's Online Store 👕\n", style="bold white on cyan", justify="center")
         console.print("""\nSystem Menu
         [1] Buy a product
         [2] View Products
