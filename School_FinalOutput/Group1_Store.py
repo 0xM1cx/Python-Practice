@@ -8,8 +8,6 @@ console = Console(width=50)
 
 
 
-
-
 # ========== Main Store | Where All the products are placed ==========
 class Shun_Store:
     Shun_items = {}
@@ -118,12 +116,6 @@ class Sudars_inventory():
 
 S_Summer_shirt = Shun_Store("shirt_one", 100, 20) 
 S_Summer_short = Shun_Store("Pants_one", 150, 15)
-S_Winter_shirt = Shun_Store("shirt_one", 100, 20) 
-S_Winter_short = Shun_Store("Pants_one", 150, 15)
-S_Spring_shirt = Shun_Store("shirt_one", 100, 20) 
-S_Sprint_short = Shun_Store("Pants_one", 150, 15)
-S_Fall_shirt = Shun_Store("shirt_one", 100, 20) 
-S_Fall_short = Shun_Store("Pants_one", 150, 15)
 
 
 first_customer = Customer(12, "Shawn", "Tacloban City, Leyte")
