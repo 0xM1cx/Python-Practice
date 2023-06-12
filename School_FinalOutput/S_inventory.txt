@@ -1,1 +1,2 @@
-37 Pants_one 1 Pants_one 2 300
+14 Summer_Shirt_One 1 Summer_Shirt_One 2 200
+37 Winter_Shirt_Two 3 Winter_Shirt_Two 2 400

@@ -10,29 +10,36 @@ console = Console(width=100)
 
 
 # ========== Main Store | Where All the products are placed ==========
-S_items = {}
 class S_Store:
-
+    S_items = {}
     pcode = 1
-    
+
     def __init__(self, pname, pprice, pstock):
         self.product_name = pname
         self.product_price = pprice
         S_Store.product_stock = pstock
 
-        S_items[S_Store.pcode] = (self.product_name, self.product_price, self.product_stock)
+        S_Store.S_items[S_Store.pcode] = (self.product_name, self.product_price, self.product_stock)
         S_Store.pcode += 1
 
     def display_Shun_product(self):
+        prod_table = Table()
         console.print("\n🥼 たかい's Store Items 👔\n", style="bold white on cyan", justify="center")
-        for each_p in S_items.keys():
-            pro_details = S_items[each_p]
-            console.print(f"{str(each_p)} - {str(pro_details[0])} @ Php {str(pro_details[1])}\n")
+        
+        # Product Table
+        prod_table.add_column("Product ID", style="cyan", no_wrap=True, justify="center")
+        prod_table.add_column("Product Name", style="green", justify="center")
+        prod_table.add_column("Product Price", style="blue", justify="center")
+        prod_table.add_column("No.Product In-Stock", justify="center", style="red")
+
+        for key, value in S_Store.S_items.items():
+            prod_table.add_row(str(key), str(value[0]), f"₱ {str(value[1])}", str(value[2]))
+
+        console.print(prod_table)
         
 
     
 c_customer = {}
-
 # ========== Customer =========
 class Customer:
     '''This handles customer data'''
@@ -63,26 +70,19 @@ class Customer:
 
 
 # ========== Sales =========
-class Sales:
+class Sales(S_Store):
     '''This handles customer transactions with the store'''
     def __init__(self):
-        self.display_S_product()
-        self.buy()  
+        super().display_Shun_product() # Na inherit ha S_Store class an display function
+        self.buy()  # gin call an buy function
 
-
-    # ========= Display the products in the store
-    def display_S_product(self):
-        console.print("\n🥼 たかい's Store Items 👔\n", style="bold white on cyan", justify="center")
-        for each_p in S_items.keys():
-            pro_details = S_items[each_p]
-            console.print(f"{str(each_p)} - {str(pro_details[0])} @ Php {str(pro_details[1])}\n")
 
     def buy(self):
         self.customer_choice = int(input("Enter the number of your choice: "))
         self.customer_quantity = int(input("Enter number quantity: "))
         self.customer_id = int(input("Enter customer ID: "))
 
-        item_detail = S_items[self.customer_choice]
+        item_detail = S_Store.S_items[self.customer_choice]
         c_detail = c_customer[self.customer_id]
 
         print(c_detail[0] + ", Please pay an amount of", self.customer_quantity * item_detail[1], "pesos only")
@@ -92,7 +92,6 @@ class Sales:
             sales_record = str(self.customer_id) + " " + str(item_detail[0]) + " "
             sales_record += str(self.customer_choice) + " " + str(item_detail[0]) + " " + str(self.customer_quantity) + " "
             sales_record += str(self.customer_quantity * item_detail[1]) + "\n"
-
             file_S_inventory.write(sales_record)                                         
 
 
@@ -108,15 +107,23 @@ class S_inventory():
 
 
     def display_inventory(self):
-        with open("Shun_inventory.txt", "r") as file_S_inventory:
+        with open("S_inventory.txt", "r") as file_S_inventory:
             sales_record = file_S_inventory.readline()
             sales_amount = 0
             S_item = {}
 
             while sales_record != '':
-                print(sales_record, end='')
+                sales_details = sales_record.split()
+                # print(sales_details)
+                rec_dis = f"""
+                #################################
+                {str(sales_details[0])} => {str(sales_details[2])}
+                ITEM BOUGHT: {str(sales_details[1])}
+                QUANTITY: {str(sales_details[4])}
+                TOTAL COST: {str(int(sales_details[4]) * int(sales_details[5]))}
+                ################################"""
+                console.print(rec_dis)
 
-                sales_details = sales_rec.split()
                 sales_amount += int(sales_details[5])
 
                 if int(sales_details[2]) in S_item:
@@ -124,11 +131,19 @@ class S_inventory():
                 else:
                     S_item[int(sales_details[2])] = (sales_details[4],)
                     
-                sales_rec = file_S_inventory.readline()
-print(S_items)
-S_Summer_shirt = S_Store("shirt_one", 100, 20, pcode) 
-S_Summer_short = S_Store("Pants_one", 150, 15, pcode)
-print(S_items)
+                sales_record = file_S_inventory.readline()
+
+
+            console.print(f"\nTotal Current Sales: {sales_amount}")
+
+
+
+
+S_Summer_shirt = S_Store("Summer_Shirt_One", 100, 20) 
+S_Summer_short = S_Store("Summer_Pants_One", 150, 15)
+S_Winter_shirt = S_Store("Winter_Shirt_Two", 200, 20) 
+S_Winter_short = S_Store("Winter_Pants_Two", 250, 15)
+
 
 first_customer = Customer(14, "Shawn", "Cebu City, Cebu")
 second_customer = Customer(16, "Eloisa", "Pinabacdao, Samar")
