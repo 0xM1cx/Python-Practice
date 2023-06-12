@@ -174,7 +174,7 @@ def menu():
             s_rec = Sales()
 
         elif c == 2: # for displaying all the products
-            S_Store.display_Shun_product()
+            S_Store.display_Shun_product(None)
 
         elif c == 3: # Get specified customer record
             first_customer.customer_record()
