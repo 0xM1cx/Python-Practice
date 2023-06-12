@@ -39,12 +39,14 @@ class Customer:
         self.customer_id = cid
         self.customer_name = cname
         self.customer_address = caddress
-        self.customer_record()
+
 
     def customer_record(self):
-        print("View Customers")
+        # console.print("\nView Customers", style="bold white on blue", justify="center")
         self.c_customer[self.customer_id] = (self.customer_name, self.customer_address)
-        return self.c_customer[self.customer_id]
+        
+        for key, value in self.c_customer.items():
+            console.print(f"#{key} Name: {value[0]}; Address: {value[1]}")
 
 
 
@@ -55,7 +57,7 @@ class Sales:
     '''This handles customer transactions with the store'''
     def __init__(self):
         self.display_Shuns_product()
-        self.buy()
+        self.buy()  
 
 
     # ========= Display the products in the store
@@ -136,6 +138,8 @@ def menu():
         [3] View Customers
         [4] Generate Inventory Report
         [5] Exit""")
+
+        
         c = int(input("Enter your Choice: "))
 
         if c == 1: #For buying items
@@ -145,7 +149,7 @@ def menu():
             Shun_Store.display_Shun_product()
 
         elif c == 3: # Get specified customer record
-            print(first_customer.customer_record())
+            first_customer.customer_record()
 
         elif c == 4: #
             Sudars_inven = Sudars_inventory()
