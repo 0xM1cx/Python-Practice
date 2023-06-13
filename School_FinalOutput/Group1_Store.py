@@ -120,7 +120,7 @@ class S_inventory():
                 {str(sales_details[0])} => {str(sales_details[2])}
                 ITEM BOUGHT: {str(sales_details[1])}
                 QUANTITY: {str(sales_details[4])}
-                TOTAL COST: {str(int(sales_details[4]) * int(sales_details[5]))}
+                TOTAL COST: {str(sales_details[5])}
                 ################################"""
                 console.print(rec_dis)
 
@@ -187,4 +187,6 @@ def menu():
             rpt = "N"
         else:
             print("Enter the right number of choices!")
+            sleep(2)
+            menu()
 menu()
