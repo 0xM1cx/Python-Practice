@@ -2,3 +2,4 @@
 14 Winter_Shirt_Two 3 Winter_Shirt_Two 2 400
 37 Winter_Shirt_Two 3 Winter_Shirt_Two 2 400
 67 Winter_Pants_Two 4 Winter_Pants_Two 1 250
+14 Summer_Shirt_One 1 Summer_Shirt_One 2 200

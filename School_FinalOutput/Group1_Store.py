@@ -1,7 +1,9 @@
 from rich import print
 from rich.console import Console
 from rich.table import Table
+from rich.progress import track
 from time import sleep
+
 
 
 
@@ -85,6 +87,9 @@ class Sales(S_Store):
         item_detail = S_Store.S_items[self.customer_choice]
         c_detail = c_customer[self.customer_id]
 
+
+        for _ in track(range(10), description="[green]Processing Sale"):
+                sleep(0.2)
         print(c_detail[0] + ", Please pay an amount of", self.customer_quantity * item_detail[1], "pesos only")
         
         with open("S_inventory.txt", "a") as file_S_inventory:
@@ -187,6 +192,7 @@ def menu():
             rpt = "N"
         else:
             print("Enter the right number of choices!")
-            sleep(2)
+            for _ in track(range(10), description="[green]Restarting"):
+                sleep(0.2)
             menu()
 menu()
