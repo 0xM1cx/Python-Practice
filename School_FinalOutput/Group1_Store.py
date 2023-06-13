@@ -21,7 +21,7 @@ class S_Store:
         self.product_price = pprice
         S_Store.product_stock = pstock
 
-        S_Store.S_items[S_Store.pcode] = (self.product_name, self.product_price, self.product_stock)
+        S_Store.S_items[S_Store.pcode] = [self.product_name, self.product_price, self.product_stock]
         S_Store.pcode += 1
 
     def display_Shun_product(self):
@@ -83,7 +83,7 @@ class Sales(S_Store):
         self.customer_choice = int(input("Enter the number of your choice: "))
         self.customer_quantity = int(input("Enter number quantity: "))
         self.customer_id = int(input("Enter customer ID: "))
-
+        super().S_items[self.customer_choice][2] = int(super().S_items[self.customer_choice][2]) - self.customer_quantity
         item_detail = S_Store.S_items[self.customer_choice]
         c_detail = c_customer[self.customer_id]
 
@@ -105,7 +105,7 @@ class Sales(S_Store):
 
 
 # ========== K Inventory ==========
-class S_inventory():
+class S_inventory(S_Store):
     '''This stores the sales details in a text file'''
     def __init__(self):
         self.display_inventory()
@@ -131,11 +131,12 @@ class S_inventory():
 
                 sales_amount += int(sales_details[5])
 
-                if int(sales_details[2]) in S_item:
-                    S_item[int(sales_details[2])] += (sales_details[4],)
+                print(S_item)                
+                if int(sales_details[2]) in S_item: # 
+                    super().S_items[int(sales_details[2])] += (sales_details[4],)
                 else:
-                    S_item[int(sales_details[2])] = (sales_details[4],)
-                    
+                    super().S_items[int(sales_details[2])] = (sales_details[4],)
+
                 sales_record = file_S_inventory.readline()
 
 
