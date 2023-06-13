@@ -22,7 +22,7 @@ class S_Store:
         S_Store.product_stock = pstock
 
         S_Store.S_items[S_Store.pcode] = [self.product_name, self.product_price, self.product_stock]
-        S_Store.pcode += 1
+        S_Store.pcode += 1 
 
     def display_Shun_product(self):
         prod_table = Table()
@@ -49,7 +49,7 @@ class Customer:
     def __init__(self, cid, cname, caddress):
         self.customer_id = cid
         self.customer_name = cname
-        self.customer_address = caddress
+        self.customer_address = caddress 
         c_customer[self.customer_id] = (self.customer_name, self.customer_address)
 
 
@@ -130,8 +130,7 @@ class S_inventory(S_Store):
                 console.print(rec_dis)
 
                 sales_amount += int(sales_details[5])
-
-                print(S_item)                
+                                
                 if int(sales_details[2]) in S_item: # 
                     super().S_items[int(sales_details[2])] += (sales_details[4],)
                 else:
