@@ -112,11 +112,13 @@ class S_inventory(S_Store):
             sales_record = file_S_inventory.readlines()
             sales_amount = 0
             S_item = {}
-            
+            cnt = 1
 
             for rec in sales_record:
                 sales_details = rec.split()
-                S_item[sales_details[0]] = [sales_details[1], sales_details[4], sales_details[5]]
+
+                S_item[cnt] = [sales_details[0],sales_details[1], sales_details[4], sales_details[5]]
+                cnt += 1
             # while sales_record != '':
             #     sales_details = sales_record.split()
             #     # print(sales_details)
@@ -135,17 +137,18 @@ class S_inventory(S_Store):
                 inven_table.add_column("ITEM BOUGHT", style="green", justify="center")
                 inven_table.add_column("QUANTITY", style="blue", justify="center")
                 inven_table.add_column("TOTAL COST", justify="center", style="red")
+                
 
                 for key, value in S_item.items():        
-                    inven_table.add_row(str(key), str(value[0]), str(value[1]), str(value[2]))
+                    inven_table.add_row(value[0], str(value[1]), str(value[2]), str(value[3]))
 
-                console.print(inven_table)
-
-                print(S_item)
+            console.print(inven_table)
 
                 
 
-            #     sales_amount += int(sales_details[5])
+                
+
+            sales_amount += int(sales_details[5])
                                 
             #     if int(sales_details[2]) in S_item: # 
             #         super().S_items[int(sales_details[2])] += (sales_details[4],)
@@ -179,7 +182,7 @@ def menu():
     rpt = "Y"
 
     while rpt == "Y":
-        console.print("\n🩳 たかい's Online Store 👕\n", style="bold white on cyan", justify="center")
+        console.print("\n🩳 たかい's Online Store 👕\n", style="bold white on cyan", justify="center")  
         console.print("""\nSystem Menu
         [1] Buy a product
         [2] View Products
