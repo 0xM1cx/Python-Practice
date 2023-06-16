@@ -28,7 +28,7 @@ class Tindahan:
         else:
             print("Invalid product code.")
 
-    def delete_product(self, pcode):
+    def delete_product(self, pcode): # this functions deletes products
         if pcode in self.rjp_product:
             del self.rjp_product[pcode]
             print(f"Product with code {pcode} has been deleted.")
