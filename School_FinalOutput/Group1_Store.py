@@ -68,7 +68,7 @@ class Customer:
 class Sales(S_Store):
     '''This handles customer transactions with the store'''
     def __init__(self):
-        super().display_Shun_product() # Na inherit ha S_Store class an display function
+        super c  display_Shun_product() # Na inherit ha S_Store class an display function
         self.buy()  # gin call an buy function
 
 
@@ -116,14 +116,29 @@ class S_inventory(S_Store):
             while sales_record != '':
                 sales_details = sales_record.split()
                 # print(sales_details)
-                rec_dis = f"""
-                #################################
-                {str(sales_details[0])} => {str(sales_details[2])}
-                ITEM BOUGHT: {str(sales_details[1])}
-                QUANTITY: {str(sales_details[4])}
-                TOTAL COST: {str(sales_details[5])}
-                ################################"""
-                console.print(rec_dis)
+                # rec_dis = f"""
+                # #################################
+                # {str(sales_details[0])} => {str(sales_details[2])}
+                # ITEM BOUGHT: {str(sales_details[1])}
+                # QUANTITY: {str(sales_details[4])}
+                # TOTAL COST: {str(sales_details[5])}
+                # ################################"""
+                # console.print(rec_dis)
+
+
+                prod_table = Table()
+        
+                # Product Table
+                prod_table.add_column("Customer ID", style="cyan", no_wrap=True, justify="center")
+                prod_table.add_column("ITEM BOUGHT", style="green", justify="center")
+                prod_table.add_column("QUANTITY", style="blue", justify="center")
+                prod_table.add_column("TOTAL COST", justify="center", style="red")
+
+                for key, value in S_Store.S_items.items():
+                    prod_table.add_row(str(sales_details[0]), str(sales_details[1]), str(sales_details[4]), str(sales_details[5]))
+
+
+                
 
                 sales_amount += int(sales_details[5])
                                 

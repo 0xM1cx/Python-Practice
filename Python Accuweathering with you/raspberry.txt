@@ -1,0 +1,51 @@
+GUI Autostart
+
+new file with .desktop extenstion
+in the /home/pi/config/autostart folder
+
+[Desktop Entry] #important
+Encoding=UTF-8
+Type=Application
+Name=<GUI Controller>
+Comment=
+Exec = python3 /home/pi/Desktop/filename.py #important
+StartupNotify=false
+Terminal=true
+Hidden=false
+
+Other way
+
+Yes, it is possible to set up an autorun file in Raspberry Pi without rebooting it. There are multiple ways to achieve this, but one common approach is to use the .bashrc file to run a script or command automatically whenever a user logs in.
+
+Here's how you can do it:
+
+Open a terminal on your Raspberry Pi or connect to it via SSH.
+
+Navigate to your home directory by running the following command:
+
+bash
+Copy code
+cd ~
+Open the .bashrc file using a text editor. You can use the nano editor in this example:
+
+Copy code
+nano .bashrc
+Scroll to the bottom of the file and add the following line:
+
+bash
+Copy code
+python3 /path/to/your/script.py
+Replace /path/to/your/script.py with the actual path to your Python script that you want to run automatically.
+
+Save the file by pressing Ctrl + X, then Y to confirm, and finally Enter to overwrite the existing .bashrc file.
+
+To activate the changes, you can either log out and log back in, or run the following command to reload the .bashrc file in the current terminal session:
+
+bash
+Copy code
+source ~/.bashrc
+Now, whenever you open a new terminal session or log in, the specified Python script will automatically run.
+
+Keep in mind that this method runs the script for each user who logs in, so if you have multiple user accounts on your Raspberry Pi, the script will be executed for each of them. If you only want it to run for a specific user, you can modify their respective .bashrc file instead.
+
+Additionally, make sure you have the correct file permissions and shebang line (if applicable) in your Python script to ensure it can be executed.
