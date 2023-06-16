@@ -5,3 +5,7 @@
 14 Summer_Pants_One 2 Summer_Pants_One 1 150
 14 Summer_Shirt_One 1 Summer_Shirt_One 5 500
 16 Winter_Pants_Two 4 Winter_Pants_Two 5 1250
+14 Summer_Shirt_One 1 Summer_Shirt_One 5 500
+14 IphoneV 5 IphoneV 10 50000
+14 PineApple 5 PineApple 10 400000
+14 Pineapple_X 5 Pineapple_X 10 500000

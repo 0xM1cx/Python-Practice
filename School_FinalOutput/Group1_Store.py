@@ -68,7 +68,7 @@ class Customer:
 class Sales(S_Store):
     '''This handles customer transactions with the store'''
     def __init__(self):
-        super c  display_Shun_product() # Na inherit ha S_Store class an display function
+        super().display_Shun_product() # Na inherit ha S_Store class an display function
         self.buy()  # gin call an buy function
 
 
@@ -109,45 +109,50 @@ class S_inventory(S_Store):
 
     def display_inventory(self):
         with open("S_inventory.txt", "r") as file_S_inventory:
-            sales_record = file_S_inventory.readline()
+            sales_record = file_S_inventory.readlines()
             sales_amount = 0
             S_item = {}
+            
 
-            while sales_record != '':
-                sales_details = sales_record.split()
-                # print(sales_details)
-                # rec_dis = f"""
-                # #################################
-                # {str(sales_details[0])} => {str(sales_details[2])}
-                # ITEM BOUGHT: {str(sales_details[1])}
-                # QUANTITY: {str(sales_details[4])}
-                # TOTAL COST: {str(sales_details[5])}
-                # ################################"""
-                # console.print(rec_dis)
-
-
-                prod_table = Table()
+            for rec in sales_record:
+                sales_details = rec.split()
+                S_item[sales_details[0]] = [sales_details[1], sales_details[4], sales_details[5]]
+            # while sales_record != '':
+            #     sales_details = sales_record.split()
+            #     # print(sales_details)
+            #     # rec_dis = f"""
+            #     # #################################
+            #     # {str(sales_details[0])} => {str(sales_details[2])}
+            #     # ITEM BOUGHT: {str(sales_details[1])}
+            #     # QUANTITY: {str(sales_details[4])}
+            #     # TOTAL COST: {str(sales_details[5])}
+            #     # ################################"""
+            #     # console.print(rec_dis)
+                inven_table = Table()
         
                 # Product Table
-                prod_table.add_column("Customer ID", style="cyan", no_wrap=True, justify="center")
-                prod_table.add_column("ITEM BOUGHT", style="green", justify="center")
-                prod_table.add_column("QUANTITY", style="blue", justify="center")
-                prod_table.add_column("TOTAL COST", justify="center", style="red")
+                inven_table.add_column("Customer ID", style="cyan", no_wrap=True, justify="center")
+                inven_table.add_column("ITEM BOUGHT", style="green", justify="center")
+                inven_table.add_column("QUANTITY", style="blue", justify="center")
+                inven_table.add_column("TOTAL COST", justify="center", style="red")
 
-                for key, value in S_Store.S_items.items():
-                    prod_table.add_row(str(sales_details[0]), str(sales_details[1]), str(sales_details[4]), str(sales_details[5]))
+                for key, value in S_item.items():        
+                    inven_table.add_row(str(key), str(value[0]), str(value[1]), str(value[2]))
 
+                console.print(inven_table)
+
+                print(S_item)
 
                 
 
-                sales_amount += int(sales_details[5])
+            #     sales_amount += int(sales_details[5])
                                 
-                if int(sales_details[2]) in S_item: # 
-                    super().S_items[int(sales_details[2])] += (sales_details[4],)
-                else:
-                    super().S_items[int(sales_details[2])] = (sales_details[4],)
+            #     if int(sales_details[2]) in S_item: # 
+            #         super().S_items[int(sales_details[2])] += (sales_details[4],)
+            #     else:
+            #         super().S_items[int(sales_details[2])] = (sales_details[4],)
 
-                sales_record = file_S_inventory.readline()
+            #     sales_record = file_S_inventory.readline()
 
 
             console.print(f"\nTotal Current Sales: {sales_amount}")
@@ -180,7 +185,8 @@ def menu():
         [2] View Products
         [3] View Customers
         [4] Generate Inventory Report
-        [5] Exit""")
+        [5] Add A Product
+        [6] Exit""")
 
         
         c = int(input("Enter your Choice: "))
@@ -198,6 +204,12 @@ def menu():
             S_inven = S_inventory()
 
         elif c == 5:
+            prod_name = input("Product Name: ")
+            prod_price = int(input("Product Price: "))
+            prod_stock = int(input("Product Stock: "))
+            new_prod = S_Store(prod_name, prod_price, prod_stock)
+
+        elif c == 6:
             print("Thank You! Come Again.")
             rpt = "N"
         else:
