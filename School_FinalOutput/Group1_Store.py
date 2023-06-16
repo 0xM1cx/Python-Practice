@@ -139,7 +139,6 @@ class S_inventory(S_Store):
 
 
 
-
 S_Summer_shirt = S_Store("Summer_Shirt_One", 100, 20) 
 S_Summer_short = S_Store("Summer_Pants_One", 150, 15)
 S_Winter_shirt = S_Store("Winter_Shirt_Two", 200, 20) 
