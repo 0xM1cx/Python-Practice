@@ -11,3 +11,4 @@
 14 Pineapple_X 5 Pineapple_X 10 500000
 14 Phone 5 Phone 10 400000
 14 Summer_Shirt_One 1 Summer_Shirt_One 10 1000
+14 BiscuitX 5 BiscuitX 5 200000

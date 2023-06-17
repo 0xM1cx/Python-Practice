@@ -57,6 +57,7 @@ class Customer:
         table.add_column("Customer Name", style="green")
         table.add_column("Customer Adress", justify="right", style="red")
 
+
         for key, value in c_customer.items():
             table.add_row(str(key), value[0], value[1])
         
@@ -93,6 +94,7 @@ class Sales(S_Store):
             sales_record = str(self.customer_id) + " " + str(item_detail[0]) + " "
             sales_record += str(self.customer_choice) + " " + str(item_detail[0]) + " " + str(self.customer_quantity) + " "
             sales_record += str(self.customer_quantity * item_detail[1]) + "\n"
+            sales_record += str(super().product_stock)
             file_S_inventory.write(sales_record)                                         
 
 
@@ -116,26 +118,18 @@ class S_inventory(S_Store):
 
             for rec in sales_record:
                 sales_details = rec.split()
-
+                
                 S_item[cnt] = [sales_details[0],sales_details[1], sales_details[4], sales_details[5]]
                 cnt += 1
-            # while sales_record != '':
-            #     sales_details = sales_record.split()
-            #     # print(sales_details)
-            #     # rec_dis = f"""
-            #     # #################################
-            #     # {str(sales_details[0])} => {str(sales_details[2])}
-            #     # ITEM BOUGHT: {str(sales_details[1])}
-            #     # QUANTITY: {str(sales_details[4])}
-            #     # TOTAL COST: {str(sales_details[5])}
-            #     # ################################"""
-            #     # console.print(rec_dis)
+            
                 inven_table = Table()
         
                 # Product Table
                 inven_table.add_column("Customer ID", style="cyan", no_wrap=True, justify="center")
                 inven_table.add_column("ITEM BOUGHT", style="green", justify="center")
                 inven_table.add_column("QUANTITY", style="blue", justify="center")
+                inven_table.add_column("ORIGINAL STOCK", justify="center", style="red")
+                inven_table.add_column("CURRENT STOCK", justify="center", style="red")
                 inven_table.add_column("TOTAL COST", justify="center", style="red")
                 
 
