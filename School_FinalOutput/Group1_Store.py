@@ -52,6 +52,18 @@ class S_Store:
             prod_table.add_row(str(key), str(value[0]), f"₱ {str(value[1])}", str(value[2]))
 
         console.print(prod_table)
+
+    def editProduct(prod_id, prod_name=None, prod_price=None, prod_stock=None):
+        if prod_name != None:
+            S_Store.S_items[prod_id][0] = prod_name
+        
+        if prod_price != None:
+            S_Store.S_items[prod_id][1] = prod_price
+        
+        if prod_stock != None:
+            S_Store.S_items[prod_id][2] = prod_stock
+
+
     
 c_customer = {}
 # ========== Customer =========
@@ -223,7 +235,11 @@ def menu():
         [4] Generate Inventory Report
         [5] Add A Product
         [6] Add A Customer
-        [7] Exit""")
+        [7] Edit A Product
+        [8] Edit A Customer
+        [9] Delete A Product
+        [10] Delete A Customer
+        [11] Exit""")
 
         
         c = int(input("Enter your Choice: "))
@@ -238,10 +254,10 @@ def menu():
             Clearscreen()
             first_customer.customer_record()
  
-        elif c == 4: #
+        elif c == 4: # View Inventory
             S_inven = S_inventory()
 
-        elif c == 5:
+        elif c == 5: # Add Product
             prod_name = input("Product Name: ")
             prod_price = int(input("Product Price: "))
             prod_stock = int(input("Product Stock: "))
@@ -249,7 +265,7 @@ def menu():
             loadingScreen("Adding Product")
             Clearscreen()
 
-        elif c == 6:
+        elif c == 6: # Add Customer
             cust_ID = int(input("Customer ID: "))
             cust_Name = input("Customer Name: ")
             cust_Address = input("Customer Address: ")
@@ -259,8 +275,13 @@ def menu():
             new_cust = Customer(cust_ID, cust_Name, cust_Address)
             loadingScreen("Adding Customer to the Database")
             Clearscreen()
-
-        elif c == 7:
+        elif c == 7: # Edit a Product
+            prod_id = int(input("[Required] Product ID: "))
+            prod_name = input("Product Name: ")
+            prod_price = int(input("Product Price: "))
+            prod_stock = int(input("Product Stock: "))
+            edit = S_Store.editProduct(prod_id=prod_id, prod_name=prod_name, prod_price=prod_price, prod_stock=prod_stock)
+        elif c == 11: # Exit
             print("Thank You! Come Again.")
             rpt = "N"
         else:

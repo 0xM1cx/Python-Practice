@@ -1,0 +1,13 @@
+1001 Michael 1 Shirt 1 150.0
+1001 Michael 1 Shirt 1 150.0
+1001 Michael 3 banana 1 10.0
+1001 Michael 2 Trousers 1 250.0
+1001 Michael 3 banana 1 10.0
+1001 Michael 1 Shirt 1 150.0
+1001 Michael 1 Shirt 1 150.0
+1001 Michael 1 Shirt 1 150.0
+1001 Michael 2 Trousers 2 500.0
+1001 Michael 2 Trousers 1 250.0
+1001 Michael 2 Trousers 1 250.0
+1001 Michael 3 banana 2 20.0
+1001 Michael 4 ticket 1 100.0
