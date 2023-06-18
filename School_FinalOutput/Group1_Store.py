@@ -12,12 +12,11 @@ console = Console(width=100)
 class S_Store:
     S_items = {}
     pcode = 1
-    original_stock = []
+    original_stock = {}
     def __init__(self, pname, pprice, pstock):
         self.product_name = pname
         self.product_price = pprice
         S_Store.product_stock = pstock
-        S_Store.original_stock.append(S_Store.product_stock)
         S_Store.S_items[S_Store.pcode] = [self.product_name, self.product_price, self.product_stock]
         S_Store.pcode += 1 
 
@@ -75,13 +74,43 @@ class Sales(S_Store):
 
     def buy(self):
         self.customer_choice = int(input("Enter the number of your choice: "))
+        if int(super().S_items[self.customer_choice][2]) == 0:
+            print("No more product in stock")
+            print("Restarting...")
+            sleep(2)
+            self.buy()
+
         self.customer_quantity = int(input("Enter number quantity: "))
         self.customer_id = int(input("Enter customer ID: "))
-        
+
+        if self.customer_id not in c_customer: # Checking for user in database, if not, then allow to create new user
+            print("Customer is not in database yet")
+            uInput = input("Add customer? Y or N")
+            if uInput == "Y" or "y":
+                cust_ID = int(input("Customer ID: "))
+                cust_Name = input("Customer Name: ")
+                cust_Address = input("Customer Address: ")
+                if " " in cust_Name:
+                    cust_Name.replace(" ", "_")            
+            
+                new_cust = Customer(cust_ID, cust_Name, cust_Address)
+                for _ in track(range(10), description="[green]Adding Customer To Database"):
+                    sleep(0.2)
+            elif uInput == "N" or "n":
+                self.buy()
+            else:
+                print("NOT VALID INPUT, please try again")
+                sleep(2)
+                self.buy()
+
+
+
+        super().original_stock[self.customer_choice] = super().S_items[self.customer_choice][2]
         super().S_items[self.customer_choice][2] = int(super().S_items[self.customer_choice][2]) - self.customer_quantity
-        
         item_detail = S_Store.S_items[self.customer_choice]
         c_detail = c_customer[self.customer_id]
+        original_prod_Stock = super().original_stock[self.customer_choice]
+        current_number_of_Stock = super().S_items[self.customer_choice][2]
 
 
         for _ in track(range(10), description="[green]Processing Sale"):
@@ -93,8 +122,8 @@ class Sales(S_Store):
                                
             sales_record = str(self.customer_id) + " " + str(item_detail[0]) + " "
             sales_record += str(self.customer_choice) + " " + str(item_detail[0]) + " " + str(self.customer_quantity) + " "
-            sales_record += str(self.customer_quantity * item_detail[1]) + "\n"
-            sales_record += str(super().original_stock[0]) + " " + str(super().product_stock)
+            sales_record += str(self.customer_quantity * item_detail[1]) + " "
+            sales_record += str(original_prod_Stock) + " " + str(current_number_of_Stock) + "\n"
             file_S_inventory.write(sales_record)                                         
 
 
@@ -116,8 +145,8 @@ class S_inventory(S_Store):
 
             for rec in sales_record:
                 sales_details = rec.split()
-                print(sales_details)
-                S_item[cnt] = [sales_details[0],sales_details[1], sales_details[4], sales_details[5]]
+                
+                S_item[cnt] = [sales_details[0],sales_details[1], sales_details[6], sales_details[7], sales_details[4], sales_details[5]]
                 cnt += 1
             
                 inven_table = Table()
@@ -125,29 +154,20 @@ class S_inventory(S_Store):
                 # Product Table
                 inven_table.add_column("Customer ID", style="cyan", no_wrap=True, justify="center") # value[0]
                 inven_table.add_column("ITEM BOUGHT", style="green", justify="center") # value[1]
-                inven_table.add_column("QUANTITY", style="blue", justify="center") # value [2]
-                inven_table.add_column("ORIGINAL STOCK", justify="center", style="red") # New
-                inven_table.add_column("CURRENT STOCK", justify="center", style="red") # New
+                inven_table.add_column("QUANTITY", style="blue", justify="center") # value [3]
+                inven_table.add_column("ORIGINAL STOCK", justify="center", style="red") # value[3]
+                inven_table.add_column("CURRENT STOCK", justify="center", style="red") # value[4]
                 inven_table.add_column("TOTAL COST", justify="center", style="red") # value[3]
                 
                 
                 for value in S_item.values():        
-                    inven_table.add_row(value[0], str(value[1]), str(value[2]), str(value[3]))
+                    
+                    inven_table.add_row(value[0], str(value[1]),  str(value[4]), str(value[2]), str(value[3]), str(value[5]))
 
             console.print(inven_table)
 
                 
-
-                
-
             sales_amount += int(sales_details[5])
-                                
-            #     if int(sales_details[2]) in S_item: # 
-            #         super().S_items[int(sales_details[2])] += (sales_details[4],)
-            #     else:
-            #         super().S_items[int(sales_details[2])] = (sales_details[4],)
-
-            #     sales_record = file_S_inventory.readline()
 
 
             console.print(f"\nTotal Current Sales: {sales_amount}")
@@ -171,7 +191,7 @@ fourth_customer = Customer(37, "Jane", "Carigara,   Leyte")
 # ========== First funtion to be called ==========
 def menu():
     rpt = "Y"
-
+    
     while rpt == "Y":
         console.print("\n🩳 たかい's Online Store 👕\n", style="bold white on cyan", justify="center")  
         console.print("""\nSystem Menu
@@ -180,7 +200,8 @@ def menu():
         [3] View Customers
         [4] Generate Inventory Report
         [5] Add A Product
-        [6] Exit""")
+        [6] Add A Customer
+        [7] Exit""")
 
         
         c = int(input("Enter your Choice: "))
@@ -204,6 +225,15 @@ def menu():
             new_prod = S_Store(prod_name, prod_price, prod_stock)
 
         elif c == 6:
+            cust_ID = int(input("Customer ID: "))
+            cust_Name = input("Customer Name: ")
+            cust_Address = input("Customer Address: ")
+            if " " in cust_Name:
+                cust_Name.replace(" ", "_")            
+            
+            new_cust = Customer(cust_ID, cust_Name, cust_Address)
+
+        elif c == 7:
             print("Thank You! Come Again.")
             rpt = "N"
         else:
