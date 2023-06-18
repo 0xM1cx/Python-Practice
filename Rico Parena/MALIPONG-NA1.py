@@ -200,7 +200,7 @@ def admin_login():
 def customer_login(customer1):
     print("\nCustomer Login")
     while True:
-        customer_id = int(input("Enter your customer ID: "))
+        customer_id = input("Enter your customer ID: ")
         clear_screen()
         if customer_id in customer1.c_customer:
             customer_name = customer1.c_customer[customer_id][0]
@@ -222,6 +222,7 @@ def menu():
     customer_logged_in = False
 
     while not (admin_logged_in or customer_logged_in):
+        print(Customer.c_customer)
         print("\nWelcome to Apollo Tindahan!")
         print("Choose an option:")
         print("[1] Admin Login")
