@@ -7,6 +7,13 @@ import os
 
 console = Console(width=100)
 
+# THINGS TO ADD
+# + Delete a Product
+# + Edit Product
+# + Edit Customer Info
+# + Delete Customer
+
+
 
 def loadingScreen(text):
     for _ in track(range(10), description=f"[green]{text}"):

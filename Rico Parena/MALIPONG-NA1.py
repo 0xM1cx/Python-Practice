@@ -1,6 +1,11 @@
 import os
 import time
 
+# THINGS TO DO
+# + INPUT NET INCOME
+# + Makita an remaining stock, original stock
+
+
 class Tindahan:
     rjp_product = {}
     pcode = 1
