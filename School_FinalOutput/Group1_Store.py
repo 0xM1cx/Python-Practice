@@ -3,9 +3,20 @@ from rich.console import Console
 from rich.table import Table
 from rich.progress import track
 from time import sleep
+import os
 
 console = Console(width=100)
 
+
+def loadingScreen(text):
+    for _ in track(range(10), description=f"[green]{text}"):
+                    sleep(0.2)
+
+def Clearscreen():
+    if os.name == "nt":
+        os.system("cls")
+    else:
+        os.system("clear")
 
 
 # ========== Main Store | Where All the products are placed ==========
@@ -96,6 +107,7 @@ class Sales(S_Store):
                 new_cust = Customer(cust_ID, cust_Name, cust_Address)
                 for _ in track(range(10), description="[green]Adding Customer To Database"):
                     sleep(0.2)
+                Clearscreen()
             elif uInput == "N" or "n":
                 self.buy()
             else:
@@ -124,7 +136,9 @@ class Sales(S_Store):
             sales_record += str(self.customer_choice) + " " + str(item_detail[0]) + " " + str(self.customer_quantity) + " "
             sales_record += str(self.customer_quantity * item_detail[1]) + " "
             sales_record += str(original_prod_Stock) + " " + str(current_number_of_Stock) + "\n"
-            file_S_inventory.write(sales_record)                                         
+            file_S_inventory.write(sales_record)   
+        sleep(2)
+        Clearscreen()                                      
 
 
 
@@ -190,6 +204,7 @@ fourth_customer = Customer(37, "Jane", "Carigara,   Leyte")
 
 # ========== First funtion to be called ==========
 def menu():
+    Clearscreen()
     rpt = "Y"
     
     while rpt == "Y":
@@ -213,6 +228,7 @@ def menu():
             S_Store.display_Shun_product(None)
 
         elif c == 3: # Get specified customer record
+            Clearscreen()
             first_customer.customer_record()
  
         elif c == 4: #
@@ -223,6 +239,8 @@ def menu():
             prod_price = int(input("Product Price: "))
             prod_stock = int(input("Product Stock: "))
             new_prod = S_Store(prod_name, prod_price, prod_stock)
+            loadingScreen("Adding Product")
+            Clearscreen()
 
         elif c == 6:
             cust_ID = int(input("Customer ID: "))
@@ -232,13 +250,14 @@ def menu():
                 cust_Name.replace(" ", "_")            
             
             new_cust = Customer(cust_ID, cust_Name, cust_Address)
+            loadingScreen("Adding Customer to the Database")
+            Clearscreen()
 
         elif c == 7:
             print("Thank You! Come Again.")
             rpt = "N"
         else:
             print("Enter the right number of choices!")
-            for _ in track(range(10), description="[green]Restarting"):
-                sleep(0.2)
+            loadingScreen("Restarting")
             menu()
 menu()
