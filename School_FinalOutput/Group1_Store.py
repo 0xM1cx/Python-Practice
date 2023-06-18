@@ -8,10 +8,11 @@ import os
 console = Console(width=100)
 
 # THINGS TO ADD
-# + Delete a Product
-# + Edit Product
-# + Edit Customer Info
-# + Delete Customer
+# + Delete a Product : DONE
+# + Edit Product : DONE 
+# + Edit Customer Info : DONE
+# + Delete Customer : DONE
+# + Add Remaning, Original Stock, Quantity removed
 
 
 
@@ -54,13 +55,13 @@ class S_Store:
         console.print(prod_table)
 
     def editProduct(prod_id, prod_name=None, prod_price=None, prod_stock=None):
-        if prod_name != None:
+        if prod_name != '':
             S_Store.S_items[prod_id][0] = prod_name
         
-        if prod_price != None:
+        if prod_price != '':
             S_Store.S_items[prod_id][1] = int(prod_price)
         
-        if prod_stock != None:
+        if prod_stock != '':
             S_Store.S_items[prod_id][2] = int(prod_stock)
 
 
@@ -74,7 +75,7 @@ class Customer:
         self.customer_id = cid
         self.customer_name = cname
         self.customer_address = caddress 
-        c_customer[self.customer_id] = (self.customer_name, self.customer_address)
+        c_customer[self.customer_id] = [self.customer_name, self.customer_address]
 
 
     def customer_record(self):
@@ -91,6 +92,14 @@ class Customer:
             table.add_row(str(key), value[0], value[1])
         
         print(table)
+    
+    def editCustomer(cust_id, cust_name=None, cust_Add=None):
+        if cust_name != '':
+            c_customer[cust_id][0] = cust_name
+    
+        if cust_Add != '':
+            c_customer[cust_id][1] = cust_Add
+        
 
 
 
@@ -294,6 +303,33 @@ def menu():
             prod_price = input("Product Price: ")
             prod_stock = input("Product Stock: ")
             edit = S_Store.editProduct(prod_id=prod_id, prod_name=prod_name, prod_price=prod_price, prod_stock=prod_stock)
+        
+        elif c == 8: # Edit a Customer
+            try:
+                cust_id =  int(input("[Required] Customer ID: "))
+            except:
+                print("Please Provide an ID")
+                loadingScreen("Restarting")
+                Clearscreen()
+    
+            cust_name = input("Customer Name: ")
+            if " " in cust_name:
+                cust_name.replace(" ", "_")
+        
+            cust_Add = input("Customer Address: ")
+            edit = Customer.editCustomer(cust_id=cust_id, cust_name=cust_name, cust_Add=cust_Add)
+        
+        elif c == 9: # Delete a Product
+            prod_id = int(input("What product to Delete[ID]: "))
+            del S_Store.S_items[prod_id]
+            loadingScreen("DELETING PRODUCT")
+            Clearscreen()
+        
+        elif c == 10: # Delete a Customer
+            cust_id = int(input("What Customer to Delete[ID]: "))
+            del c_customer[cust_id]
+            loadingScreen("DELETING CUSTOMER")
+            Clearscreen()
         elif c == 11: # Exit
             Clearscreen()
             console.print("Thank You! Come Again.", style="bold white on cyan", justify="center")
