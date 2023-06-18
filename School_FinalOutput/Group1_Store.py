@@ -58,10 +58,10 @@ class S_Store:
             S_Store.S_items[prod_id][0] = prod_name
         
         if prod_price != None:
-            S_Store.S_items[prod_id][1] = prod_price
+            S_Store.S_items[prod_id][1] = int(prod_price)
         
         if prod_stock != None:
-            S_Store.S_items[prod_id][2] = prod_stock
+            S_Store.S_items[prod_id][2] = int(prod_stock)
 
 
     
@@ -291,10 +291,8 @@ def menu():
             if " " in prod_name:
                 prod_name.replace(" ", "_")
         
-            prod_price = int(input("Product Price: "))
-            
-            prod_stock = int(input("Product Stock: "))
-           
+            prod_price = input("Product Price: ")
+            prod_stock = input("Product Stock: ")
             edit = S_Store.editProduct(prod_id=prod_id, prod_name=prod_name, prod_price=prod_price, prod_stock=prod_stock)
         elif c == 11: # Exit
             Clearscreen()
