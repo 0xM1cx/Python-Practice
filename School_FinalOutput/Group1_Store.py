@@ -12,12 +12,12 @@ console = Console(width=100)
 class S_Store:
     S_items = {}
     pcode = 1
-
+    original_stock = []
     def __init__(self, pname, pprice, pstock):
         self.product_name = pname
         self.product_price = pprice
         S_Store.product_stock = pstock
-
+        S_Store.original_stock.append(S_Store.product_stock)
         S_Store.S_items[S_Store.pcode] = [self.product_name, self.product_price, self.product_stock]
         S_Store.pcode += 1 
 
@@ -94,10 +94,8 @@ class Sales(S_Store):
             sales_record = str(self.customer_id) + " " + str(item_detail[0]) + " "
             sales_record += str(self.customer_choice) + " " + str(item_detail[0]) + " " + str(self.customer_quantity) + " "
             sales_record += str(self.customer_quantity * item_detail[1]) + "\n"
-            sales_record += str(super().product_stock)
+            sales_record += str(super().original_stock[0]) + " " + str(super().product_stock)
             file_S_inventory.write(sales_record)                                         
-
-
 
 
 
@@ -118,22 +116,22 @@ class S_inventory(S_Store):
 
             for rec in sales_record:
                 sales_details = rec.split()
-                
+                print(sales_details)
                 S_item[cnt] = [sales_details[0],sales_details[1], sales_details[4], sales_details[5]]
                 cnt += 1
             
                 inven_table = Table()
         
                 # Product Table
-                inven_table.add_column("Customer ID", style="cyan", no_wrap=True, justify="center")
-                inven_table.add_column("ITEM BOUGHT", style="green", justify="center")
-                inven_table.add_column("QUANTITY", style="blue", justify="center")
-                inven_table.add_column("ORIGINAL STOCK", justify="center", style="red")
-                inven_table.add_column("CURRENT STOCK", justify="center", style="red")
-                inven_table.add_column("TOTAL COST", justify="center", style="red")
+                inven_table.add_column("Customer ID", style="cyan", no_wrap=True, justify="center") # value[0]
+                inven_table.add_column("ITEM BOUGHT", style="green", justify="center") # value[1]
+                inven_table.add_column("QUANTITY", style="blue", justify="center") # value [2]
+                inven_table.add_column("ORIGINAL STOCK", justify="center", style="red") # New
+                inven_table.add_column("CURRENT STOCK", justify="center", style="red") # New
+                inven_table.add_column("TOTAL COST", justify="center", style="red") # value[3]
                 
-
-                for key, value in S_item.items():        
+                
+                for value in S_item.values():        
                     inven_table.add_row(value[0], str(value[1]), str(value[2]), str(value[3]))
 
             console.print(inven_table)
