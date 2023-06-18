@@ -245,9 +245,11 @@ def menu():
         c = int(input("Enter your Choice: "))
 
         if c == 1: #For buying items
+            Clearscreen()
             s_rec = Sales()
 
         elif c == 2: # for displaying all the products
+            Clearscreen()
             S_Store.display_Shun_product(None)
 
         elif c == 3: # Get specified customer record
@@ -255,6 +257,7 @@ def menu():
             first_customer.customer_record()
  
         elif c == 4: # View Inventory
+            Clearscreen()
             S_inven = S_inventory()
 
         elif c == 5: # Add Product
@@ -276,13 +279,26 @@ def menu():
             loadingScreen("Adding Customer to the Database")
             Clearscreen()
         elif c == 7: # Edit a Product
-            prod_id = int(input("[Required] Product ID: "))
+            try:
+                prod_id = int(input("[Required] Product ID: "))
+            except:
+                print("Please Provide an ID")
+                loadingScreen("Restarting")
+                Clearscreen()
+                menu()
+    
             prod_name = input("Product Name: ")
+            if " " in prod_name:
+                prod_name.replace(" ", "_")
+        
             prod_price = int(input("Product Price: "))
+            
             prod_stock = int(input("Product Stock: "))
+           
             edit = S_Store.editProduct(prod_id=prod_id, prod_name=prod_name, prod_price=prod_price, prod_stock=prod_stock)
         elif c == 11: # Exit
-            print("Thank You! Come Again.")
+            Clearscreen()
+            console.print("Thank You! Come Again.", style="bold white on cyan", justify="center")
             rpt = "N"
         else:
             print("Enter the right number of choices!")
