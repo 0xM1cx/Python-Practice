@@ -9,7 +9,10 @@ import time
 class Tindahan:
     rjp_product = {}
     pcode = 1
-        
+    orig_stock = {}    
+
+
+
     def display_rjp_product(self):
         print("\nApollo Tindahan")
         for each_p in self.rjp_product.keys():
@@ -21,7 +24,7 @@ class Tindahan:
         self.product_price = pprice
         self.product_stock = pstock
 
-        self.rjp_product[self.pcode] = (self.product_name, self.product_price, self.product_stock)
+        self.rjp_product[self.pcode] =[self.product_name, self.product_price, self.product_stock]
         Tindahan.pcode += 1
         tindahan.save_products()
 
@@ -113,7 +116,7 @@ class Customer:
         except FileNotFoundError:
             print("Product list file not found.")
 
-class Sales:
+class Sales(Tindahan):
     def __init__(self, tindahan):
         self.display_rjp_product(tindahan)
         self.buy_my_product(tindahan)
@@ -132,6 +135,10 @@ class Sales:
             c_detail = Customer.c_customer[self.customer_id]
             product_name = i_detail[0]
             product_price = i_detail[1]
+
+            super().orig_stock[self.customer_choice] = super().rjp_product[self.customer_choice][2] # Added New
+            super().rjp_product[self.customer_choice][2] = int(super().rjp_product[self.customer_choice][2]) - self.customer_quantity
+            
             total_amount = product_price * self.customer_quantity
 
             print(f"{c_detail[0]}, Please pay an amount of Php {total_amount} for {self.customer_quantity} {product_name}(s).")
