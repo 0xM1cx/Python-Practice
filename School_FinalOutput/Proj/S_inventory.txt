@@ -1,5 +1,0 @@
-14 Winter_Shirt_Two 3 Winter_Shirt_Two 10 2000 20 10
-14 Winter_Shirt_Two 3 Winter_Shirt_Two 10 2000 20 10
-14 Winter_Shirt_Two 3 Winter_Shirt_Two 5 1000 10 5
-14 Summer_Shirt_One 1 Summer_Shirt_One 10 1000 20 10
-14 Summer_Pants_One 2 Summer_Pants_One 10 1500 15 5
