@@ -45,7 +45,7 @@ while True:
 #		print ("De DTMF-toon is "),decimaal
 #		print D0, D1, D2, D3, (" = "),decimaal
 #		print ("De DTMF-toon is ("),D0,D1,D2,D3,(") ="),decimaal
-		print ("De DTMF-toon is (")+str(D0)+str(D1)+str(D2)+str(D3)+(") ="),decimaal
+		print ("De DTMF-toon is (")+ str(D0) + str(D1) + str(D2) + str(D3) + (") ="), decimaal
 		print ("")
 
 #	print ("\n")
