@@ -1,3 +1,6 @@
+import matplotlib
+import nump
+
 def getData():
     pass
 def displayGraph():
@@ -5,4 +8,3 @@ def displayGraph():
 
 def main():
     getData(); # get Data from excel file
-    
