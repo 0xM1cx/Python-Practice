@@ -1,4 +1,4 @@
-from random import randint
+codfrom random import randint
 from rich.console import Console
 from rich.table import Table
 from time import sleep
