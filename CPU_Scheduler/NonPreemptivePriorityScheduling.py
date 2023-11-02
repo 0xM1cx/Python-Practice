@@ -1,15 +1,16 @@
-codfrom random import randint
+from random import randint
 from rich.console import Console
 from rich.table import Table
 from time import sleep
 from os import system
 
 
+
 console = Console()
 
 # This is a Non-Preemtive Priotity Scheduling Program
 # Round Robin nak nabutang kay ambot, wa ko na ayusa kay bayn maruba 
-class RoundRobin:
+class _NonPreemptivePriorityScheduling:
 
     processList = []
     
@@ -28,7 +29,7 @@ class RoundRobin:
             self.processList.append(tempList)
     
     # Function that generates random input for processes
-    def Random_Input(self, Num_Process):
+    def Random_Input(self, Num_Process, Max_Burst):
         half = Num_Process // 2
         randomizer_limit = Num_Process + half
         
@@ -43,15 +44,17 @@ class RoundRobin:
                 else:
                     break
 
-            burstTime = randint(1, 20)
+            burstTime = randint(1, Max_Burst)
             Priority = randint(1, Num_Process)
             
-            tempList = [f"P{IDprocess}", arrivalTime, burstTime, Priority, 0 ]
+            tempList = [f"P{IDprocess}", arrivalTime, burstTime, Priority]
 
             self.processList.append(tempList)
+        
+        return self.processList
 
     # Execution of the Algorithm
-    def Execute(self):
+    def Execute(self, processList):
         table = Table(title="Non-Preemptive Priority Scheduling", style="bold white")
         table.add_column("Process ID", style="bold cyan", justify="center")
         table.add_column("Arrival Time", style="bold cyan", justify="center")
@@ -127,7 +130,7 @@ class RoundRobin:
 
 # Main Function of the program
 def mainFunction():
-    The_User = RoundRobin()
+    The_User = _NonPreemptivePriorityScheduling()
 
     Number_of_process = int(input("Number of process: "))
     print("\n\t[ 1 ] User Input ->")
@@ -141,8 +144,4 @@ def mainFunction():
         
     The_User.Execute()
 
-# Entry point of the Non-Preemtive Algorithm Program
-if __name__ == "__main__":
-    system("cls")
-    sleep(0.8)
-    mainFunction()
+
