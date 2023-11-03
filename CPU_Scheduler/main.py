@@ -7,57 +7,63 @@ from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
 
+class ProcessTableBox(customtkinter.CTkFrame):
+    def __init__(self, master):
+        super().__init__(master)
+
+        # Label For Process Table
+        self.greet = customtkinter.CTkLabel(self, text="CPU Algorithm Simulator", fg_color="transparent", font=("Arial", 20))
+        self.greet.grid(row=0, column=0, sticky="ew", pady=20, padx=20)
+
+        self.myimg = customtkinter.CTkImage(Image.open("table.png"), size=(400, 400))
+        self.imgLabel = customtkinter.CTkLabel(self, image=self.myimg, text="")
+        self.imgLabel.grid(row=1, column=0, sticky="nsew")
+
+
+class GanttChartBox(customtkinter.CTkFrame):
+    def __init__(self, master):
+        super().__init__(master)
+
+        # Label for GANTT Chart
+        self.greet = customtkinter.CTkLabel(self, text="CPU Algorithm Simulator", fg_color="transparent", font=("Arial", 20))
+        self.greet.grid(row=0, column=0, sticky="ew", pady=20, padx=20)
+
+        self.myimg = customtkinter.CTkImage(Image.open("table.png"), size=(400, 400))
+        self.imgLabel = customtkinter.CTkLabel(self, image=self.myimg, text="")
+        self.imgLabel.grid(row=1, column=0, sticky="nsew")
+
+
+
 class ToplevelWindow(customtkinter.CTkToplevel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.geometry("1000x500")
-        self.grid_columnconfigure((0, 1), weight=1)
+        self.geometry("880x500")
+        self.grid_columnconfigure((0,1), weight=1)
         self.grid_rowconfigure(0, weight=1)
 
-        self.fig, self.ax = plt.subplots()
-        self.table = self.ax.table(cellText=self.values, loc='center', cellLoc='center')
-        self.ax.axis("off")
-        self.table.auto_set_font_size(False)
-        self.table.set_fontsize(12)
-        self.table.scale(1, 1.5)
-        plt.savefig("table.png")
+        # self.fig, self.ax = plt.subplots()
+        # self.table = self.ax.table(cellText=self.values, loc='center', cellLoc='center')
+        # self.ax.axis("off")
+        # self.table.auto_set_font_size(False)
+        # self.table.set_fontsize(12)
+        # self.table.scale(1, 1.5)
+        # plt.savefig("table.png")
 
         
-        self.myimg = customtkinter.CTkImage(Image.open("table.png"), size=(400, 400))
-        self.imgLabel = customtkinter.CTkLabel(self, image=self.myimg, text="")
-        self.imgLabel.grid(row=0, column=0, sticky="nsew")
+        # self.myimg = customtkinter.CTkImage(Image.open("table.png"), size=(400, 400))
+        # self.imgLabel = customtkinter.CTkLabel(self, image=self.myimg, text="")
+        # self.imgLabel.grid(row=0, column=0, sticky="nsew")
 
-        
+        # Instantiating Process Table Frame
+        self.Process_Table_Box = ProcessTableBox(self)
+        self.Process_Table_Box.grid(row=0, column=0, sticky="nsew", pady=20, padx=20)
 
-# class PlotWindow(customtkinter.CTkFrame):
-#     def __init__(self, master):
-#         super().__init__(master)
+        # Instantiating Process 
+        self.Gantt_Chart_Box = GanttChartBox(self)
+        self.Gantt_Chart_Box.grid(row=0, column=1, sticky="nsew", pady=20, padx=20)
 
-#         # self.add("GC")
-#         # self.add("PT")
-#         # self.set("PT")
-        
-#         # self.values = [
-#         #     [1, 2, 3, 4],
-#         #     [1, 2, 3, 4],
-#         #     [1, 2, 3, 4],
-#         #     [1, 2, 3, 4]
-#         # ]
-#     def DrawTable(self):
-#         self._myimg = customtkinter.CTkImage(Image.open("output/Processtable.png"), size=(400, 400))
-#         self._imgLabel = customtkinter.CTkLabel(self, image=self._myimg, text="")
-#         self._imgLabel.grid(row=0, column=0, columnspan=1, sticky="nesw", padx=5, pady=5)
-# #         # self.fig, self.ax = plt.subplots()
-# #         # self.table = self.ax.table(cellText=self.values, loc='center', cellLoc='center')
-# #         # self.ax.axis("off")
-# #         # self.table.auto_set_font_size(False)
-# #         # self.table.set_fontsize(12)
-# #         # self.table.scale(1, 1.5)
-# #         # plt.savefig("output\Processtable.png")
 
-# #         self.myimg = customtkinter.CTkImage(light_image=Image.open("table.png"))
-# #         self.imgLabel = customtkinter.CTkLabel(self, image=self.myimg, text="")
-# #         self.imgLabel.grid(row=0, column=0)
+
 
 
         
@@ -103,9 +109,9 @@ class OptionWindow(customtkinter.CTkFrame):
         if self.AlgoMenu.get() == "Preemptive Priority Scheduling":
             print("This is Preemptive Priority Scheduling")
         elif self.AlgoMenu.get() == "Non-Preemtive Priotity Scheduling":
-            # self.toplev = ToplevelWindow(self)
             self.processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
-            print(self.processList)
+            self.toplev = ToplevelWindow(self)
+
             # self.Plot_Window.DrawTable(int(self.Process_Input.get()))
             # self.TopWin = ToplevelWindow(self)
             # self.myimg = customtkinter.CTkImage(light_image=Image.open("table.png"), size=(100,100))
@@ -119,7 +125,7 @@ class App(customtkinter.CTk):
         super().__init__()
       
         self.title("CPU Scheduler Algorithm")
-        self.geometry("1000x400");
+        self.geometry("1000x300");
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
 
