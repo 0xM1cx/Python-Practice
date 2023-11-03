@@ -8,15 +8,26 @@ from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
 
+NP = 0
+
+
 class ProcessTableBox(customtkinter.CTkScrollableFrame):
     def __init__(self, master):
         super().__init__(master)
+        self.height = 4000
+        global NP
+        if NP > 30 and NP <= 50:
+            self.height = 1500
+        elif NP <= 30 and NP >= 20:
+            self.height = 1000
+        elif NP < 20:
+            self.height = 500
 
         # Label For Process Table
         self.title = customtkinter.CTkLabel(self, text="Process Table", fg_color="transparent", font=("Arial", 20))
         self.title.grid(row=0, column=0, sticky="ew", pady=20, padx=20)
 
-        self.myimg = customtkinter.CTkImage(Image.open("table.png"), size=(400, 4000))
+        self.myimg = customtkinter.CTkImage(Image.open("table.png"), size=(400, self.height))
         self.imgLabel = customtkinter.CTkLabel(self, image=self.myimg, text="")
         self.imgLabel.grid(row=1, column=0, sticky="nsew")
 
@@ -24,14 +35,31 @@ class ProcessTableBox(customtkinter.CTkScrollableFrame):
 class GanttChartBox(customtkinter.CTkScrollableFrame):
     def __init__(self, master):
         super().__init__(master)
+        self.height = 4000
+        global NP
+        if NP > 30 and NP <= 50:
+            self.height = 1500
+        elif NP <= 30 and NP >= 20:
+            self.height = 1000
+        elif NP < 20:
+            self.height = 500       
 
         # Label for GANTT Chart
         self.title = customtkinter.CTkLabel(self, text="GANTT Chart", fg_color="transparent", font=("Arial", 20))
         self.title.grid(row=0, column=0, sticky="ew", pady=20, padx=20)
 
-        self.myimg = customtkinter.CTkImage(Image.open("table.png"), size=(400, 4000))
+        ## WT Avg
+        self.title = customtkinter.CTkLabel(self, text="Waiting Time Average", fg_color="transparent", font=("Arial", 10))
+        self.title.grid(row=1, column=0, sticky="ew", pady=20, padx=20)
+        self.WT_Result = customtkinter.CTkLabel(self, text=" Result", fg_color="transparent", width=20)
+        ## TT Avg
+        self.title = customtkinter.CTkLabel(self, text="Turnaround Time Average", fg_color="transparent", font=("Arial", 10))
+        self.title.grid(row=2, column=0, sticky="ew", pady=20, padx=20)
+        self.TT_Result = customtkinter.CTkLabel(self, text="Result", fg_color="transparent", width=20)
+
+        self.myimg = customtkinter.CTkImage(Image.open("table.png"), size=(400, self.height))
         self.imgLabel = customtkinter.CTkLabel(self, image=self.myimg, text="")
-        self.imgLabel.grid(row=1, column=0, sticky="nsew")
+        self.imgLabel.grid(row=3, column=0, sticky="nsew")
 
 
 
@@ -104,6 +132,8 @@ class OptionWindow(customtkinter.CTkFrame):
         self.BTSlider_CurValue.configure(text=math.trunc(value))
     
     def GenerateTable(self):
+        global NP
+        NP = int(self.Process_Input.get())
         self.columnTitles = ["Process ID", "Arrival Time", "Burt Time", "Priority Number"]
         self.processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
         self.data = [self.columnTitles]
