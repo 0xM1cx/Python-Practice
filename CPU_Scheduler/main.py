@@ -2,33 +2,34 @@ import customtkinter, math, os
 from NonPreemptivePriorityScheduling import _NonPreemptivePriorityScheduling
 from CTkTable import *
 from matplotlib import pyplot as plt
+from matplotlib.table import Table
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
 
-class ProcessTableBox(customtkinter.CTkFrame):
+class ProcessTableBox(customtkinter.CTkScrollableFrame):
     def __init__(self, master):
         super().__init__(master)
 
         # Label For Process Table
-        self.greet = customtkinter.CTkLabel(self, text="Process Table", fg_color="transparent", font=("Arial", 20))
-        self.greet.grid(row=0, column=0, sticky="ew", pady=20, padx=20)
+        self.title = customtkinter.CTkLabel(self, text="Process Table", fg_color="transparent", font=("Arial", 20))
+        self.title.grid(row=0, column=0, sticky="ew", pady=20, padx=20)
 
-        self.myimg = customtkinter.CTkImage(Image.open("table.png"), size=(400, 400))
+        self.myimg = customtkinter.CTkImage(Image.open("table.png"), size=(400, 4000))
         self.imgLabel = customtkinter.CTkLabel(self, image=self.myimg, text="")
         self.imgLabel.grid(row=1, column=0, sticky="nsew")
 
 
-class GanttChartBox(customtkinter.CTkFrame):
+class GanttChartBox(customtkinter.CTkScrollableFrame):
     def __init__(self, master):
         super().__init__(master)
 
         # Label for GANTT Chart
-        self.greet = customtkinter.CTkLabel(self, text="GANTT Chart", fg_color="transparent", font=("Arial", 20))
-        self.greet.grid(row=0, column=0, sticky="ew", pady=20, padx=20)
+        self.title = customtkinter.CTkLabel(self, text="GANTT Chart", fg_color="transparent", font=("Arial", 20))
+        self.title.grid(row=0, column=0, sticky="ew", pady=20, padx=20)
 
-        self.myimg = customtkinter.CTkImage(Image.open("table.png"), size=(400, 400))
+        self.myimg = customtkinter.CTkImage(Image.open("table.png"), size=(400, 4000))
         self.imgLabel = customtkinter.CTkLabel(self, image=self.myimg, text="")
         self.imgLabel.grid(row=1, column=0, sticky="nsew")
 
@@ -91,7 +92,7 @@ class OptionWindow(customtkinter.CTkFrame):
         self.AlgoChoice = customtkinter.CTkLabel(self, text="What Algorithm to Use?", fg_color="transparent")
         self.AlgoChoice.grid(row=0, column=3)
         self.AlgoMenu = customtkinter.CTkOptionMenu(self, values=["Preemptive Priority Scheduling", "Non-Preemtive Priotity Scheduling"], 
-        command=self.setAlgo, width=250)
+        width=250)
         self.AlgoMenu.grid(row=1, column=3)
 
         # Start Button
@@ -102,16 +103,33 @@ class OptionWindow(customtkinter.CTkFrame):
     def setBT(self, value):
         self.BTSlider_CurValue.configure(text=math.trunc(value))
     
-    def setAlgo(self, choice):
-        return choice
+    def GenerateTable(self):
+        self.columnTitles = ["Process ID", "Arrival Time", "Burt Time", "Priority Number"]
+        self.processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
+        self.data = [self.columnTitles]
+        for i in self.processList:
+            self.data.append(i)
+
+        self.fig, self.ax = plt.subplots()
+        self.table = self.ax.table(cellText=self.data, loc='center', cellLoc='center')
+        self.ax.axis("off")
+        self.table.auto_set_font_size(False)
+        self.table.set_fontsize(10)
+        self.table.scale(1, 1.5)
+        self.fig.tight_layout()
+        plt.savefig("table.png", bbox_inches='tight', dpi=150)
+        # plt.show()
+
+
+
     
     def startExecution(self):
         if self.AlgoMenu.get() == "Preemptive Priority Scheduling":
             ## Draw Table for processes
-
+            pass
             ## Draw GANTT Chart
         elif self.AlgoMenu.get() == "Non-Preemtive Priotity Scheduling":
-            self.processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
+            self.GenerateTable()
             self.toplev = ToplevelWindow(self)
 
             # self.Plot_Window.DrawTable(int(self.Process_Input.get()))
@@ -121,7 +139,7 @@ class OptionWindow(customtkinter.CTkFrame):
             # self.imgLabel.grid(row=0, column=0)
 
             ## Draw Table for processes
-            columnTitles = ["Process ID", "Arrival Time", "Burt Time", "Priority Number"]
+            
             ## Draw GANTT Chart
 
             
@@ -132,7 +150,7 @@ class App(customtkinter.CTk):
         super().__init__()
       
         self.title("CPU Scheduler Algorithm")
-        self.geometry("1000x300");
+        self.geometry("1000x300")
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
 
