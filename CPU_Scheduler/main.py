@@ -7,8 +7,6 @@ from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
 
-
-
 class ToplevelWindow(customtkinter.CTkToplevel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -16,23 +14,20 @@ class ToplevelWindow(customtkinter.CTkToplevel):
         self.grid_columnconfigure((0, 1), weight=1)
         self.grid_rowconfigure(0, weight=1)
 
-        # self.fig, self.ax = plt.subplots()
-        # self.table = self.ax.table(cellText=self.values, loc='center', cellLoc='center')
-        # self.ax.axis("off")
-        # self.table.auto_set_font_size(False)
-        # self.table.set_fontsize(12)
-        # self.table.scale(1, 1.5)
-        # plt.savefig("output\Processtable.png")
+        self.fig, self.ax = plt.subplots()
+        self.table = self.ax.table(cellText=self.values, loc='center', cellLoc='center')
+        self.ax.axis("off")
+        self.table.auto_set_font_size(False)
+        self.table.set_fontsize(12)
+        self.table.scale(1, 1.5)
+        plt.savefig("table.png")
 
         
         self.myimg = customtkinter.CTkImage(Image.open("table.png"), size=(400, 400))
         self.imgLabel = customtkinter.CTkLabel(self, image=self.myimg, text="")
         self.imgLabel.grid(row=0, column=0, sticky="nsew")
 
-        self._myimg = customtkinter.CTkImage(Image.open("output/Processtable.png"), size=(400, 400))
-        self._imgLabel = customtkinter.CTkLabel(self, image=self._myimg, text="")
-        self._imgLabel.grid(row=0, column=1, sticky="nsew")
-
+        
 
 # class PlotWindow(customtkinter.CTkFrame):
 #     def __init__(self, master):
@@ -105,13 +100,12 @@ class OptionWindow(customtkinter.CTkFrame):
         return choice
     
     def startExecution(self):
-        
         if self.AlgoMenu.get() == "Preemptive Priority Scheduling":
             print("This is Preemptive Priority Scheduling")
         elif self.AlgoMenu.get() == "Non-Preemtive Priotity Scheduling":
              
             self.toplev = ToplevelWindow(self)
-            # self.processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
+            self.processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
             # self.Plot_Window.DrawTable(int(self.Process_Input.get()))
             # self.TopWin = ToplevelWindow(self)
             # self.myimg = customtkinter.CTkImage(light_image=Image.open("table.png"), size=(100,100))
@@ -125,9 +119,13 @@ class App(customtkinter.CTk):
         super().__init__()
       
         self.title("CPU Scheduler Algorithm")
-        self.geometry("1000x500");
+        self.geometry("1000x300");
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
+
+        ## Welcome Label
+        self.greet = customtkinter.CTkLabel(self, text="CPU Algorithm Simulator", fg_color="transparent")
+        self.greet.grid(row=0, column=0, sticky="nsew")
 
         ### OPTION MENU
         self.optionMenu = OptionWindow(self)

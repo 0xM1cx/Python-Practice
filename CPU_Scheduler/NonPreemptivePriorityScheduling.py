@@ -4,8 +4,6 @@ from rich.table import Table
 from time import sleep
 from os import system
 
-
-
 console = Console()
 
 # This is a Non-Preemtive Priotity Scheduling Program
@@ -38,10 +36,9 @@ class _NonPreemptivePriorityScheduling:
 
             while True:
                 arrivalTime = randint(0, randomizer_limit)
-                
                 if [_process for _process in self.processList if _process[1] == arrivalTime]:
                     pass
-                else:
+                else:   
                     break
 
             burstTime = randint(1, Max_Burst)
