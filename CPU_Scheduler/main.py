@@ -12,7 +12,7 @@ class ProcessTableBox(customtkinter.CTkFrame):
         super().__init__(master)
 
         # Label For Process Table
-        self.greet = customtkinter.CTkLabel(self, text="CPU Algorithm Simulator", fg_color="transparent", font=("Arial", 20))
+        self.greet = customtkinter.CTkLabel(self, text="Process Table", fg_color="transparent", font=("Arial", 20))
         self.greet.grid(row=0, column=0, sticky="ew", pady=20, padx=20)
 
         self.myimg = customtkinter.CTkImage(Image.open("table.png"), size=(400, 400))
@@ -25,7 +25,7 @@ class GanttChartBox(customtkinter.CTkFrame):
         super().__init__(master)
 
         # Label for GANTT Chart
-        self.greet = customtkinter.CTkLabel(self, text="CPU Algorithm Simulator", fg_color="transparent", font=("Arial", 20))
+        self.greet = customtkinter.CTkLabel(self, text="GANTT Chart", fg_color="transparent", font=("Arial", 20))
         self.greet.grid(row=0, column=0, sticky="ew", pady=20, padx=20)
 
         self.myimg = customtkinter.CTkImage(Image.open("table.png"), size=(400, 400))
@@ -107,7 +107,9 @@ class OptionWindow(customtkinter.CTkFrame):
     
     def startExecution(self):
         if self.AlgoMenu.get() == "Preemptive Priority Scheduling":
-            print("This is Preemptive Priority Scheduling")
+            ## Draw Table for processes
+
+            ## Draw GANTT Chart
         elif self.AlgoMenu.get() == "Non-Preemtive Priotity Scheduling":
             self.processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
             self.toplev = ToplevelWindow(self)
@@ -117,6 +119,11 @@ class OptionWindow(customtkinter.CTkFrame):
             # self.myimg = customtkinter.CTkImage(light_image=Image.open("table.png"), size=(100,100))
             # self.imgLabel = customtkinter.CTkLabel(self, image=self.myimg, text="")
             # self.imgLabel.grid(row=0, column=0)
+
+            ## Draw Table for processes
+            columnTitles = ["Process ID", "Arrival Time", "Burt Time", "Priority Number"]
+            ## Draw GANTT Chart
+
             
     
 
