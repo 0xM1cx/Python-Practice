@@ -103,9 +103,9 @@ class OptionWindow(customtkinter.CTkFrame):
         if self.AlgoMenu.get() == "Preemptive Priority Scheduling":
             print("This is Preemptive Priority Scheduling")
         elif self.AlgoMenu.get() == "Non-Preemtive Priotity Scheduling":
-             
-            self.toplev = ToplevelWindow(self)
+            # self.toplev = ToplevelWindow(self)
             self.processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
+            print(self.processList)
             # self.Plot_Window.DrawTable(int(self.Process_Input.get()))
             # self.TopWin = ToplevelWindow(self)
             # self.myimg = customtkinter.CTkImage(light_image=Image.open("table.png"), size=(100,100))
@@ -119,17 +119,28 @@ class App(customtkinter.CTk):
         super().__init__()
       
         self.title("CPU Scheduler Algorithm")
-        self.geometry("1000x300");
+        self.geometry("1000x400");
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
 
         ## Welcome Label
-        self.greet = customtkinter.CTkLabel(self, text="CPU Algorithm Simulator", fg_color="transparent")
-        self.greet.grid(row=0, column=0, sticky="nsew")
+        self.greet = customtkinter.CTkLabel(self, text="CPU Algorithm Simulator", fg_color="transparent", font=("Arial", 40))
+        self.greet.grid(row=0, column=0, sticky="ew")
+
+        # ## Member Names
+        # ## Ivan
+        # self.greet = customtkinter.CTkLabel(self, text="Galang, John Ivan", fg_color="transparent", font=("Arial", 20))
+        # self.greet.grid(row=1, column=0, sticky="ew")
+        # ## Michael
+        # self.greet = customtkinter.CTkLabel(self, text="Ochengco, Michael Angelo", fg_color="transparent", font=("Arial", 20))
+        # self.greet.grid(row=2, column=0, sticky="ew")
+        # # Shawn
+        # self.greet = customtkinter.CTkLabel(self, text="Sudaria, Shawn Michael", fg_color="transparent", font=("Arial", 20))
+        # self.greet.grid(row=3, column=0, sticky="ew")
 
         ### OPTION MENU
         self.optionMenu = OptionWindow(self)
-        self.optionMenu.grid(row=1, column=0, sticky="ew", columnspan=2, padx=50, pady=10)
+        self.optionMenu.grid(row=4, column=0, sticky="ew", columnspan=2, padx=50, pady=10)
         
         ### PLOT Window
         # self.plotWindow = PlotWindow(self)
