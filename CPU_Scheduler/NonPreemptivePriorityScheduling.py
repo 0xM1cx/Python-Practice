@@ -11,7 +11,7 @@ console = Console()
 class _NonPreemptivePriorityScheduling:
 
     processList = []
-    
+    process_Timing = {}
     # Function to get the user input for processes
     def User_Input(self, Num_Process):
         for IDprocess in range(1, Num_Process + 1):
@@ -51,21 +51,21 @@ class _NonPreemptivePriorityScheduling:
 
     # Execution of the Algorithm
     def Execute(self, processList):
-        table = Table(title="Non-Preemptive Priority Scheduling", style="bold white")
-        table.add_column("Process ID", style="bold cyan", justify="center")
-        table.add_column("Arrival Time", style="bold cyan", justify="center")
-        table.add_column("Burst Time", style="bold cyan", justify="center")
-        table.add_column("Priority Level", style="bold cyan", justify="center")
+        # Gin comment out ko anay kay dire gamit
+        # table = Table(title="Non-Preemptive Priority Scheduling", style="bold white")
+        # table.add_column("Process ID", style="bold cyan", justify="center")
+        # table.add_column("Arrival Time", style="bold cyan", justify="center")
+        # table.add_column("Burst Time", style="bold cyan", justify="center")
+        # table.add_column("Priority Level", style="bold cyan", justify="center")
 
-        for process in self.processList:
-            table.add_row(process[0], str(process[1]), str(process[2]), str(process[3]))
+        # for process in self.processList:
+        #     table.add_row(process[0], str(process[1]), str(process[2]), str(process[3]))
         
-        # console.print(table)
-
+        
         currentTime = 0
         ProcessComplete = []
         MemoryQueue = []
-
+        process_timings = {}
         print("\n\n--------Gantt Chart Simulation--------") # Simulation or displaying of process of the algorithm
         while len(ProcessComplete) < len(self.processList):
             for process in self.processList:
@@ -86,10 +86,13 @@ class _NonPreemptivePriorityScheduling:
             
             current_process = MemoryQueue.pop(0) # pops the first elemnt stored in the memory queue
             ProcessComplete.append(current_process)
+            self.process_Timing[current_process[0]] = (currentTime, currentTime+current_process[2])
+            print(f"{current_process[0]} : {currentTime} - {currentTime+current_process[2]}")
             currentTime += current_process[2]
 
+
             console.print(f"Running: {current_process[0]}")
-            console.print(f"Burst Time: 0")
+            console.print(f"Burst Time: {current_process[2]}")
             console.print(f"Priority lvl: {current_process[3]}\n")
             console.rule(style="green", characters="-")
             sleep(1)
@@ -108,20 +111,22 @@ class _NonPreemptivePriorityScheduling:
         WT = totalWT / len(self.processList) # Waiting time
         TT = totalTT / len(self.processList) # Turnaround TIme
 
-        table2 = Table(title="Results", style="bold white")
-        table2.add_column("Process ID", style="bold cyan", justify="center")
-        table2.add_column("Waiting Time", style="bold cyan", justify="center")
-        table2.add_column("Turnaround Time", style="bold cyan", justify="center")
 
-        for process in self.processList:
-            waitingTime = currentTime - process[1] - process[2]
-            turnarroundTime = waitingTime + process[2]
-            table2.add_row(process[0], str(waitingTime), str(turnarroundTime))
+        return self.process_Timing
+        # table2 = Table(title="Results", style="bold white")
+        # table2.add_column("Process ID", style="bold cyan", justify="center")
+        # table2.add_column("Waiting Time", style="bold cyan", justify="center")
+        # table2.add_column("Turnaround Time", style="bold cyan", justify="center")
 
-        console.print(table2)
+        # for process in self.processList:
+        #     waitingTime = currentTime - process[1] - process[2]
+        #     turnarroundTime = waitingTime + process[2]
+        #     table2.add_row(process[0], str(waitingTime), str(turnarroundTime))
 
-        console.print(f"WT average: {WT}")
-        console.print(f"TT average: {TT}\n\n")
+        # console.print(table2)
+
+        # console.print(f"WT average: {WT}")
+        # console.print(f"TT average: {TT}\n\n")
 
 
 # Main Function of the program
@@ -142,4 +147,4 @@ def mainFunction():
 
 
 
-mainFunction()
+# mainFunction()
