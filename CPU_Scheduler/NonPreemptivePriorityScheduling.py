@@ -25,7 +25,6 @@ class _NonPreemptivePriorityScheduling:
             tempList = [f"P{IDprocess}", arrivalTime, burstTime, Priority]
             
             self.processList.append(tempList)
-    
     # Function that generates random input for processes
     def Random_Input(self, Num_Process, Max_Burst):
         half = Num_Process // 2
@@ -61,7 +60,7 @@ class _NonPreemptivePriorityScheduling:
         for process in self.processList:
             table.add_row(process[0], str(process[1]), str(process[2]), str(process[3]))
         
-        console.print(table)
+        # console.print(table)
 
         currentTime = 0
         ProcessComplete = []
@@ -137,8 +136,10 @@ def mainFunction():
     if UR == 1:
         The_User.User_Input(Number_of_process)
     elif UR == 2:
-        The_User.Random_Input(Number_of_process)
+        The_User.Random_Input(Number_of_process, 10)
         
-    The_User.Execute()
+    The_User.Execute(The_User.processList)
 
 
+
+mainFunction()
