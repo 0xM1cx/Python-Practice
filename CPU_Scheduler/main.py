@@ -134,6 +134,7 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
         table.scale(1, 1.5)
         fig.tight_layout()
         plt.savefig("./PROCESSTABLE_OUTPUT/table.png", bbox_inches='tight', dpi=150)
+        return "Done"
  
     def GenerateGANTT_Chart(self):
         processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
@@ -150,6 +151,7 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
         plt.legend(loc='upper right')
         plt.grid(axis='x')
         plt.savefig("./GANTT_OUTPUT/GTChart.png", bbox_inches='tight', dpi=150)
+        return "Done"
 
     def startExecution(self):
         if self.AlgoMenu.get() == "Preemptive Priority Scheduling":
@@ -161,7 +163,7 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
 
         elif self.AlgoMenu.get() == "Non-Preemtive Priotity Scheduling":
             ## Draw Table for processes
-            # self.GenerateProcessTable()
+            self.GenerateProcessTable()
             
             ## Draw GANTT Chart
             self.GenerateGANTT_Chart()
