@@ -12,6 +12,8 @@ class _NonPreemptivePriorityScheduling:
 
     processList = []
     process_Timing = {}
+    waitingTime = 0
+    turnaroundTime = 0
     # Function to get the user input for processes
     def User_Input(self, Num_Process):
         for IDprocess in range(1, Num_Process + 1):
@@ -51,21 +53,12 @@ class _NonPreemptivePriorityScheduling:
 
     # Execution of the Algorithm
     def Execute(self, processList):
-        # Gin comment out ko anay kay dire gamit
-        # table = Table(title="Non-Preemptive Priority Scheduling", style="bold white")
-        # table.add_column("Process ID", style="bold cyan", justify="center")
-        # table.add_column("Arrival Time", style="bold cyan", justify="center")
-        # table.add_column("Burst Time", style="bold cyan", justify="center")
-        # table.add_column("Priority Level", style="bold cyan", justify="center")
 
-        # for process in self.processList:
-        #     table.add_row(process[0], str(process[1]), str(process[2]), str(process[3]))
         
         
         currentTime = 0
         ProcessComplete = []
         MemoryQueue = []
-        process_timings = {}
         # print("\n\n--------Gantt Chart Simulation--------") # Simulation or displaying of process of the algorithm
         while len(ProcessComplete) < len(self.processList):
             for process in self.processList:
@@ -76,9 +69,6 @@ class _NonPreemptivePriorityScheduling:
 
             # Executed if there is no Process in the moment
             if not MemoryQueue:
-                # console.print(f"Running: None\n")
-                # console.rule(style="green", characters="-")
-                # sleep(1)
                 currentTime += 1
                 continue
 
@@ -98,35 +88,26 @@ class _NonPreemptivePriorityScheduling:
             # sleep(1)
 
 
-        # totalWT = 0
-        # totalTT = 0
+        totalWT = 0
+        totalTT = 0
 
-        # for process in self.processList:
-        #     turnarroundTime = currentTime - process[1]
-        #     waitingTime = turnarroundTime - process[2]
 
-        #     totalWT += waitingTime
-        #     totalTT += turnarroundTime
-
-        # WT = totalWT / len(self.processList) # Waiting time
-        # TT = totalTT / len(self.processList) # Turnaround TIme
-
-        G_fig, G_ax = plt.subplots()
-        for i, (process, timings) in enumerate(process_Timing.items()):
-            start, end = timings
-            ax.barh(i, end - start, left=start, align='center', label=process)
-
-        ax.set_xlabel('Time')
-        ax.set_yticks(range(len(process_Timing)))
-        ax.set_yticklabels(process_Timing.keys())
-        ax.set_title('Gantt Chart')
-        plt.legend(loc='upper right')
-        plt.grid(axis='x')
-        plt.savefig("./GANTT_OUTPUT/GTChart.png", bbox_inches='tight', dpi=150)
         
+        for process in self.processList:
+            turnarroundTime = currentTime - process[1]
+            waitingTime = turnarroundTime - process[2]
 
+            totalWT += waitingTime
+            totalTT += turnarroundTime
 
-        # return self.process_Timing
+        WT = totalWT / len(self.processList) # Waiting time
+        TT = totalTT / len(self.processList) # Turnaround TIme
+
+        
+        self.waitingTime = WT
+        self.turnaroundTime =  TT
+
+        return self.process_Timing
         # table2 = Table(title="Results", style="bold white")
         # table2.add_column("Process ID", style="bold cyan", justify="center")
         # table2.add_column("Waiting Time", style="bold cyan", justify="center")

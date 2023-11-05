@@ -3,9 +3,9 @@ from copy import deepcopy
 
 
 
-class PreemptivePriorityScheduling: # Class for simulating Preemptive Priority CPU Scheduling
+class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority CPU Scheduling
     process_list = [] # List to Store the Processes [PID, AT, BT, RT, PL,CT]
-    
+    fourColumnProcessList = []
     def inputUser(self, no_of_processes): # USER INPUT
         for process_id in range(1, no_of_processes + 1): # Loop to enter user values for each process
             temporary = [] # Temporary list to store values
@@ -30,7 +30,7 @@ class PreemptivePriorityScheduling: # Class for simulating Preemptive Priority C
             
             self.process_list.append(temporary) # Appending the list of values inside the list of processes
         
-    def inputRandom(self, no_of_processes): # RANDOM INPUT
+    def inputRandom(self, no_of_processes, max_BT): # RANDOM INPUT
         half = no_of_processes // 2 
         randomizer_limit = no_of_processes + half # Randomizer limit is 150% of the Number of Processes
         
@@ -45,7 +45,7 @@ class PreemptivePriorityScheduling: # Class for simulating Preemptive Priority C
                 else:
                     break
 
-            burst_time = randint(1, randomizer_limit)
+            burst_time = randint(1, max_BT)
             
             remaining_time = deepcopy(burst_time)
 
@@ -54,9 +54,13 @@ class PreemptivePriorityScheduling: # Class for simulating Preemptive Priority C
             completion_time = 0
 
             temporary = [f"P{process_id}", arrival_time, burst_time, remaining_time, priority_level, completion_time]
+
             
             self.process_list.append(temporary)
+            self.fourColumnProcessList.append([f"P{process_id}", arrival_time, burst_time, priority_level])
 
+
+        return self.fourColumnProcessList
         
     def schedulingProcess(self): # Scheduling Algorithm
         # Print input table
@@ -73,10 +77,10 @@ class PreemptivePriorityScheduling: # Class for simulating Preemptive Priority C
                 if process[1] <= current_time and process not in completed_list and process not in ready_queue: # Inserting newly arrived processes to the Memory Queue
                     ready_queue.append(process)
             
-            print(f"\nTimeframe {current_time}")
+            # print(f"\nTimeframe {current_time}")
             
             if not ready_queue: # Checking for idle time
-                print(f"Running: None")
+                # print(f"R unning: None")
                 current_time += 1
                 continue # Skip rest of the algorithm if idle time
             
@@ -86,9 +90,9 @@ class PreemptivePriorityScheduling: # Class for simulating Preemptive Priority C
             current_process[3] -= 1 # Decerement current process bust time
             
             # Print Simulation
-            print(f"Running: {current_process[0]}")
-            print(f"Current Burst Time: {current_process[3]}")
-            print(f"Priority Level: {current_process[4]}")
+            # print(f"Running: {current_process[0]}")
+            # print(f"Current Burst Time: {current_process[3]}")
+            # print(f"Priority Level: {current_process[4]}")
             
             if current_process[3] == 0: # Check if process is Completed
                 completed_list.append(current_process) # Append current process to completed list
@@ -112,26 +116,26 @@ class PreemptivePriorityScheduling: # Class for simulating Preemptive Priority C
         avg_wt = total_wt / len(self.process_list)
         avg_tt = total_tt / len(self.process_list)
         
-        # Print table results
-        print("\nProcess\tWaiting Time\tTurnaround Time")
-        for process in self.process_list:
-            print(f"{process[0]}\t{process[5] - process[1] - process[2]}\t\t{process[5] - process[1]}")
+        # # Print table results
+        # print("\nProcess\tWaiting Time\tTurnaround Time")
+        # for process in self.process_list:
+        #     print(f"{process[0]}\t{process[5] - process[1] - process[2]}\t\t{process[5] - process[1]}")
 
-        print(f"Average Waiting Time: {avg_wt}")
-        print(f"Average Turnaround Time: {avg_tt}")
+        # print(f"Average Waiting Time: {avg_wt}")
+        # print(f"Average Turnaround Time: {avg_tt}")
 
 
 
-# Main Machinery
-proseso = PreemptivePriorityScheduling() # Create instance
+# # Main Machinery
+# proseso = PreemptivePriorityScheduling() # Create instance
 
-process_amount = int(input("Enter # of Processes: ")) # Input # of Processes
+# process_amount = int(input("Enter # of Processes: ")) # Input # of Processes
 
-user_or_random = input("User or Random Input? [U/R]: ") # Select if User or Random Values
+# user_or_random = input("User or Random Input? [U/R]: ") # Select if User or Random Values
 
-if user_or_random.lower() == "u":
-    proseso.inputUser(process_amount)
-elif user_or_random.lower() == "r":
-    proseso.inputRandom(process_amount)
+# if user_or_random.lower() == "u":
+#     proseso.inputUser(process_amount)
+# elif user_or_random.lower() == "r":
+#     proseso.inputRandom(process_amount)
     
-proseso.schedulingProcess() # Run Scheduling Algotihm
+# proseso.schedulingProcess() # Run Scheduling Algotihm
