@@ -66,19 +66,19 @@ class _NonPreemptivePriorityScheduling:
         ProcessComplete = []
         MemoryQueue = []
         process_timings = {}
-        print("\n\n--------Gantt Chart Simulation--------") # Simulation or displaying of process of the algorithm
+        # print("\n\n--------Gantt Chart Simulation--------") # Simulation or displaying of process of the algorithm
         while len(ProcessComplete) < len(self.processList):
             for process in self.processList:
                 if process[1] <= currentTime and process not in ProcessComplete and process not in MemoryQueue:
                     MemoryQueue.append(process)
 
-            console.print(f"\nTimeframe {currentTime}")
+            # console.print(f"\nTimeframe {currentTime}")
 
             # Executed if there is no Process in the moment
             if not MemoryQueue:
-                console.print(f"Running: None\n")
-                console.rule(style="green", characters="-")
-                sleep(1)
+                # console.print(f"Running: None\n")
+                # console.rule(style="green", characters="-")
+                # sleep(1)
                 currentTime += 1
                 continue
 
@@ -91,11 +91,11 @@ class _NonPreemptivePriorityScheduling:
             currentTime += current_process[2]
 
 
-            console.print(f"Running: {current_process[0]}")
-            console.print(f"Burst Time: {current_process[2]}")
-            console.print(f"Priority lvl: {current_process[3]}\n")
-            console.rule(style="green", characters="-")
-            sleep(1)
+            # console.print(f"Running: {current_process[0]}")
+            # console.print(f"Burst Time: {current_process[2]}")
+            # console.print(f"Priority lvl: {current_process[3]}\n")
+            # console.rule(style="green", characters="-")
+            # sleep(1)
 
 
         totalWT = 0

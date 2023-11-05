@@ -7,6 +7,8 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
+import GANTT_CHART_GEN
+
 
 NP = 0
 class ProcessTableBox(customtkinter.CTkScrollableFrame):
@@ -136,22 +138,7 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
         plt.savefig("./PROCESSTABLE_OUTPUT/table.png", bbox_inches='tight', dpi=150)
         return "Done"
  
-    def GenerateGANTT_Chart(self):
-        processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
-        process_Timing = self.NonPPS_Instance.Execute(processList)
-        fig, ax = plt.subplots()
-        for i, (process, timings) in enumerate(process_Timing.items()):
-            start, end = timings
-            ax.barh(i, end - start, left=start, align='center', label=process)
-
-        ax.set_xlabel('Time')
-        ax.set_yticks(range(len(process_Timing)))
-        ax.set_yticklabels(process_Timing.keys())
-        ax.set_title('Gantt Chart')
-        plt.legend(loc='upper right')
-        plt.grid(axis='x')
-        plt.savefig("./GANTT_OUTPUT/GTChart.png", bbox_inches='tight', dpi=150)
-        return "Done"
+    
 
     def startExecution(self):
         if self.AlgoMenu.get() == "Preemptive Priority Scheduling":
@@ -166,7 +153,9 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
             self.GenerateProcessTable()
             
             ## Draw GANTT Chart
-            self.GenerateGANTT_Chart()
+            processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
+            process_Timing = self.NonPPS_Instance.Execute(processList)
+            GANTT_CHART_GEN.GenerateGANTT_Chart(processList, process_Timing)
             
             self.toplev = ToplevelWindow(self) ## This Generates the Top Level window that shows the charts and Table
     
