@@ -65,7 +65,7 @@ class GanttChartBox(customtkinter.CTkScrollableFrame):
 class ToplevelWindow(customtkinter.CTkToplevel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.geometry("880x500")
+        self.geometry("8900x500")
         self.grid_columnconfigure((0,1), weight=1)
         self.grid_rowconfigure(0, weight=1)
 
@@ -119,32 +119,33 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
     def GenerateProcessTable(self):
         global NP
         NP = int(self.Process_Input.get())
-        self.columnTitles = ["Process ID", "Arrival Time", "Burt Time", "Priority Number"]
-        self.processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
-        self.data = [self.columnTitles]
-        for i in self.processList:
-            self.data.append(i)
+        columnTitles = ["Process ID", "Arrival Time", "Burt Time", "Priority Number"]
+        processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
+        data = [columnTitles]
 
-        self.fig, self.ax = plt.subplots()
-        self.table = self.ax.table(cellText=self.data, loc='center', cellLoc='center')
-        self.ax.axis("off")
-        self.table.auto_set_font_size(False)
-        self.table.set_fontsize(10)
-        self.table.scale(1, 1.5)
-        self.fig.tight_layout()
+        for i in processList:
+            data.append(i)
+
+        fig, ax = plt.subplots()
+        table = ax.table(cellText=data, loc='center', cellLoc='center')
+        ax.axis("off")
+        table.auto_set_font_size(False)
+        table.set_fontsize(10)
+        table.scale(1, 1.5)
+        fig.tight_layout()
         plt.savefig("./PROCESSTABLE_OUTPUT/table.png", bbox_inches='tight', dpi=150)
  
     def GenerateGANTT_Chart(self):
-        self.processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
-        self.process_Timing = self.NonPPS_Instance.Execute(self.processList)
+        processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
+        process_Timing = self.NonPPS_Instance.Execute(processList)
         fig, ax = plt.subplots()
-        for i, (process, timings) in enumerate(self.process_Timing.items()):
+        for i, (process, timings) in enumerate(process_Timing.items()):
             start, end = timings
             ax.barh(i, end - start, left=start, align='center', label=process)
 
         ax.set_xlabel('Time')
-        ax.set_yticks(range(len(self.process_Timing)))
-        ax.set_yticklabels(self.process_Timing.keys())
+        ax.set_yticks(range(len(process_Timing)))
+        ax.set_yticklabels(process_Timing.keys())
         ax.set_title('Gantt Chart')
         plt.legend(loc='upper right')
         plt.grid(axis='x')
@@ -160,7 +161,7 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
 
         elif self.AlgoMenu.get() == "Non-Preemtive Priotity Scheduling":
             ## Draw Table for processes
-            self.GenerateProcessTable()
+            # self.GenerateProcessTable()
             
             ## Draw GANTT Chart
             self.GenerateGANTT_Chart()
