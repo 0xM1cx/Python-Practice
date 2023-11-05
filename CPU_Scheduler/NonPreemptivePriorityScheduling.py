@@ -77,7 +77,6 @@ class _NonPreemptivePriorityScheduling:
             current_process = MemoryQueue.pop(0) # pops the first elemnt stored in the memory queue
             ProcessComplete.append(current_process)
             self.process_Timing[current_process[0]] = (currentTime, currentTime+current_process[2])
-            print(f"{current_process[0]} : {currentTime} - {currentTime+current_process[2]}")
             currentTime += current_process[2]
 
 
