@@ -118,11 +118,15 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
     
     
 
-    def GenerateProcessTable(self):
+    def GenerateProcessTable(self, algo):
         global NP
         NP = int(self.Process_Input.get())
         columnTitles = ["Process ID", "Arrival Time", "Burt Time", "Priority Number"]
-        processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
+        if algo == 1:
+            pass
+        elif algo == 2:   
+            processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
+        
         data = [columnTitles]
 
         for i in processList:
@@ -141,11 +145,13 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
     
 
     def startExecution(self):
+        algo = 0
         if self.AlgoMenu.get() == "Preemptive Priority Scheduling":
-            self.toplev = ToplevelWindow(self) ## This Generates the Top Level window that shows the charts and Table
+            
+             ## This Generates the Top Level window that shows the charts and Table
 
             ## Draw Table for processes
-            pass
+            
             ## Draw GANTT Chart
 
         elif self.AlgoMenu.get() == "Non-Preemtive Priotity Scheduling":
@@ -153,11 +159,11 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
             self.GenerateProcessTable()
             
             ## Draw GANTT Chart
-            processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
-            process_Timing = self.NonPPS_Instance.Execute(processList)
-            GANTT_CHART_GEN.GenerateGANTT_Chart(processList, process_Timing)
+            # processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
+            # self.NonPPS_Instance.Execute(processList)
+            # GANTT_CHART_GEN.GenerateGANTT_Chart(processList, process_Timing)
             
-            self.toplev = ToplevelWindow(self) ## This Generates the Top Level window that shows the charts and Table
+        self.toplev = ToplevelWindow(self) ## This Generates the Top Level window that shows the charts and Table
     
 
 class App(customtkinter.CTk):

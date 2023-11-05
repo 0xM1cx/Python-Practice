@@ -98,21 +98,35 @@ class _NonPreemptivePriorityScheduling:
             # sleep(1)
 
 
-        totalWT = 0
-        totalTT = 0
+        # totalWT = 0
+        # totalTT = 0
 
-        for process in self.processList:
-            turnarroundTime = currentTime - process[1]
-            waitingTime = turnarroundTime - process[2]
+        # for process in self.processList:
+        #     turnarroundTime = currentTime - process[1]
+        #     waitingTime = turnarroundTime - process[2]
 
-            totalWT += waitingTime
-            totalTT += turnarroundTime
+        #     totalWT += waitingTime
+        #     totalTT += turnarroundTime
 
-        WT = totalWT / len(self.processList) # Waiting time
-        TT = totalTT / len(self.processList) # Turnaround TIme
+        # WT = totalWT / len(self.processList) # Waiting time
+        # TT = totalTT / len(self.processList) # Turnaround TIme
+
+        G_fig, G_ax = plt.subplots()
+        for i, (process, timings) in enumerate(process_Timing.items()):
+            start, end = timings
+            ax.barh(i, end - start, left=start, align='center', label=process)
+
+        ax.set_xlabel('Time')
+        ax.set_yticks(range(len(process_Timing)))
+        ax.set_yticklabels(process_Timing.keys())
+        ax.set_title('Gantt Chart')
+        plt.legend(loc='upper right')
+        plt.grid(axis='x')
+        plt.savefig("./GANTT_OUTPUT/GTChart.png", bbox_inches='tight', dpi=150)
+        
 
 
-        return self.process_Timing
+        # return self.process_Timing
         # table2 = Table(title="Results", style="bold white")
         # table2.add_column("Process ID", style="bold cyan", justify="center")
         # table2.add_column("Waiting Time", style="bold cyan", justify="center")
@@ -129,21 +143,21 @@ class _NonPreemptivePriorityScheduling:
         # console.print(f"TT average: {TT}\n\n")
 
 
-# Main Function of the program
-def mainFunction():
-    The_User = _NonPreemptivePriorityScheduling()
+# # Main Function of the program
+# def mainFunction():
+#     The_User = _NonPreemptivePriorityScheduling()
 
-    Number_of_process = int(input("Number of process: "))
-    print("\n\t[ 1 ] User Input ->")
-    print("\t[ 2 ] random INput->")
-    UR = int(input("\nUser or Random Input? >>  "))
+#     Number_of_process = int(input("Number of process: "))
+#     print("\n\t[ 1 ] User Input ->")
+#     print("\t[ 2 ] random INput->")
+#     UR = int(input("\nUser or Random Input? >>  "))
 
-    if UR == 1:
-        The_User.User_Input(Number_of_process)
-    elif UR == 2:
-        The_User.Random_Input(Number_of_process, 10)
+#     if UR == 1:
+#         The_User.User_Input(Number_of_process)
+#     elif UR == 2:
+#         The_User.Random_Input(Number_of_process, 10)
         
-    The_User.Execute(The_User.processList)
+#     The_User.Execute(The_User.processList)
 
 
 
