@@ -8,6 +8,9 @@ class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority 
     fourColumnProcessList = []
     waitingTime = 0
     turnaroundTime = 0
+    start_times = []
+    end_times = []
+    
     def inputUser(self, no_of_processes): # USER INPUT
         for process_id in range(1, no_of_processes + 1): # Loop to enter user values for each process
             temporary = [] # Temporary list to store values
@@ -65,16 +68,11 @@ class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority 
         return self.fourColumnProcessList
         
     def schedulingProcess(self): # Scheduling Algorithm
-        # Print input table
-        print("\nProcess\tArrival Time\tBurst Time\tPriority Level")
-        for process in self.process_list:
-            print(f"{process[0]}\t{process[1]}\t\t{process[2]}\t\t{process[4]}")
         
         current_time = 0 # Current Time Frame
         completed_list = [] # List for completed processes
         ready_queue = [] # Memory Queue
-        start_times = []
-        end_times = []
+        
         while len(completed_list) < len(self.process_list): # Loop for the Algorithm
             for process in self.process_list:
                 if process[1] <= current_time and process not in completed_list and process not in ready_queue: # Inserting newly arrived processes to the Memory Queue
@@ -102,10 +100,10 @@ class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority 
                 ready_queue.pop(0) # Remove current process from ready queue
                 current_process[5] = current_time + 1 # Set completion time for current process
             
-            if len(start_times) < len(completed_list):
-                start_times.append(current_time)
-            if len(end_times) < len(completed_list):
-                end_times.append(current_time + 1)
+            if len(self.start_times) < len(completed_list):
+                self.start_times.append(current_time)
+            if len(self.end_times) < len(completed_list):
+                self.end_times.append(current_time + 1)
             
             current_time += 1 # Increment Current Time Frame
         
@@ -125,7 +123,9 @@ class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority 
         avg_tt = total_tt / len(self.process_list)
         
 
-        return 
+        self.waitingTime = avg_wt
+        self.turnaroundTime = avg_wt
+        return completed_list
         # # Print table results
         # print("\nProcess\tWaiting Time\tTurnaround Time")
         # for process in self.process_list:

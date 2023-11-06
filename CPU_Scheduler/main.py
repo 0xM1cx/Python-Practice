@@ -126,11 +126,19 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
     def setBT(self, value):
         self.BTSlider_CurValue.configure(text=math.trunc(value))
     
-    def generateGC_PPS(self):
-        pass
+    def generateGC_PPS(self, completed_list, start_times, end_times):
+        fig, ax = plt.subplots()
+        for i, process in enumerate(completed_list):
+            start_time = start_times[i]
+            end_time = end_times[i]
+            process_name = process[0]
+            ax.barh(process_name, end_time - start_time, left=start_time, label=process_name)
 
+        ax.set_xlabel('Time', fontsize=9)
+        ax.legend(loc='center left', bbox_to_anchor=(1.0, 0.5))
+        plt.grid(axis='x')
+        plt.savefig("./GANTT_OUTPUT/GTChart.png", bbox_inches='tight', dpi=100)
     def GenerateGANTT_Chart(self, process_Timing):
-        
         fig, ax = plt.subplots()
         for i, (process, timings) in enumerate(process_Timing.items()):
             start, end = timings
@@ -146,17 +154,22 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
 
     def startExecution(self):
         global NP
+        global WT
+        global TT
         NP = int(self.Process_Input.get())
         if self.AlgoMenu.get() == "Preemptive Priority Scheduling":
-            global WT
-            global TT
+            
             processList = self.PPS_Instance.inputRandom(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
+            completed_list = self.PPS_Instance.schedulingProcess()
+            WT = self.PPS_Instance.waitingTime
+            TT = self.PPS_Instance.turnaroundTime
+            start_times = self.PPS_Instance.start_times
+            end_times = self.PPS_Instance.end_times
+            self.generateGC_PPS(completed_list, start_times, end_times)
             
         
 
         elif self.AlgoMenu.get() == "Non-Preemtive Priotity Scheduling":
-            global WT
-            global TT
             processList = self.PPS_Instance.inputRandom(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
             processTiming = self.NonPPS_Instance.Execute(processList)
             WT = self.NonPPS_Instance.waitingTime
