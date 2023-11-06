@@ -71,7 +71,8 @@ class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority 
         current_time = 0 # Current Time Frame
         completed_list = [] # List for completed processes
         ready_queue = [] # Memory Queue
-        
+        start_times = []
+        end_times = []
         while len(completed_list) < len(self.process_list): # Loop for the Algorithm
             for process in self.process_list:
                 if process[1] <= current_time and process not in completed_list and process not in ready_queue: # Inserting newly arrived processes to the Memory Queue
@@ -98,6 +99,11 @@ class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority 
                 completed_list.append(current_process) # Append current process to completed list
                 ready_queue.pop(0) # Remove current process from ready queue
                 current_process[5] = current_time + 1 # Set completion time for current process
+            
+            if len(start_times) < len(completed_list):
+                start_times.append(current_time)
+            if len(end_times) < len(completed_list):
+                end_times.append(current_time + 1)
             
             current_time += 1 # Increment Current Time Frame
         

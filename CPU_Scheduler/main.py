@@ -126,7 +126,10 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
     def setBT(self, value):
         self.BTSlider_CurValue.configure(text=math.trunc(value))
     
-    def GenerateGANTT_Chart(self, processList, process_Timing):
+    def generateGC_PPS(self):
+        pass
+
+    def GenerateGANTT_Chart(self, process_Timing):
         
         fig, ax = plt.subplots()
         for i, (process, timings) in enumerate(process_Timing.items()):
@@ -145,23 +148,20 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
         global NP
         NP = int(self.Process_Input.get())
         if self.AlgoMenu.get() == "Preemptive Priority Scheduling":
-            processList = self.PPS_Instance.inputRandom(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
-            
-            ## This Generates the Top Level window that shows the charts and Table
-            ## Draw Table for processes
-            
-            ## Draw GANTT Chart
-
-        elif self.AlgoMenu.get() == "Non-Preemtive Priotity Scheduling":
-            ## Draw Table for processes
             global WT
             global TT
-            ## Draw GANTT Chart
-            processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
+            processList = self.PPS_Instance.inputRandom(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
+            
+        
+
+        elif self.AlgoMenu.get() == "Non-Preemtive Priotity Scheduling":
+            global WT
+            global TT
+            processList = self.PPS_Instance.inputRandom(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
             processTiming = self.NonPPS_Instance.Execute(processList)
             WT = self.NonPPS_Instance.waitingTime
             TT = self.NonPPS_Instance.turnaroundTime
-            self.GenerateGANTT_Chart(processList, processTiming)
+            self.GenerateGANTT_Chart(processTiming)
         
         ## The two lines below are used sa printing of process table
         global data
