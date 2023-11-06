@@ -6,6 +6,8 @@ from copy import deepcopy
 class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority CPU Scheduling
     process_list = [] # List to Store the Processes [PID, AT, BT, RT, PL,CT]
     fourColumnProcessList = []
+    waitingTime = 0
+    turnaroundTime = 0
     def inputUser(self, no_of_processes): # USER INPUT
         for process_id in range(1, no_of_processes + 1): # Loop to enter user values for each process
             temporary = [] # Temporary list to store values
@@ -122,6 +124,8 @@ class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority 
         avg_wt = total_wt / len(self.process_list)
         avg_tt = total_tt / len(self.process_list)
         
+
+        return 
         # # Print table results
         # print("\nProcess\tWaiting Time\tTurnaround Time")
         # for process in self.process_list:
