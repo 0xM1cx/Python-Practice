@@ -10,7 +10,8 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 
 ## TODO
-# Change background and foreground color of table to black and white respectively   
+# Add some exit button on the top level window to destroy them
+# Complete the GANTT Chart for PPS
 
 NP = 0
 data = []
@@ -40,7 +41,7 @@ class ProcessTableBox(customtkinter.CTkScrollableFrame):
 
 
 class GanttChartBox(customtkinter.CTkScrollableFrame):
-    def __init__(self, master):
+    def __init__(self, master, title):
         super().__init__(master)
         self.height = 4000
         global NP
@@ -55,7 +56,7 @@ class GanttChartBox(customtkinter.CTkScrollableFrame):
 
         result = "Result dd"
         # Label for GANTT Chart
-        self.title = customtkinter.CTkLabel(self, text="GANTT Chart", fg_color="transparent", font=("Arial", 20))
+        self.title = customtkinter.CTkLabel(self, text=f"GANTT Chart({title})", fg_color="transparent", font=("Arial", 20))
         self.title.pack()
 
         ## WT Avg
@@ -66,7 +67,6 @@ class GanttChartBox(customtkinter.CTkScrollableFrame):
         self.title = customtkinter.CTkLabel(self, text=f"Turnaround Time Average: {round(TT, 2)}", fg_color="transparent", font=("Arial", 13))
         self.title.pack()
         
-
         self.myimg = customtkinter.CTkImage(Image.open("./GANTT_OUTPUT/GTChart.png"), size=(600, self.height))
         self.imgLabel = customtkinter.CTkLabel(self, image=self.myimg, text="")
         self.imgLabel.pack()
@@ -74,18 +74,20 @@ class GanttChartBox(customtkinter.CTkScrollableFrame):
 
 
 class ToplevelWindow(customtkinter.CTkToplevel):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.geometry("900x500")
+    def __init__(self, title):
+        super().__init__()
+        self.geometry("1080x720")
         self.grid_columnconfigure((0,1), weight=1)
         self.grid_rowconfigure(0, weight=1)
+        # Label for TOP_LEVEL WINDOW
+        
 
         # Instantiating Process Table Frame
         self.Process_Table_Box = ProcessTableBox(self)
         self.Process_Table_Box.grid(row=0, column=0, sticky="nsew", pady=20, padx=20)
 
         # Instantiating Process 
-        self.Gantt_Chart_Box = GanttChartBox(self)
+        self.Gantt_Chart_Box = GanttChartBox(self, title)
         self.Gantt_Chart_Box.grid(row=0, column=1, sticky="nsew", pady=20, padx=20)
 
 
@@ -126,19 +128,21 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
     def setBT(self, value):
         self.BTSlider_CurValue.configure(text=math.trunc(value))
     
-    def generateGC_PPS(self, completed_list, start_times, end_times):
-        fig, ax = plt.subplots()
-        for i, process in enumerate(completed_list):
-            start_time = start_times[i]
-            end_time = end_times[i]
-            process_name = process[0]
-            ax.barh(process_name, end_time - start_time, left=start_time, label=process_name)
+    # def generateGC_PPS(self, completed_list, start_times, end_times):
+    #     fig, ax = plt.subplots()
+    #     print(completed_list)
+    #     for i, process in enumerate(completed_list):
+    #         start_time = start_times[i]
+    #         end_time = end_times[i]
+    #         process_name = process[0]
+    #         ax.barh(process_name, end_time - start_time, left=start_time, label=process_name)
 
-        ax.set_xlabel('Time', fontsize=9)
-        ax.legend(loc='center left', bbox_to_anchor=(1.0, 0.5))
-        plt.grid(axis='x')
-        plt.savefig("./GANTT_OUTPUT/GTChart.png", bbox_inches='tight', dpi=100)
-    def GenerateGANTT_Chart(self, process_Timing):
+    #     ax.set_xlabel('Time', fontsize=9)
+    #     ax.legend(loc='center left', bbox_to_anchor=(1.0, 0.5))
+    #     plt.grid(axis='x')
+    #     plt.savefig("./GANTT_OUTPUT/GTChart.png", bbox_inches='tight', dpi=100)
+    
+    def GenerateGANTT_Chart(self, processList, process_Timing):
         fig, ax = plt.subplots()
         for i, (process, timings) in enumerate(process_Timing.items()):
             start, end = timings
@@ -160,27 +164,24 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
         if self.AlgoMenu.get() == "Preemptive Priority Scheduling":
             
             processList = self.PPS_Instance.inputRandom(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
-            completed_list = self.PPS_Instance.schedulingProcess()
+            completed_list = self.PPS_Instance.schedulingProcess(process_list=processList)
             WT = self.PPS_Instance.waitingTime
             TT = self.PPS_Instance.turnaroundTime
-            start_times = self.PPS_Instance.start_times
-            end_times = self.PPS_Instance.end_times
-            self.generateGC_PPS(completed_list, start_times, end_times)
-            
-        
+           
 
         elif self.AlgoMenu.get() == "Non-Preemtive Priotity Scheduling":
-            processList = self.PPS_Instance.inputRandom(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
+            processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
             processTiming = self.NonPPS_Instance.Execute(processList)
             WT = self.NonPPS_Instance.waitingTime
             TT = self.NonPPS_Instance.turnaroundTime
-            self.GenerateGANTT_Chart(processTiming)
+            self.GenerateGANTT_Chart(processList, processTiming)
         
         ## The two lines below are used sa printing of process table
         global data
         data = processList
+        self.toplev = ToplevelWindow(self.AlgoMenu.get())
 
-        self.toplev = ToplevelWindow(self) ## This Generates the Top Level window that shows the charts and Table
+         ## This Generates the Top Level window that shows the charts and Table
     
 
 class App(customtkinter.CTk):

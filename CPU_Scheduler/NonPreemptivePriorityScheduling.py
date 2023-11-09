@@ -53,9 +53,6 @@ class _NonPreemptivePriorityScheduling:
 
     # Execution of the Algorithm
     def Execute(self, processList):
-
-        
-        
         currentTime = 0
         ProcessComplete = []
         MemoryQueue = []
@@ -99,8 +96,8 @@ class _NonPreemptivePriorityScheduling:
             totalWT += waitingTime
             totalTT += turnarroundTime
 
-        WT = totalWT / len(self.processList) # Waiting time
-        TT = totalTT / len(self.processList) # Turnaround TIme
+        WT = len(self.processList) / totalWT  # Waiting time
+        TT = len(self.processList) / totalTT  # Turnaround TIme
 
         
         self.waitingTime = WT

@@ -67,14 +67,15 @@ class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority 
 
         return self.fourColumnProcessList
         
-    def schedulingProcess(self): # Scheduling Algorithm
-        
+    def schedulingProcess(self, process_list): # Scheduling Algorithm
+        start_times = []
+        end_times = []
         current_time = 0 # Current Time Frame
         completed_list = [] # List for completed processes
         ready_queue = [] # Memory Queue
         
-        while len(completed_list) < len(self.process_list): # Loop for the Algorithm
-            for process in self.process_list:
+        while len(completed_list) < len(process_list): # Loop for the Algorithm
+            for process in process_list:
                 if process[1] <= current_time and process not in completed_list and process not in ready_queue: # Inserting newly arrived processes to the Memory Queue
                     ready_queue.append(process)
             
@@ -85,7 +86,7 @@ class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority 
                 current_time += 1
                 continue # Skip rest of the algorithm if idle time
             
-            ready_queue.sort(key=lambda x: x[4]) # Sorting the ready queue based on Priority Level
+            ready_queue.sort(key=lambda x: x[3]) # Sorting the ready queue based on Priority Level
             
             current_process = ready_queue[0] # Set current process as process with highest level in memory queue
             current_process[3] -= 1 # Decerement current process bust time
@@ -95,23 +96,33 @@ class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority 
             # print(f"Current Burst Time: {current_process[3]}")
             # print(f"Priority Level: {current_process[4]}")
             
-            if current_process[3] == 0: # Check if process is Completed
-                completed_list.append(current_process) # Append current process to completed list
-                ready_queue.pop(0) # Remove current process from ready queue
-                current_process[5] = current_time + 1 # Set completion time for current process
-            
-            if len(self.start_times) < len(completed_list):
-                self.start_times.append(current_time)
-            if len(self.end_times) < len(completed_list):
-                self.end_times.append(current_time + 1)
+            # if current_process[3] == 0:
+            #     start_times.append(current_time)
+            #     end_times.append(current_time + 1)
+
+            for i, process in enumerate(completed_list):
+                start_time = start_times[i]
+                end_time = end_times[i]
+                process_name = process[0]
+                ax.barh(process_name, end_time - start_time, left=start_time, label=process_name)
+
             
             current_time += 1 # Increment Current Time Frame
         
+
+
+        fig, ax = plt.subplots()
+
+
+        ax.set_xlabel('Time', fontsize=9)
+        ax.legend(loc='center left', bbox_to_anchor=(1.0, 0.5))
+        plt.grid(axis='x')
+        plt.savefig("./GANTT_OUTPUT/GTChart.png", bbox_inches='tight', dpi=100)
         # Initialize Totals of TT and WT
         total_wt = 0
         total_tt = 0
         
-        for process in self.process_list: # Loop to calculate WT and TT of each rocess
+        for process in process_list: # Loop to calculate WT and TT of each rocess
             turnaround_time = process[5] - process[1] # Calculate TT of process (Completion Time - Arrival Time)
             waiting_time = turnaround_time - process[2] # Calculate WT of process (Turnaround Time - Burst Time)
             
