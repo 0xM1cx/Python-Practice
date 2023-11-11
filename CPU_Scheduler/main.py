@@ -78,19 +78,21 @@ class ToplevelWindow(customtkinter.CTkToplevel):
         super().__init__()
         self.geometry("1080x720")
         self.grid_columnconfigure((0,1), weight=1)
-        self.grid_rowconfigure(0, weight=1)
-        # Label for TOP_LEVEL WINDOW
-        
-
+        self.grid_rowconfigure((0, 1), weight=1)
+        # Back button for TOP_LEVEL WINDOW
+        self.back_Btn = customtkinter.CTkButton(self, text="Back to Main", command=self.backToMain)
+        self.back_Btn.grid(row=0, column=0, sticky="ew", columnspan=2)
         # Instantiating Process Table Frame
         self.Process_Table_Box = ProcessTableBox(self)
-        self.Process_Table_Box.grid(row=0, column=0, sticky="nsew", pady=20, padx=20)
+        self.Process_Table_Box.grid(row=1, column=0, sticky="ew")
 
         # Instantiating Process 
         self.Gantt_Chart_Box = GanttChartBox(self, title)
-        self.Gantt_Chart_Box.grid(row=0, column=1, sticky="nsew", pady=20, padx=20)
+        self.Gantt_Chart_Box.grid(row=1, column=1, sticky="ew")
 
 
+    def backToMain(self):
+        self.destroy()
 
 class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka butang an mga buttons
     def __init__(self, master):
@@ -160,13 +162,15 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
         global NP
         global WT
         global TT
+        
         NP = int(self.Process_Input.get())
         if self.AlgoMenu.get() == "Preemptive Priority Scheduling":
             
             processList = self.PPS_Instance.inputRandom(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
-            completed_list = self.PPS_Instance.schedulingProcess(process_list=processList)
-            WT = self.PPS_Instance.waitingTime
-            TT = self.PPS_Instance.turnaroundTime
+            # completed_list = self.PPS_Instance.schedulingProcess(process_list=processList)
+            # WT = self.PPS_Instance.waitingTime
+            # TT = self.PPS_Instance.turnaroundTime
+            print(processList)
            
 
         elif self.AlgoMenu.get() == "Non-Preemtive Priotity Scheduling":
@@ -178,6 +182,7 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
         
         ## The two lines below are used sa printing of process table
         global data
+        
         data = processList
         self.toplev = ToplevelWindow(self.AlgoMenu.get())
 
