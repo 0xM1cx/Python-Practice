@@ -77,19 +77,19 @@ class ToplevelWindow(customtkinter.CTkToplevel):
     def __init__(self, title):
         super().__init__()
         self.geometry("1080x720")
-        self.grid_columnconfigure((0,1), weight=1)
-        self.grid_rowconfigure((0, 1), weight=1)
+        # self.grid_columnconfigure((0,1), weight=1)
+        # self.grid_rowconfigure((0, 1), weight=1)
         # Back button for TOP_LEVEL WINDOW
         self.back_Btn = customtkinter.CTkButton(self, text="Back to Main", command=self.backToMain)
-        self.back_Btn.grid(row=0, column=0, sticky="ew", columnspan=2)
+        self.back_Btn.pack()
         # Instantiating Process Table Frame
         self.Process_Table_Box = ProcessTableBox(self)
-        self.Process_Table_Box.grid(row=1, column=0, sticky="ew")
-
+        # self.Process_Table_Box.grid(row=1, column=0, sticky="w")
+        self.Process_Table_Box.pack(side=customtkinter.LEFT, expand=True, fill=customtkinter.BOTH)
         # Instantiating Process 
         self.Gantt_Chart_Box = GanttChartBox(self, title)
-        self.Gantt_Chart_Box.grid(row=1, column=1, sticky="ew")
-
+        self.Gantt_Chart_Box.pack(side=customtkinter.RIGHT, expand=True, fill=customtkinter.BOTH)
+        
 
     def backToMain(self):
         self.destroy()
