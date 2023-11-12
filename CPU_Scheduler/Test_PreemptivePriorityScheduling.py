@@ -114,6 +114,7 @@ class PreemptivePriorityScheduling: # Class for simulating Preemptive Priority C
 
 
         cur_process_data[counter].append(current_time)
+        print(cur_process_data)
         # Initialize Totals of TT and WT
         total_wt = 0
         total_tt = 0
@@ -137,9 +138,22 @@ class PreemptivePriorityScheduling: # Class for simulating Preemptive Priority C
         print(f"Average Waiting Time: {avg_wt}")
         print(f"Average Turnaround Time: {avg_tt}")
 
+        return cur_process_data
 
+    def plot_gantt_chart(cur_process_data):
+        fig, gnt = plt.subplots()
+        gnt.set_xlabel('Time')
+        gnt.set_ylabel('Processes')
 
-        print(f"\n\n {cur_process_data}")
+        for process_id, data in cur_process_data.items():
+            start_time = data[1]
+            end_time = data[2]
+            gnt.broken_barh([(start_time, end_time - start_time)], (process_id, 1), facecolors=('tab:blue'))
+
+            # Add process labels
+            gnt.text(start_time + 0.5, process_id + 0.5, f'P{process_id}', verticalalignment='center', horizontalalignment='center')
+
+        plt.show()
 
 
 
@@ -155,4 +169,5 @@ if user_or_random.lower() == "u":
 elif user_or_random.lower() == "r":
     proseso.inputRandom(process_amount)
     
-proseso.schedulingProcess() # Run Scheduling Algotihm
+cur = proseso.schedulingProcess() # Run Scheduling Algotihm
+proseso.plot_gantt_chart(cur)
