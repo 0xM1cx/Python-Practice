@@ -92,6 +92,15 @@ class ToplevelWindow(customtkinter.CTkToplevel):
         
 
     def backToMain(self):
+        global data
+        global WT
+        global TT
+        global NP
+
+        data = []
+        WT = 0
+        TT = 0
+        NP = 0
         self.destroy()
 
 class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka butang an mga buttons
@@ -130,19 +139,7 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
     def setBT(self, value):
         self.BTSlider_CurValue.configure(text=math.trunc(value))
     
-    # def generateGC_PPS(self, completed_list, start_times, end_times):
-    #     fig, ax = plt.subplots()
-    #     print(completed_list)
-    #     for i, process in enumerate(completed_list):
-    #         start_time = start_times[i]
-    #         end_time = end_times[i]
-    #         process_name = process[0]
-    #         ax.barh(process_name, end_time - start_time, left=start_time, label=process_name)
 
-    #     ax.set_xlabel('Time', fontsize=9)
-    #     ax.legend(loc='center left', bbox_to_anchor=(1.0, 0.5))
-    #     plt.grid(axis='x')
-    #     plt.savefig("./GANTT_OUTPUT/GTChart.png", bbox_inches='tight', dpi=100)
     
     def GenerateGANTT_Chart(self, processList, process_Timing):
         fig, ax = plt.subplots()
@@ -167,16 +164,18 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
         if self.AlgoMenu.get() == "Preemptive Priority Scheduling":
             
             processList = self.PPS_Instance.inputRandom(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
-            completed_list = PreemptivePriorityScheduling.runner(processList)
-            # WT = self.PPS_Instance.waitingTime
-            # TT = self.PPS_Instance.turnaroundTime
-            print(completed_list)
+            PreemptivePriorityScheduling.runner(processList)
+            WT = self.PPS_Instance.WT
+            TT = self.PPS_Instance.TT
+            print(WT)
+            print(TT)
            
         elif self.AlgoMenu.get() == "Non-Preemtive Priotity Scheduling":
             processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
             processTiming = self.NonPPS_Instance.Execute(processList)
             WT = self.NonPPS_Instance.waitingTime
             TT = self.NonPPS_Instance.turnaroundTime
+            
             self.GenerateGANTT_Chart(processList, processTiming)
         
         ## The two lines below are used sa printing of process table

@@ -1,11 +1,13 @@
 from random import randint
 from copy import deepcopy
-
+from matplotlib import pyplot as plt
+import numpy as np
 
 
 class PreemptivePriorityScheduling: # Class for simulating Preemptive Priority CPU Scheduling
     process_list = [] # List to Store the Processes [PID, AT, BT, RT, PL,CT]
-    
+    WT = 0
+    TT = 0
     def inputUser(self, no_of_processes): # USER INPUT
         for process_id in range(1, no_of_processes + 1): # Loop to enter user values for each process
             temporary = [] # Temporary list to store values
@@ -127,34 +129,37 @@ class PreemptivePriorityScheduling: # Class for simulating Preemptive Priority C
             total_tt += turnaround_time # Add WT of the process to the total
         
         # Compute Averages
-        avg_wt = total_wt / len(self.process_list)
-        avg_tt = total_tt / len(self.process_list)
+        self.WT = total_wt / len(self.process_list)
+        self.TT = total_tt / len(self.process_list)
         
-        # Print table results
-        print("\nProcess\tWaiting Time\tTurnaround Time")
-        for process in self.process_list:
-            print(f"{process[0]}\t{process[5] - process[1] - process[2]}\t\t{process[5] - process[1]}")
-
-        print(f"Average Waiting Time: {avg_wt}")
-        print(f"Average Turnaround Time: {avg_tt}")
+        
 
         return cur_process_data
 
-    def plot_gantt_chart(cur_process_data):
+    def plot_gantt_chart(self, cur_process_data):
         fig, gnt = plt.subplots()
         gnt.set_xlabel('Time')
         gnt.set_ylabel('Processes')
 
-        for process_id, data in cur_process_data.items():
-            start_time = data[1]
-            end_time = data[2]
-            gnt.broken_barh([(start_time, end_time - start_time)], (process_id, 1), facecolors=('tab:blue'))
+        try:
+            colors = plt.cm.viridis(np.linspace(0, 1, len(cur_process_data)))
 
-            # Add process labels
-            gnt.text(start_time + 0.5, process_id + 0.5, f'P{process_id}', verticalalignment='center', horizontalalignment='center')
+            for i, (key, value) in enumerate(cur_process_data.items()):
+                process_name = value[0]
+                start_time = value[1]
+                end_time = value[2]
 
-        plt.show()
+                # Use a different color for each process
+                color = colors[i]
 
+                gnt.broken_barh([(start_time, end_time - start_time)], (0, 1), facecolors=(color))
+
+                # Add process labels
+                gnt.text(start_time + 1, 1, process_name, verticalalignment='center', horizontalalignment='center', color='black')
+
+            plt.show()
+        except:
+            plt.show()
 
 
 # Main Machinery
