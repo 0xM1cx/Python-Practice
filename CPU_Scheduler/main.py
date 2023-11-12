@@ -1,6 +1,7 @@
 import customtkinter, math, os
 from NonPreemptivePriorityScheduling import _NonPreemptivePriorityScheduling
 from PreemptivePriorityScheduling import _PreemptivePriorityScheduling
+import PreemptivePriorityScheduling
 from CTkTable import *
 from matplotlib import pyplot as plt
 from matplotlib.table import Table
@@ -10,7 +11,6 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 
 ## TODO
-# Add some exit button on the top level window to destroy them
 # Complete the GANTT Chart for PPS
 
 NP = 0
@@ -167,12 +167,11 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
         if self.AlgoMenu.get() == "Preemptive Priority Scheduling":
             
             processList = self.PPS_Instance.inputRandom(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
-            # completed_list = self.PPS_Instance.schedulingProcess(process_list=processList)
+            completed_list = PreemptivePriorityScheduling.runner(processList)
             # WT = self.PPS_Instance.waitingTime
             # TT = self.PPS_Instance.turnaroundTime
-            print(processList)
+            print(completed_list)
            
-
         elif self.AlgoMenu.get() == "Non-Preemtive Priotity Scheduling":
             processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
             processTiming = self.NonPPS_Instance.Execute(processList)
@@ -182,11 +181,11 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
         
         ## The two lines below are used sa printing of process table
         global data
-        
         data = processList
+
+        ## This Generates the Top Level window that shows the charts and Table
         self.toplev = ToplevelWindow(self.AlgoMenu.get())
 
-         ## This Generates the Top Level window that shows the charts and Table
     
 
 class App(customtkinter.CTk):

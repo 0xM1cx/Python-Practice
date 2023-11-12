@@ -100,34 +100,34 @@ class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority 
             #     start_times.append(current_time)
             #     end_times.append(current_time + 1)
 
-            for i, process in enumerate(completed_list):
-                start_time = start_times[i]
-                end_time = end_times[i]
-                process_name = process[0]
-                ax.barh(process_name, end_time - start_time, left=start_time, label=process_name)
+            # for i, process in enumerate(completed_list):
+            #     start_time = start_times[i]
+            #     end_time = end_times[i]
+            #     process_name = process[0]
+            #     ax.barh(process_name, end_time - start_time, left=start_time, label=process_name)
 
             
             current_time += 1 # Increment Current Time Frame
         
 
 
-        fig, ax = plt.subplots()
+        # fig, ax = plt.subplots()
 
 
-        ax.set_xlabel('Time', fontsize=9)
-        ax.legend(loc='center left', bbox_to_anchor=(1.0, 0.5))
-        plt.grid(axis='x')
-        plt.savefig("./GANTT_OUTPUT/GTChart.png", bbox_inches='tight', dpi=100)
-        # Initialize Totals of TT and WT
-        total_wt = 0
-        total_tt = 0
+        # ax.set_xlabel('Time', fontsize=9)
+        # ax.legend(loc='center left', bbox_to_anchor=(1.0, 0.5))
+        # plt.grid(axis='x')
+        # plt.savefig("./GANTT_OUTPUT/GTChart.png", bbox_inches='tight', dpi=100)
+        # # Initialize Totals of TT and WT
+        # total_wt = 0
+        # total_tt = 0
         
-        for process in process_list: # Loop to calculate WT and TT of each rocess
-            turnaround_time = process[5] - process[1] # Calculate TT of process (Completion Time - Arrival Time)
-            waiting_time = turnaround_time - process[2] # Calculate WT of process (Turnaround Time - Burst Time)
+        # for process in process_list: # Loop to calculate WT and TT of each rocess
+        #     turnaround_time = process[5] - process[1] # Calculate TT of process (Completion Time - Arrival Time)
+        #     waiting_time = turnaround_time - process[2] # Calculate WT of process (Turnaround Time - Burst Time)
             
-            total_wt += waiting_time # Add TT of the process to the total
-            total_tt += turnaround_time # Add WT of the process to the total
+        #     total_wt += waiting_time # Add TT of the process to the total
+        #     total_tt += turnaround_time # Add WT of the process to the total
         
         # Compute Averages
         avg_wt = total_wt / len(self.process_list)
@@ -148,15 +148,10 @@ class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority 
 
 
 # # Main Machinery
-# proseso = PreemptivePriorityScheduling() # Create instance
-
-# process_amount = int(input("Enter # of Processes: ")) # Input # of Processes
-
-# user_or_random = input("User or Random Input? [U/R]: ") # Select if User or Random Values
-
-# if user_or_random.lower() == "u":
-#     proseso.inputUser(process_amount)
-# elif user_or_random.lower() == "r":
-#     proseso.inputRandom(process_amount)
+def runner():
+    proseso = _PreemptivePriorityScheduling() # Create instance
+    process_list = proseso.inputRandom(10, 8)
+    proseso.schedulingProcess(process_list) # Run Scheduling Algotihm
     
-# proseso.schedulingProcess() # Run Scheduling Algotihm
+
+runner()
