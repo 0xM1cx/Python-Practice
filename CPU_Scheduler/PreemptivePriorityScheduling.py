@@ -11,31 +11,6 @@ TT = 0
 class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority CPU Scheduling
     process_list = [] # List to Store the Processes [PID, AT, BT, RT, PL,CT]
     fourColumnProcessList = []
-    
-    
-    def inputUser(self, no_of_processes): # USER INPUT
-        for process_id in range(1, no_of_processes + 1): # Loop to enter user values for each process
-            temporary = [] # Temporary list to store values
-            
-            while True:
-                arrival_time = int(input(f"\nEnter Arrival Time for P{process_id}: ")) # Arrival Time input
-                
-                if [pr for pr in self.process_list if pr[1] == arrival_time]: # Arrival Time duplicate checker
-                    print("Duplicate")
-                else:
-                    break
-
-            burst_time = int(input(f"Enter Burst Time for P{process_id}: ")) # Burst Time input
-            
-            remaining_time = deepcopy(burst_time) # Remaining Time is used for the scheduling process to simulate the remaining burst time of the process
-
-            priority_level = int(input(f"Enter Priority Level for P{process_id}: ")) # Priority Level input
-            
-            completion_time = 0 # Completion Time is the time that the process finished running
-
-            temporary = [f"P{process_id}", arrival_time, burst_time, remaining_time, priority_level, completion_time] # Storing input values inside a list
-            
-            self.process_list.append(temporary) # Appending the list of values inside the list of processes
         
     def inputRandom(self, no_of_processes, max_BT): # RANDOM INPUT
         half = no_of_processes // 2 
@@ -70,11 +45,6 @@ class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority 
         return self.fourColumnProcessList
         
     def schedulingProcess(self): # Scheduling Algorithm
-        # Print input table
-        print("\nProcess\tArrival Time\tBurst Time\tPriority Level")
-        for process in self.process_list:
-            print(f"{process[0]}\t{process[1]}\t\t{process[2]}\t\t{process[4]}")
-        
         current_time = 0 # Current Time Frame
         completed_list = [] # List for completed processes
         ready_queue = [] # Memory Queue
@@ -90,7 +60,6 @@ class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority 
             
            
             if not ready_queue: # Checking for idle time
-                print(f"Running: None")
                 current_time += 1
                 continue # Skip rest of the algorithm if idle time
             
@@ -118,9 +87,8 @@ class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority 
             
             current_time += 1 # Increment Current Time Frame
 
-
-        cur_process_data[counter].append(current_time)
-        print(cur_process_data)
+        last_process = list(cur_process_data.keys())[-1]
+        cur_process_data[last_process].append(current_time)
         # Initialize Totals of TT and WT
         total_wt = 0
         total_tt = 0
@@ -138,9 +106,6 @@ class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority 
         TT = total_wt / len(self.process_list)
         WT = total_tt / len(self.process_list)
         
-        
-        
-
         return cur_process_data
 
     def plot_gantt_chart(self, cur_process_data):
@@ -171,6 +136,5 @@ class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority 
 # Main Machinery
 def runner(process_list):
     proseso = _PreemptivePriorityScheduling() # Create instance
-        
     cur = proseso.schedulingProcess() # Run Scheduling Algotihm
     proseso.plot_gantt_chart(cur)

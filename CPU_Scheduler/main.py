@@ -5,13 +5,13 @@ import PreemptivePriorityScheduling
 from CTkTable import *
 from matplotlib import pyplot as plt
 from matplotlib.table import Table
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as tk
 from tkinter import ttk
-from PIL import Image, ImageTk
+from PIL import Image
 
 ## TODO
-# Complete the GANTT Chart for PPS
+# Make the labels at the center
+# 
 
 NP = 0
 data = []
@@ -72,19 +72,15 @@ class GanttChartBox(customtkinter.CTkScrollableFrame):
         self.imgLabel.pack()
 
 
-
 class ToplevelWindow(customtkinter.CTkToplevel):
     def __init__(self, title):
         super().__init__()
         self.geometry("1080x720")
-        # self.grid_columnconfigure((0,1), weight=1)
-        # self.grid_rowconfigure((0, 1), weight=1)
         # Back button for TOP_LEVEL WINDOW
         self.back_Btn = customtkinter.CTkButton(self, text="Back to Main", command=self.backToMain)
         self.back_Btn.pack()
         # Instantiating Process Table Frame
         self.Process_Table_Box = ProcessTableBox(self)
-        # self.Process_Table_Box.grid(row=1, column=0, sticky="w")
         self.Process_Table_Box.pack(side=customtkinter.LEFT, expand=True, fill=customtkinter.BOTH)
         # Instantiating Process 
         self.Gantt_Chart_Box = GanttChartBox(self, title)

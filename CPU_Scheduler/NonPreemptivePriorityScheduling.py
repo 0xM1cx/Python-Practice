@@ -1,10 +1,6 @@
 from random import randint
-from rich.console import Console
-from rich.table import Table
 from time import sleep
 from os import system
-
-console = Console()
 
 # This is a Non-Preemtive Priotity Scheduling Program
 # Round Robin nak nabutang kay ambot, wa ko na ayusa kay bayn maruba 
@@ -14,19 +10,7 @@ class _NonPreemptivePriorityScheduling:
     process_Timing = {}
     waitingTime = 0
     turnaroundTime = 0
-    # Function to get the user input for processes
-    def User_Input(self, Num_Process):
-        for IDprocess in range(1, Num_Process + 1):
-            tempList = []
-            
-            # Prompt for arrival time, burst time, and priority level
-            arrivalTime = int(input(f"\nP{IDprocess} Arrival Time: "))
-            burstTime = int(input(f"P{IDprocess} Burst Time: "))
-            Priority = int(input(f"P{IDprocess} Priotiy lvl: "))
-            
-            tempList = [f"P{IDprocess}", arrivalTime, burstTime, Priority]
-            
-            self.processList.append(tempList)
+    
     # Function that generates random input for processes
     def Random_Input(self, Num_Process, Max_Burst):
         half = Num_Process // 2
@@ -56,13 +40,10 @@ class _NonPreemptivePriorityScheduling:
         currentTime = 0
         ProcessComplete = []
         MemoryQueue = []
-        # print("\n\n--------Gantt Chart Simulation--------") # Simulation or displaying of process of the algorithm
         while len(ProcessComplete) < len(self.processList):
             for process in self.processList:
                 if process[1] <= currentTime and process not in ProcessComplete and process not in MemoryQueue:
                     MemoryQueue.append(process)
-
-            # console.print(f"\nTimeframe {currentTime}")
 
             # Executed if there is no Process in the moment
             if not MemoryQueue:
@@ -77,18 +58,10 @@ class _NonPreemptivePriorityScheduling:
             currentTime += current_process[2]
 
 
-            # console.print(f"Running: {current_process[0]}")
-            # console.print(f"Burst Time: {current_process[2]}")
-            # console.print(f"Priority lvl: {current_process[3]}\n")
-            # console.rule(style="green", characters="-")
-            # sleep(1)
-
 
         totalWT = 0
         totalTT = 0
 
-
-        
         for process in self.processList:
             turnarroundTime = currentTime - process[1]
             waitingTime = turnarroundTime - process[2]
@@ -96,46 +69,11 @@ class _NonPreemptivePriorityScheduling:
             totalWT += waitingTime
             totalTT += turnarroundTime
 
-        WT = len(self.processList) / totalWT  # Waiting time
-        TT = len(self.processList) / totalTT  # Turnaround TIme
+        WT = totalWT / len(self.processList) # Waiting time
+        TT = totalTT / len(self.processList) # Turnaround TIme
 
         
         self.waitingTime = WT
         self.turnaroundTime =  TT
 
         return self.process_Timing
-        # table2 = Table(title="Results", style="bold white")
-        # table2.add_column("Process ID", style="bold cyan", justify="center")
-        # table2.add_column("Waiting Time", style="bold cyan", justify="center")
-        # table2.add_column("Turnaround Time", style="bold cyan", justify="center")
-
-        # for process in self.processList:
-        #     waitingTime = currentTime - process[1] - process[2]
-        #     turnarroundTime = waitingTime + process[2]
-        #     table2.add_row(process[0], str(waitingTime), str(turnarroundTime))
-
-        # console.print(table2)
-
-        # console.print(f"WT average: {WT}")
-        # console.print(f"TT average: {TT}\n\n")
-
-
-# # Main Function of the program
-# def mainFunction():
-#     The_User = _NonPreemptivePriorityScheduling()
-
-#     Number_of_process = int(input("Number of process: "))
-#     print("\n\t[ 1 ] User Input ->")
-#     print("\t[ 2 ] random INput->")
-#     UR = int(input("\nUser or Random Input? >>  "))
-
-#     if UR == 1:
-#         The_User.User_Input(Number_of_process)
-#     elif UR == 2:
-#         The_User.Random_Input(Number_of_process, 10)
-        
-#     The_User.Execute(The_User.processList)
-
-
-
-# mainFunction()
