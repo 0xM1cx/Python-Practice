@@ -5,13 +5,13 @@ from copy import deepcopy
 from matplotlib import pyplot as plt
 import numpy as np
 
-
+WT = 0
+TT = 0
 
 class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority CPU Scheduling
     process_list = [] # List to Store the Processes [PID, AT, BT, RT, PL,CT]
     fourColumnProcessList = []
-    WT = 0
-    TT = 0
+    
     
     def inputUser(self, no_of_processes): # USER INPUT
         for process_id in range(1, no_of_processes + 1): # Loop to enter user values for each process
@@ -132,13 +132,14 @@ class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority 
             total_wt += waiting_time # Add TT of the process to the total
             total_tt += turnaround_time # Add WT of the process to the total
         
+        global TT
+        global WT
         # Compute Averages
-        avg_WT = total_wt / len(self.process_list)
-        avg_TT = total_tt / len(self.process_list)
-        print(avg_TT)
-        print(avg_WT)
-        self.WT = avg_WT
-        self.TT = avg_TT
+        TT = total_wt / len(self.process_list)
+        WT = total_tt / len(self.process_list)
+        
+        
+        
 
         return cur_process_data
 

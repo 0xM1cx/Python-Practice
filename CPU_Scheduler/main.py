@@ -165,10 +165,9 @@ class OptionWindow(customtkinter.CTkFrame): # Amo adi an window kun hain naka bu
             
             processList = self.PPS_Instance.inputRandom(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
             PreemptivePriorityScheduling.runner(processList)
-            WT = self.PPS_Instance.WT
-            TT = self.PPS_Instance.TT
-            print(WT)
-            print(TT)
+            TT = PreemptivePriorityScheduling.TT
+            WT = PreemptivePriorityScheduling.WT
+            
            
         elif self.AlgoMenu.get() == "Non-Preemtive Priotity Scheduling":
             processList = self.NonPPS_Instance.Random_Input(int(self.Process_Input.get()), math.trunc(self.Burst_Time.get()))
