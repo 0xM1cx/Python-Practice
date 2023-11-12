@@ -66,7 +66,6 @@ class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority 
             ready_queue.sort(key=lambda x: x[4]) # Sorting the ready queue based on Priority Level
             
             current_process = ready_queue[0] # Set current process as process with highest level in memory queue
-            
             current_process[3] -= 1 # Decerement current process bust time
             if flag:
                 cur_process_data[counter] = []
@@ -79,7 +78,6 @@ class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority 
                 cur_process_data[counter-1].append(current_time)
                 flag = True
             
-           
             if current_process[3] == 0: # Check if process is Completed
                 completed_list.append(current_process) # Append current process to completed list
                 ready_queue.pop(0) # Remove current process from ready queue
@@ -123,7 +121,6 @@ class _PreemptivePriorityScheduling: # Class for simulating Preemptive Priority 
 
                 # Use a different color for each process
                 color = colors[i]
-
                 gnt.broken_barh([(start_time, end_time - start_time)], (0, 1), facecolors=(color))
 
                 # Add process labels
