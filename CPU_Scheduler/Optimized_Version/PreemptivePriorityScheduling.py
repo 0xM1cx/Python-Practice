@@ -11,6 +11,10 @@ class _PreemptivePriorityScheduling:
     TT = 0
 
     def __init__(self, seed_value=None):
+        process_list = []
+        four_column_process_list = []
+        WT = 0
+        TT = 0 
         if seed_value is not None:
             seed(seed_value)
 
@@ -93,7 +97,6 @@ class _PreemptivePriorityScheduling:
 
         self.TT = total_wt / len(self.process_list)
         self.WT = total_tt / len(self.process_list)
-        print(cur_process_data)
         return cur_process_data
 
     def plot_gantt_chart(self, cur_process_data):
@@ -113,12 +116,16 @@ class _PreemptivePriorityScheduling:
             gnt.broken_barh([(start_time, end_time - start_time)], (0, 1), facecolors=(color))
 
             gnt.text(start_time + 1, 1, process_name, verticalalignment='center', horizontalalignment='center', color='black')
-        if os.path.isfile("GTChart.png"):
-            os.remove("GTChart.png")
         plt.savefig("GTChart.png", bbox_inches='tight', dpi=150)
+    
+
+
+
 
 
 def runner(process_list):
     proseso = _PreemptivePriorityScheduling()
     cur = proseso.schedulingProcess()
     proseso.plot_gantt_chart(cur)
+    return proseso.TT, proseso.WT
+
