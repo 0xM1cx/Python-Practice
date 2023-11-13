@@ -1,7 +1,8 @@
 from random import randint, seed
 from copy import deepcopy
 from matplotlib import pyplot as plt
-import numpy as np
+import numpy as np 
+import os
 
 class _PreemptivePriorityScheduling:
     process_list = []
@@ -91,7 +92,7 @@ class _PreemptivePriorityScheduling:
 
         self.TT = total_wt / len(self.process_list)
         self.WT = total_tt / len(self.process_list)
-
+        print(cur_process_data)
         return cur_process_data
 
     def plot_gantt_chart(self, cur_process_data):
@@ -99,22 +100,22 @@ class _PreemptivePriorityScheduling:
         gnt.set_xlabel('Time')
         gnt.set_ylabel('Processes')
 
-        try:
-            colors = plt.cm.viridis(np.linspace(0, 1, len(cur_process_data)))
 
-            for i, (key, value) in enumerate(cur_process_data.items()):
-                process_name = value[0]
-                start_time = value[1]
-                end_time = value[2]
+        colors = plt.cm.viridis(np.linspace(0, 1, len(cur_process_data)))
 
-                color = colors[i]
-                gnt.broken_barh([(start_time, end_time - start_time)], (0, 1), facecolors=(color))
+        for i, (key, value) in enumerate(cur_process_data.items()):
+            process_name = value[0]
+            start_time = value[1]
+            end_time = value[2]
 
-                gnt.text(start_time + 1, 1, process_name, verticalalignment='center', horizontalalignment='center', color='black')
+            color = colors[i]
+            gnt.broken_barh([(start_time, end_time - start_time)], (0, 1), facecolors=(color))
 
-            plt.savefig("./GANTT_OUTPUT/GTChart.png", bbox_inches='tight', dpi=100)
-        except:
-            plt.savefig("./GANTT_OUTPUT/GTChart.png", bbox_inches='tight', dpi=100)
+            gnt.text(start_time + 1, 1, process_name, verticalalignment='center', horizontalalignment='center', color='black')
+        if os.path.isfile("GTChart.png"):
+            os.remove("GTChart.png")
+        plt.savefig("GTChart.png", bbox_inches='tight', dpi=150)
+
 
 def runner(process_list):
     proseso = _PreemptivePriorityScheduling()
