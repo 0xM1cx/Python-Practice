@@ -63,6 +63,7 @@ class _PreemptivePriorityScheduling:
             if flag:
                 cur_process_data[counter] = []
                 cur_process_data[counter].append(current_process[0])
+                cur_process_data[counter].append(current_time)
                 temp = current_process[0]
                 flag = False
             elif temp != current_process[0]:
@@ -102,7 +103,7 @@ class _PreemptivePriorityScheduling:
 
 
         colors = plt.cm.viridis(np.linspace(0, 1, len(cur_process_data)))
-
+        
         for i, (key, value) in enumerate(cur_process_data.items()):
             process_name = value[0]
             start_time = value[1]
