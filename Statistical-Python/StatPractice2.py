@@ -15,5 +15,5 @@ x_data = ["Shawn", "Abby", "James", "Patricia"]
 y_data = [90, 100, 89, 94]
 
 
-plt.plot(x_data, y_data)
+plt.plot(x_data, y_data, marker="o")
 plt.show()
