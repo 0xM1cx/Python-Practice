@@ -37,9 +37,7 @@ class handTracker():
                 lmlist.append([id,cx,cy])
             if draw:
                 cv2.circle(image,(cx,cy), 15 , (255,0,255), cv2.FILLED)
-
         return lmlist
-
 
 
 def main():
