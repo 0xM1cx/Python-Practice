@@ -18,7 +18,6 @@ def training_NN():
 	model.add(tf.keras.layers.Dense(10, activation='softmax'))
 
 	model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-
 	model.fit(x_train, y_train, epochs=3)
 	model.save('handwritten.model')
 
@@ -28,5 +27,7 @@ def load_model():
 	model = tr.keras.models.load_model('handwritten.model')
 
 def main():
-	# training_NN()
 	load_model()
+
+
+main()
