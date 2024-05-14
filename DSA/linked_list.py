@@ -15,8 +15,10 @@ def main():
     head = insertBeginning(head, "John")
     head = insertBeginning(head, "Zyra")
 
-    print(head.next.next.data)
-
+    current = head
+    while current:
+        print(current.data, end=" ")
+        current = current.next
 
 main()
         
