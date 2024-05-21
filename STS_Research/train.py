@@ -20,6 +20,19 @@ from configs import ModelConfigs
 import os
 from tqdm import tqdm
 
+"""
+    1. tenserflow
+    2. mltu preprocessors
+    3. mltu transformers
+    4. mltu augmentors
+    5. keras
+    6. tkinter
+    7. MNSIT database
+    8. numpy
+    9. opencv
+
+"""
+
 # Must download and extract datasets manually from https://fki.tic.heia-fr.ch/databases/download-the-iam-handwriting-database to Datasets\IAM_Sentences
 sentences_txt_path = os.path.join("Datasets", "IAM_Sentences", "ascii", "sentences.txt")
 sentences_folder_path = os.path.join("Datasets", "IAM_Sentences", "sentences")
